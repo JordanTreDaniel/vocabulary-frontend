@@ -10,7 +10,9 @@ class CategoryPage extends React.Component {
                     <Col xs={12} md={12}>
                         <CategoryList categories={this.props.categories}/>
                     </Col>
-                    <Col xs={10} md={9}>
+                </Row>
+                <Row className="show-grid">
+                    <Col xs={12} md={12}>
                         <h1>Category Display</h1>
                     </Col>
                 </Row>

@@ -21,7 +21,7 @@ class CategoryList extends React.Component {
         let carouselItems = this.props.categories.map((category, index) => {
             // debugger
             return (
-                <Carousel.Item key={index} className="carousel-item" style={{backgroundImage: `url("${category.attributes["img-url"]}")`, height: "1000px"}}>
+                <Carousel.Item key={index} className="carousel-item" style={{backgroundImage: `url("${category.attributes["img-url"]}")`, height: "300px"}}>
                     <Carousel.Caption>
                         <h3>{category.attributes.name}</h3>
                         <p>{category.attributes.desc}</p>
