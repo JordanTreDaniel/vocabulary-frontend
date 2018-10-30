@@ -2,10 +2,12 @@ import React from 'react'
 
 class CategoryItem extends React.Component {
     render() {
-        let c = this.props.category;
-        return <div id={`category${c.attributes.id}`} class={`category`}>
-            <h3>{c.attributes.name}</h3>
-            <p>Description: {c.attributes.desc}</p>
+        let categoryAttr = this.props.category.attributes;  
+        let id = this.props.category.id;
+        return <div id={`category${id}`} className={`category`}>
+            <h3>{categoryAttr.name}</h3>
+            <img src={categoryAttr["img-url"]} alt={`${categoryAttr.name} logo.`}/>
+            <p>Description: {categoryAttr.desc}</p>
         </div>
     }
 }
