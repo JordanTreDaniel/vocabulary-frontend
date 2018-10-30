@@ -1,13 +1,21 @@
 import React from 'react';
 import CategoryItem from './CategoryItem';
 import CategoryList from './CategoryList';
-
+import {Grid, Row, Col } from 'react-bootstrap';
 class CategoryPage extends React.Component {
     render() {
-        let catItemsArr = this.props.categories.map((category, idx) => {
-            return <CategoryItem category={category} key={idx}/>
-        })
-        return <CategoryList categories={catItemsArr}>{catItemsArr}</CategoryList>
+        return (
+            <Grid>
+                <Row className="show-grid">
+                    <Col xs={12} md={12}>
+                        <CategoryList categories={this.props.categories}/>
+                    </Col>
+                    <Col xs={10} md={9}>
+                        <h1>Category Display</h1>
+                    </Col>
+                </Row>
+            </Grid>
+        )
     }
 
     componentDidMount() {
