@@ -1,5 +1,8 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/lib/Carousel';
+import Button from 'react-bootstrap/lib/Carousel';
+import { Link } from "react-router-dom";
+
 
 class CategoryList extends React.Component {
     constructor(props) {
@@ -31,11 +34,17 @@ class CategoryList extends React.Component {
                     style={{backgroundColor: `black`, height: "300px"}}
                     
                 >
-                    <img src={category.imgUrl}/>
+                    <img src={category.imgUrl} alt={category.name}/>
                     <Carousel.Caption>
                         <h3>{category.name}</h3>
                         <p>{category.desc}</p>
+                        <Link to={{
+                            pathname: `/categories/${category.id}/edit`,
+                            state: { category: category }
+                        }}>Edit {category.name}</Link>
                     </Carousel.Caption>
+                    
+                    
                 </Carousel.Item>
             )
         });

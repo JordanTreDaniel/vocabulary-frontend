@@ -17,13 +17,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route path={`${this.props.match.path}/:id`} render={() => {
+        <Route exact path={`${this.props.match.path}/:id`} render={() => {
           return <CategoryPage 
             fetchCategories={this.fetchCategories}
             categories={this.state.categories}  
             terms={this.state.terms}
             getCategory={id => this.fetchCategory(id)}
           />
+        }}/>
+        <Route exact path={`${this.props.match.path}/:id/edit`} render={(props) => {
+          debugger;
         }}/>
       </div>
     );
