@@ -1,6 +1,8 @@
 import React from 'react';
 import Tabs from 'react-bootstrap/lib/Tabs';
 import Term from './Term';
+import Tab from 'react-bootstrap/lib/Tab';
+
 class TermContainer extends React.Component {
     constructor(props) {
       super(props);
@@ -18,9 +20,8 @@ class TermContainer extends React.Component {
     }
   
     render() {
-        debugger
-        let terms = this.props.terms.map((term) => {
-            return <Term term={term} key={term.id}/>
+        let terms = this.props.terms.map((term, idx) => {
+            return <Tab eventkey={term.id} title={term.attributes.term} key={idx}/>
         });
 
         return (
