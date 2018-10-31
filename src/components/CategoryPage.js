@@ -1,19 +1,23 @@
 import React from 'react';
 import CategoryItem from './CategoryItem';
 import CategoryList from './CategoryList';
+import TermContainer from './TermContainer';
 import {Grid, Row, Col } from 'react-bootstrap';
 class CategoryPage extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <Grid>
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
-                        <CategoryList categories={this.props.categories}/>
+                        <CategoryList categories={this.props.categories} getCategory={id => this.props.getCategory(id)}/>
                     </Col>
                 </Row>
                 <Row className="show-grid">
                     <Col xs={12} md={12}>
-                        <h1>Category Display</h1>
+                        <TermContainer terms={this.props.terms}/>
                     </Col>
                 </Row>
             </Grid>

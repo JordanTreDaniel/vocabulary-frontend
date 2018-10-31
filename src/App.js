@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './assets/images/logo.svg';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import CategoryPage from './components/CategoryPage'
 
@@ -9,7 +8,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      categories: []
+      categories: [],
+      terms: []
     }
   }
   render() {
@@ -19,12 +19,26 @@ class App extends Component {
           return <CategoryPage 
             fetchCategories={this.fetchCategories}
             categories={this.state.categories}  
+            terms={this.state.terms}
+            getCategory={id => this.fetchCategory(id)}
           />
         }}/>
       </div>
     );
   }
-
+  fetchCategory = (id) => {
+    fetch(`http://localhost:3000/api/v1/categories/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        debugger;
+        this.setState({
+          terms: res.data.relationships.cards.data
+        })
+      })
+      .catch(err => {
+        throw err;
+      })
+  }
   fetchCategories = () => {
     fetch("http://localhost:3000/api/v1/categories")
       .then(res => res.json())

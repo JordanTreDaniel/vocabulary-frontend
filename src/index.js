@@ -4,12 +4,13 @@ import './assets/stylesheets/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import CategoryPage from './components/CategoryPage'
 
 const AppRouter = () => {
     return <Router>
                 <>
                     <Link to="/home">Home</Link>
-                    <Link to="/categories/5">Categories</Link>
+                    <Link to="/categories">Categories</Link>
                     <Link to="/tags">Tags</Link>
                     <Link to="/terms">Terms</Link>
                     <Route path="/home" component={App}/>
