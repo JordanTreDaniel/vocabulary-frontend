@@ -5,6 +5,7 @@ import CategoryPage from './components/CategoryPage'
 import './assets/stylesheets/App.css';
 import Term from './models/Term';
 import Category from './models/Category';
+import CategoryEdit from './components/CategoryEdit';
 
 class App extends Component {
   constructor() {
@@ -25,14 +26,20 @@ class App extends Component {
             getCategory={id => this.fetchCategory(id)}
           />
         }}/>
-        <Route exact path={`${this.props.match.path}/:id/edit`} render={(props) => {
-          debugger;
+        <Route exact 
+          path={`${this.props.match.path}/:id/edit`} 
+          render={(props) => {
+            return <CategoryEdit 
+              fetch={() => this.fetchCategory(props.match.params.id)}
+              category={this.state.category}
+              terms={this.state.terms}
+            />
         }}/>
       </div>
     );
   }
   fetchCategory = (id) => {
-    fetch(`http://localhost:3000/api/v1/categories/${id}`)
+    return fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(res => res.json())
       .then(res => {
         if (res.included === undefined) {
@@ -44,6 +51,9 @@ class App extends Component {
             terms: res.included.map((obj) => {
               return new Term(obj.attributes.term, obj.attributes.def, obj.attributes.desc, obj.id);
             })
+          })
+          this.setState({
+            category: res.data
           })
         }
       })
