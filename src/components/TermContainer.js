@@ -15,22 +15,25 @@ class TermContainer extends React.Component {
     }
   
     handleSelect(key) {
-      alert(`selected ${key}`);
       this.setState({ key });
     }
   
     render() {
         let terms = this.props.terms.map((term, idx) => {
-            return <Tab eventkey={term.id} title={term.attributes.term} key={idx}/>
+            return (
+                <Tab eventKey={idx} title={term.attributes.term} key={term.id}>
+                    <Term term={term}/>
+                </Tab>
+            )
         });
 
         return (
             <Tabs
             activeKey={this.state.key}
-            onSelect={this.handleSelect}
+            onSelect={key => this.handleSelect(key)}
             id="controlled-tab-example"
             >
-            {terms}
+                {terms}
             </Tabs>
         );
     }

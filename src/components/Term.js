@@ -7,11 +7,14 @@ class Term extends React.Component {
     }
 
     render() {
-        let term = this.props.term;
+        let term = this.props.term.attributes;
         return (
-        <Tab eventkey={term.id} title={term.attributes.term} >
-            {term.attributes.term}
-        </Tab>)
+            <div class="term-card">
+                <h2>{term.term}</h2>
+                <p><strong>{term.term}</strong> - {term.def}</p>
+                <small>{term.desc}</small>
+            </div>
+        )
     }
 }
 export default Term;
