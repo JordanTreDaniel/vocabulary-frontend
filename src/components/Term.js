@@ -9,7 +9,7 @@ class Term extends React.Component {
     render() {
         let term = this.props.term;
         return (
-        <Tab eventkey={term.id} title={term.attributes.term}>
+        <Tab eventkey={term.id} title={term.attributes.term} >
             {term.attributes.term}
         </Tab>)
     }

@@ -30,9 +30,8 @@ class App extends Component {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
       .then(res => res.json())
       .then(res => {
-        debugger;
         this.setState({
-          terms: res.data.relationships.cards.data
+          terms: res.included === undefined ? [] : res.included
         })
       })
       .catch(err => {

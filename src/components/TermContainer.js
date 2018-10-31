@@ -18,8 +18,9 @@ class TermContainer extends React.Component {
     }
   
     render() {
+        debugger
         let terms = this.props.terms.map((term) => {
-            return <Term term={term}/>
+            return <Term term={term} key={term.id}/>
         });
 
         return (
