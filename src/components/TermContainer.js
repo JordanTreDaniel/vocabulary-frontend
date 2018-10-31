@@ -21,7 +21,7 @@ class TermContainer extends React.Component {
     render() {
         let terms = this.props.terms.map((term, idx) => {
             return (
-                <Tab eventKey={idx} title={term.attributes.term} key={term.id}>
+                <Tab eventKey={idx} title={term.term} key={term.id}>
                     <Term term={term}/>
                 </Tab>
             )

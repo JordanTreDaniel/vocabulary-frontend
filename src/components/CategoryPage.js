@@ -1,12 +1,9 @@
 import React from 'react';
-import CategoryItem from './CategoryItem';
 import CategoryList from './CategoryList';
 import TermContainer from './TermContainer';
 import {Grid, Row, Col } from 'react-bootstrap';
 class CategoryPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+   
     render() {
         return (
             <Grid>
