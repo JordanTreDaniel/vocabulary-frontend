@@ -8,12 +8,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 const AppRouter = () => {
     return <Router>
                 <>
-                    <Link to="/home">Home</Link>
+                    <Link to="/">Home</Link>
                     <Link to="/categories">Categories</Link>
                     <Link to="/tags">Tags</Link>
                     <Link to="/terms">Terms</Link>
-                    <Route path="/home" component={App}/>
-                    <Route path="/categories" component={App}/>
+                    <Route path="" component={App}/>
                 </>
             </Router>
 }

@@ -22,7 +22,7 @@ class CategoryList extends React.Component {
     }
     findSelectedCategory = (idx) => {
         let cat = this.props.categories[idx];
-        this.props.getCategory(parseInt(cat.id));
+        this.props.fetchCategory(parseInt(cat.id));
     }
     render() {
         let carouselItems = this.props.categories.map((category, index) => {
@@ -32,7 +32,7 @@ class CategoryList extends React.Component {
                     id={category.id}
                     className="carousel-item" 
                     style={{backgroundColor: `black`, height: "300px"}}
-                    
+
                 >
                     <img src={category.imgUrl} alt={category.name}/>
                     <Carousel.Caption>
@@ -43,8 +43,6 @@ class CategoryList extends React.Component {
                             state: { category: category }
                         }}>Edit {category.name}</Link>
                     </Carousel.Caption>
-                    
-                    
                 </Carousel.Item>
             )
         });
