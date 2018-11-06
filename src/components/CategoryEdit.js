@@ -4,6 +4,7 @@ import {    FormGroup,
             FormExample,
             ControlLabel,
             HelpBlock,
+            Button
         } from 'react-bootstrap/lib'
 import { Redirect} from "react-router-dom";
     
@@ -18,7 +19,7 @@ export default class CategoryEdit extends React.Component {
 
     render() {
       return this.props.category ? (
-        <form>
+        <form onSubmit={this.props.handleSubmit}>
           <FormGroup
             controlId="formBasicText"
             validationState={this.getValidationState()}
@@ -43,6 +44,7 @@ export default class CategoryEdit extends React.Component {
             <FormControl.Feedback />
             <HelpBlock>Validation is based on string length.</HelpBlock>
           </FormGroup>
+          <Button bsStyle="primary" type="submit">Save Changes</Button>
         </form>
       ) : <Redirect to="/categories"/>;
     }

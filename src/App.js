@@ -27,6 +27,7 @@ class App extends Component {
               props={props}
               category={this.state.category}
               handleChange={this.handleChange}
+              handleSubmit={this.handleSubmit}
             />
         }}/>
       </div>
@@ -41,6 +42,11 @@ class App extends Component {
         }
       }
     })
+  }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    debugger
   }
   fetchCategory = (id) => {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
