@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import CategoryPage from './components/CategoryPage'
 
 import './assets/stylesheets/App.css';
-import Term from './models/Term';
 import Category from './models/Category';
 
 class App extends Component {
@@ -12,7 +11,6 @@ class App extends Component {
     this.state = {
       categories: [],
       terms: [],
-      category: new Category()
     }
   }
   render() {
@@ -28,10 +26,21 @@ class App extends Component {
               fetchCategory={id => this.fetchCategory(id)}
               props={props}
               category={this.state.category}
+              handleChange={this.handleChange}
             />
         }}/>
       </div>
     );
+  }
+  handleChange = (e) => {
+    e.preventDefault();
+    this.setState({
+      category: {
+        attributes: {
+          [e.target.name]: e.target.value
+        }
+      }
+    })
   }
   fetchCategory = (id) => {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
@@ -58,9 +67,7 @@ class App extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
-          categories: res.data.map((c) => {
-            return new Category(c.attributes.name, c.attributes.desc, c.attributes["img-url"], c.id)
-          }),
+          categories: res.data,
           category: res.data[0]
         })
       })

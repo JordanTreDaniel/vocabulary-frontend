@@ -5,30 +5,19 @@ import {    FormGroup,
             ControlLabel,
             HelpBlock,
         } from 'react-bootstrap/lib'
+import { Redirect} from "react-router-dom";
     
 export default class CategoryEdit extends React.Component {
     constructor(props, context) {
       super(props, context);
-      this.state = {
-          // category: this.props.category,
-      }
     }
-    // componentDidMount() {
-    //     this.props.fetchCategory();
-    // }
 
     getValidationState() {
       return  null;
     }
-  
-    handleChange = (e) => {
-      this.setState({ [e.target.name]: e.target.value });
-    }
-  
+
     render() {
-      // let that = this;
-      // debugger
-      return (
+      return this.props.category ? (
         <form>
           <FormGroup
             controlId="formBasicText"
@@ -40,22 +29,22 @@ export default class CategoryEdit extends React.Component {
               name="name"
               value={this.props.category.attributes.name}
               placeholder="Enter text"
-              onChange={this.handleChange}
+              onChange={this.props.handleChange}
             />
             <FormControl.Feedback />
             <ControlLabel>Category Description</ControlLabel>
             <FormControl
               type="text"
-              name="description"
-              value={this.props.category.attributes.name}
+              name="desc"
+              value={this.props.category.attributes.desc}
               placeholder="Enter text"
-              onChange={this.handleChange}
+              onChange={this.props.handleChange}
             />
             <FormControl.Feedback />
             <HelpBlock>Validation is based on string length.</HelpBlock>
           </FormGroup>
         </form>
-      );
+      ) : <Redirect to="/categories"/>;
     }
   }
   

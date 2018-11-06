@@ -3,11 +3,21 @@ import CategoryList from './CategoryList';
 import CategoryEdit from './CategoryEdit';
 import TermContainer from './TermContainer';
 import {Grid, Row, Col } from 'react-bootstrap';
-import { Route, Redirect} from "react-router-dom";
+import { Route } from "react-router-dom";
 class CategoryPage extends React.Component {
-   constructor(props) {
-       super(props);
-   }
+    constructor(props) {
+        super(props);
+    }
+    handleChange = (e) => {
+        e.preventDefault();
+        this.setState({
+        category: {
+            attributes: {
+            [e.target.name]: e.target.value
+            }
+        }
+        })
+    }
     render() {
         // debugger;
         return (
@@ -35,12 +45,13 @@ class CategoryPage extends React.Component {
                     path={`${this.props.props.match.path}/:id/edit`} 
                     exact 
                     render={(props) => {
-                        debugger
-                        return props.location.state.category.attributes ? <CategoryEdit 
+                        return <CategoryEdit 
                         fetchCategory={() => this.props.fetchCategory(parseInt(props.match.params.id))}
                         category={this.props.category}
                         terms={this.props.terms}
-                        /> : <Redirect to="/categories"/>
+                        {...props}
+                        handleChange={this.props.handleChange}
+                        />
                 }}/>
             </div>  
         )
