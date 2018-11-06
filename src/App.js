@@ -44,19 +44,14 @@ class App extends Component {
         })
       } else {
         this.setState({
-          terms: res.included.map((obj) => {
-            return new Term(obj.attributes.term, obj.attributes.def, obj.attributes.desc, obj.id);
-          }),
+          terms: res.included,
           category: res.data
         })
       }
-        this.setState({
-          
-        })
-      })
-      .catch(err => {
-        throw err;
-      })
+    })
+    .catch(err => {
+      throw err;
+    })
   }
   fetchCategories = () => {
     fetch("http://localhost:3000/api/v1/categories")

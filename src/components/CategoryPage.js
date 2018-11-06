@@ -3,8 +3,7 @@ import CategoryList from './CategoryList';
 import CategoryEdit from './CategoryEdit';
 import TermContainer from './TermContainer';
 import {Grid, Row, Col } from 'react-bootstrap';
-import { Route } from "react-router-dom";
-
+import { Route, Redirect} from "react-router-dom";
 class CategoryPage extends React.Component {
    constructor(props) {
        super(props);
@@ -36,11 +35,12 @@ class CategoryPage extends React.Component {
                     path={`${this.props.props.match.path}/:id/edit`} 
                     exact 
                     render={(props) => {
-                        return <CategoryEdit 
+                        debugger
+                        return props.location.state.category.attributes ? <CategoryEdit 
                         fetchCategory={() => this.props.fetchCategory(parseInt(props.match.params.id))}
                         category={this.props.category}
                         terms={this.props.terms}
-                        />
+                        /> : <Redirect to="/categories"/>
                 }}/>
             </div>  
         )

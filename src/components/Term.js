@@ -1,12 +1,12 @@
 import React from 'react';
 
 let Term = (props) => {
-        let term = props.term;
+        let {def, desc, term} = props.term.attributes;
         return (
             <div className={"term-card"}>
-                <h2>{term.term}</h2>
-                <p><strong>{term.term}</strong> - {term.def}</p>
-                <small>{term.desc}</small>
+                <h2>{term}</h2>
+                <p><strong>{term}</strong> - {def}</p>
+                <small>{desc}</small>
             </div>
         )
 }

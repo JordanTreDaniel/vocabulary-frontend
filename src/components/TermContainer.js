@@ -6,22 +6,20 @@ import Tab from 'react-bootstrap/lib/Tab';
 class TermContainer extends React.Component {
     constructor(props) {
       super(props);
-  
-      this.handleSelect = this.handleSelect.bind(this);
-  
       this.state = {
         key: 1
       };
     }
   
-    handleSelect(key) {
+    handleSelect = (key) => {
       this.setState({ key });
     }
   
     render() {
         let terms = this.props.terms.map((term, idx) => {
+            console.log(term)
             return (
-                <Tab eventKey={idx} title={term.term} key={term.id}>
+                <Tab eventKey={idx} title={term.attributes.term} key={term.id}>
                     <Term term={term}/>
                 </Tab>
             )

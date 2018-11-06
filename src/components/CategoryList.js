@@ -32,7 +32,6 @@ class CategoryList extends React.Component {
                     id={category.id}
                     className="carousel-item" 
                     style={{backgroundColor: `black`, height: "300px"}}
-
                 >
                     <img src={category.imgUrl} alt={category.name}/>
                     <Carousel.Caption>
