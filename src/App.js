@@ -4,7 +4,7 @@ import CategoryPage from './components/CategoryPage'
 
 import './assets/stylesheets/App.css';
 import Category from './models/Category';
-
+const API = 'https://codecabulary.herokuapp.com/api/v1';
 class App extends Component {
   constructor() {
     super();
@@ -56,7 +56,7 @@ class App extends Component {
     debugger
     console.log(this.state.category)
     debugger
-    fetch(`http://localhost:3000/api/v1/categories/${this.state.category.id}`, {
+    fetch(`${API}/categories/${this.state.category.id}`, {
       method: "PATCH",
       body: JSON.stringify(this.state.category),
       headers: {
@@ -76,7 +76,7 @@ class App extends Component {
     })
   }
   fetchCategory = (id) => {
-    fetch(`http://localhost:3000/api/v1/categories/${id}`)
+    fetch(`${API}/categories/${id}`)
     .then(res => res.json())
     .then(res => {
       if (res.included === undefined) {
@@ -96,7 +96,7 @@ class App extends Component {
     })
   }
   fetchCategories = () => {
-    fetch("http://localhost:3000/api/v1/categories")
+    fetch(`${API}/api/v1/categories`)
       .then(res => res.json())
       .then(res => {
         this.setState({
