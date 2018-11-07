@@ -43,15 +43,39 @@ class App extends Component {
       }
     })
   }
-  handleSubmit = (e) => {
-    e.preventDefault();
-    let formData = new FormData(e.target);
+  handleSubmit = (e, catId) => {
     debugger
+    e.preventDefault();
+    let data = {
+      name: e.target.name.value,
+      desc: e.target.desc.value,
+      "img-url": e.target['img-url'].value
+    }
+    debugger;
+    this.updateCategory(data, catId)
+  }
+  updateCategory = (payload, catId) => {
+    fetch(`http://localhost:3000/api/v1/categories/${catId}`, {
+      method: "PATCH",
+      body: JSON.stringify(payload)
+    })
+    .then(res => {
+      res.json();
+    })
+    .then(category => {
+      this.setState({
+        category: category
+      })
+    })
+    .catch(err => {
+      debugger;
+    })
   }
   fetchCategory = (id) => {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
     .then(res => res.json())
     .then(res => {
+      debugger
       if (res.included === undefined) {
         this.setState({
           terms: [],

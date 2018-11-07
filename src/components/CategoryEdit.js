@@ -19,7 +19,7 @@ export default class CategoryEdit extends React.Component {
 
     render() {
       return this.props.category ? (
-        <form onSubmit={this.props.handleSubmit}>
+        <form onSubmit={(e) => this.props.handleSubmit(e ,this.props.category.id)}>
           <FormGroup
             controlId="formBasicText"
             validationState={this.getValidationState()}
@@ -38,6 +38,15 @@ export default class CategoryEdit extends React.Component {
               type="text"
               name="desc"
               value={this.props.category.attributes.desc}
+              placeholder="Enter text"
+              onChange={this.props.handleChange}
+            />
+            <FormControl.Feedback />
+            <ControlLabel>Category Image URL</ControlLabel>
+            <FormControl
+              type="text"
+              name="img-url"
+              value={this.props.category.attributes["img-url"]}
               placeholder="Enter text"
               onChange={this.props.handleChange}
             />
