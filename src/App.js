@@ -96,7 +96,7 @@ class App extends Component {
     })
   }
   fetchCategories = () => {
-    fetch(`${API}/api/v1/categories`)
+    fetch(`${API}/categories`)
       .then(res => res.json())
       .then(res => {
         this.setState({
