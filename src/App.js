@@ -35,29 +35,33 @@ class App extends Component {
   }
   handleChange = (e) => {
     e.preventDefault();
-    this.setState({
-      category: {
-        attributes: {
-          [e.target.name]: e.target.value
-        }
+    e.persist();
+    this.setState(prevState => {
+      return {
+        category: {
+          ...prevState.category,
+          attributes: {
+            ...prevState.category.attributes,
+            [e.target.name]: e.target.value
+          },
+        },
       }
-    })
+    }, console.log(this.state))
   }
-  handleSubmit = (e, catId) => {
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.updateCategory();
+  }
+  updateCategory = () => {
     debugger
-    e.preventDefault();
-    let data = {
-      name: e.target.name.value,
-      desc: e.target.desc.value,
-      "img-url": e.target['img-url'].value
-    }
-    debugger;
-    this.updateCategory(data, catId)
-  }
-  updateCategory = (payload, catId) => {
-    fetch(`http://localhost:3000/api/v1/categories/${catId}`, {
+    console.log(this.state.category)
+    debugger
+    fetch(`http://localhost:3000/api/v1/categories/${this.state.category.id}`, {
       method: "PATCH",
-      body: JSON.stringify(payload)
+      body: JSON.stringify(this.state.category),
+      headers: {
+        "Content-Type": "text/html; charset=utf-8"
+      }
     })
     .then(res => {
       res.json();
@@ -75,7 +79,6 @@ class App extends Component {
     fetch(`http://localhost:3000/api/v1/categories/${id}`)
     .then(res => res.json())
     .then(res => {
-      debugger
       if (res.included === undefined) {
         this.setState({
           terms: [],

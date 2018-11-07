@@ -51,7 +51,7 @@ class CategoryPage extends React.Component {
                         terms={this.props.terms}
                         {...props}
                         handleChange={this.props.handleChange}
-                        handleSubmit={(e, id) => this.props.handleSubmit(e, id)}
+                        handleSubmit={this.props.handleSubmit}
                         />
                 }}/>
             </div>  

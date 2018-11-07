@@ -16,10 +16,14 @@ export default class CategoryEdit extends React.Component {
     getValidationState() {
       return  null;
     }
-
+    handleSubmit = (event) => {
+      event.preventDefault();
+      console.log("in the handle submit", this.props.category)
+      this.props.handleSubmit();
+    }
     render() {
       return this.props.category ? (
-        <form onSubmit={(e) => this.props.handleSubmit(e ,this.props.category.id)}>
+        <form onSubmit={this.handleSubmit}>
           <FormGroup
             controlId="formBasicText"
             validationState={this.getValidationState()}
