@@ -5,6 +5,7 @@ import CategoryPage from './components/CategoryPage'
 import './assets/stylesheets/App.css';
 import Category from './models/Category';
 const API = 'https://codecabulary.herokuapp.com/api/v1';
+const LOCAL = `http://localhost:3000/api/v1`
 class App extends Component {
   constructor() {
     super();
@@ -49,18 +50,15 @@ class App extends Component {
     }, console.log(this.state))
   }
   handleSubmit = (event) => {
-    event.preventDefault();
     this.updateCategory();
   }
   updateCategory = () => {
-    debugger
-    console.log(this.state.category)
-    debugger
-    fetch(`${API}/categories/${this.state.category.id}`, {
+    fetch(`${LOCAL}/categories/${this.state.category.id}`, {
       method: "PATCH",
       body: JSON.stringify(this.state.category),
       headers: {
-        "Content-Type": "text/html; charset=utf-8"
+        "Content-Type": "application/json",
+        "Accept": "application/json"
       }
     })
     .then(res => {
@@ -76,7 +74,7 @@ class App extends Component {
     })
   }
   fetchCategory = (id) => {
-    fetch(`${API}/categories/${id}`)
+    fetch(`${LOCAL}/categories/${id}`)
     .then(res => res.json())
     .then(res => {
       if (res.included === undefined) {
@@ -96,7 +94,7 @@ class App extends Component {
     })
   }
   fetchCategories = () => {
-    fetch(`${API}/categories`)
+    fetch(`${LOCAL}/categories`)
       .then(res => res.json())
       .then(res => {
         this.setState({
