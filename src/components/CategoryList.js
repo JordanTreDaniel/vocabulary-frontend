@@ -26,7 +26,6 @@ class CategoryList extends React.Component {
     }
     render() {
         let carouselItems = this.props.categories.map((category, index) => {
-            let c = category.attributes;
             return (
                 <Carousel.Item 
                     key={index} 
@@ -34,14 +33,14 @@ class CategoryList extends React.Component {
                     className="carousel-item" 
                     style={{backgroundColor: `black`, height: "300px"}}
                 >
-                    <img src={c['img-url']} alt={c.name}/>
+                    <img src={category['img_url']} alt={category.name}/>
                     <Carousel.Caption>
-                        <h3>{c.name}</h3>
-                        <p>{c.desc}</p>
+                        <h3>{category.name}</h3>
+                        <p>{category.desc}</p>
                         <Link to={{
                             pathname: `/categories/${category.id}/edit`,
                             state: { category: category }
-                        }}>Edit {c.name}</Link>
+                        }}>Edit {category.name}</Link>
                     </Carousel.Caption>
                 </Carousel.Item>
             )

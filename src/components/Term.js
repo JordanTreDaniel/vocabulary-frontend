@@ -1,7 +1,7 @@
 import React from 'react';
 
 let Term = (props) => {
-        let {def, desc, term} = props.term.attributes;
+        let {def, desc, term} = props.card;
         return (
             <div className={"term-card"}>
                 <h2>{term}</h2>

@@ -11,7 +11,7 @@ class App extends Component {
     super();
     this.state = {
       categories: [],
-      terms: [],
+      cards: [],
     }
   }
   render() {
@@ -23,7 +23,7 @@ class App extends Component {
             return <CategoryPage 
               fetchCategories={this.fetchCategories}
               categories={this.state.categories}  
-              terms={this.state.terms}
+              cards={this.state.cards}
               fetchCategory={id => this.fetchCategory(id)}
               props={props}
               category={this.state.category}
@@ -40,11 +40,7 @@ class App extends Component {
     this.setState(prevState => {
       return {
         category: {
-          ...prevState.category,
-          attributes: {
-            ...prevState.category.attributes,
-            [e.target.name]: e.target.value
-          },
+          [e.target.name]: e.target.value
         },
       }
     }, console.log(this.state))
@@ -77,17 +73,10 @@ class App extends Component {
     fetch(`${LOCAL}/categories/${id}`)
     .then(res => res.json())
     .then(res => {
-      if (res.included === undefined) {
-        this.setState({
-          terms: [],
-          category: res.data
-        })
-      } else {
-        this.setState({
-          terms: res.included,
-          category: res.data
-        })
-      }
+      this.setState({
+        category: res,
+        cards: res.cards
+      })
     })
     .catch(err => {
       throw err;
@@ -98,8 +87,8 @@ class App extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
-          categories: res.data,
-          category: res.data[0]
+          categories: res,
+          category: res[0]
         })
       })
       .catch(err => {

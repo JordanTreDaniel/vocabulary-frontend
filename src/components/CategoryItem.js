@@ -3,14 +3,12 @@ import Carousel from 'react-bootstrap/lib/Carousel';
 
 class CategoryItem extends React.Component {
     render() {
-        let categoryAttr = this.props.category.attributes;  
-        let id = this.props.category.id;
         return (
             <Carousel.Item>
-                <img width={900} height={500} alt="900x500" src={categoryAttr["img-url"]} />
+                <img width={900} height={500} alt="900x500" src={category["img_url"]} />
                 <Carousel.Caption>
-                    <h3>{categoryAttr.name}</h3>
-                    <p>{categoryAttr.desc}</p>
+                    <h3>{category.name}</h3>
+                    <p>{category.desc}</p>
                 </Carousel.Caption>
             </Carousel.Item>
         )

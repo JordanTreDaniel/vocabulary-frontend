@@ -18,7 +18,6 @@ export default class CategoryEdit extends React.Component {
     }
     handleSubmit = (event) => {
       event.preventDefault();
-      console.log("in the handle submit", this.props.category)
       this.props.handleSubmit();
     }
     render() {
@@ -32,7 +31,7 @@ export default class CategoryEdit extends React.Component {
             <FormControl
               type="text"
               name="name"
-              value={this.props.category.attributes.name}
+              value={this.props.category.name}
               placeholder="Enter text"
               onChange={this.props.handleChange}
             />
@@ -41,7 +40,7 @@ export default class CategoryEdit extends React.Component {
             <FormControl
               type="text"
               name="desc"
-              value={this.props.category.attributes.desc}
+              value={this.props.category.desc}
               placeholder="Enter text"
               onChange={this.props.handleChange}
             />
@@ -50,7 +49,7 @@ export default class CategoryEdit extends React.Component {
             <FormControl
               type="text"
               name="img-url"
-              value={this.props.category.attributes["img-url"]}
+              value={this.props.category["img_url"]}
               placeholder="Enter text"
               onChange={this.props.handleChange}
             />

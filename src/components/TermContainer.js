@@ -16,11 +16,11 @@ class TermContainer extends React.Component {
     }
   
     render() {
-        let terms = this.props.terms.map((term, idx) => {
-            console.log(term)
+        let cards = this.props.cards.map((card, idx) => {
+            console.log(card)
             return (
-                <Tab eventKey={idx} title={term.attributes.term} key={term.id}>
-                    <Term term={term}/>
+                <Tab eventKey={idx} title={card.term} key={card.id}>
+                    <Term card={card}/>
                 </Tab>
             )
         });
@@ -31,7 +31,7 @@ class TermContainer extends React.Component {
             onSelect={key => this.handleSelect(key)}
             id="controlled-tab-example"
             >
-                {terms}
+                {cards}
             </Tabs>
         );
     }

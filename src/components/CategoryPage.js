@@ -19,7 +19,6 @@ class CategoryPage extends React.Component {
         })
     }
     render() {
-        // debugger;
         return (
             <div id="category-page-container">
                 <Route 
@@ -35,7 +34,7 @@ class CategoryPage extends React.Component {
                                 </Row>
                                 <Row className="show-grid">
                                     <Col xs={12} md={12}>
-                                        <TermContainer terms={this.props.terms}/>
+                                        <TermContainer cards={this.props.cards}/>
                                     </Col>
                                 </Row>
                             </Grid>
@@ -48,7 +47,7 @@ class CategoryPage extends React.Component {
                         return <CategoryEdit 
                         fetchCategory={() => this.props.fetchCategory(parseInt(props.match.params.id))}
                         category={this.props.category}
-                        terms={this.props.terms}
+                        cards={this.props.cards}
                         {...props}
                         handleChange={this.props.handleChange}
                         handleSubmit={this.props.handleSubmit}
