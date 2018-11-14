@@ -40,15 +40,17 @@ class App extends Component {
     this.setState(prevState => {
       return {
         category: {
+          ...prevState.category,
           [e.target.name]: e.target.value
         },
       }
-    }, console.log(this.state))
+    })
   }
   handleSubmit = (event) => {
     this.updateCategory();
   }
   updateCategory = () => {
+    // debugger
     fetch(`${LOCAL}/categories/${this.state.category.id}`, {
       method: "PATCH",
       body: JSON.stringify(this.state.category),
@@ -57,13 +59,20 @@ class App extends Component {
         "Accept": "application/json"
       }
     })
-    .then(res => {
-      res.json();
-    })
+    .then(res => res.json())
     .then(category => {
-      this.setState({
-        category: category
+      this.setState(prevState => {
+        let cats = prevState.categories;
+        let oldCategory = cats.find((cat) => {
+          return cat.id === category.id;
+        })
+        cats[cats.indexOf(oldCategory)] = category;
+        return {
+          category: category,
+          categories: cats
+        }
       })
+      this.props.history.push(`/categories`)
     })
     .catch(err => {
       debugger;
@@ -87,7 +96,9 @@ class App extends Component {
       .then(res => res.json())
       .then(res => {
         this.setState({
-          categories: res,
+          categories: res.sort((a, b) => {
+            return a.id - b.id
+          }),
           category: res[0]
         })
       })
