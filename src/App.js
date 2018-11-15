@@ -37,7 +37,21 @@ class App extends Component {
   }
   handleCardInputChange = (e, idx) => {
     e.persist();
-    
+    this.setState((prevState) => {
+      return {
+        category: {
+          ...prevState.category,
+          cards: [
+            ...prevState.category.cards.slice(0, idx),
+            {
+              ...prevState.category.cards[idx],
+              [e.target.name]: e.target.value
+            },
+            ...prevState.category.cards.slice(idx+1)
+          ]
+        }
+      }
+    });
   }
   handleChange = (e) => {
     e.preventDefault();
