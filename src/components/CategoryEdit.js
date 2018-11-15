@@ -6,7 +6,7 @@ import {    FormGroup,
             HelpBlock,
             Button
         } from 'react-bootstrap/lib'
-import { Redirect} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import CardForm from './CardForm';
 export default class CategoryEdit extends React.Component {
     constructor(props, context) {

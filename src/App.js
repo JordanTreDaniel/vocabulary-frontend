@@ -89,7 +89,7 @@ class App extends Component {
     .then(res => {
       this.setState({
         category: res,
-        cards: res.cards
+        cards: res.cards 
       })
     })
     .catch(err => {
@@ -103,9 +103,10 @@ class App extends Component {
         this.setState({
           categories: res.sort((a, b) => {
             return a.id - b.id
-          }),
-          category: res[0]
+          })
         })
+        //must set a default category for state to display
+        this.fetchCategory(res[0].id)
       })
       .catch(err => {
         throw err;
