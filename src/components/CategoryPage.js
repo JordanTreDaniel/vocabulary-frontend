@@ -8,16 +8,6 @@ class CategoryPage extends React.Component {
     constructor(props) {
         super(props);
     }
-    handleChange = (e) => {
-        e.preventDefault();
-        this.setState({
-        category: {
-            attributes: {
-            [e.target.name]: e.target.value
-            }
-        }
-        })
-    }
     render() {
         return (
             <div id="category-page-container">
@@ -51,6 +41,7 @@ class CategoryPage extends React.Component {
                         {...props}
                         handleChange={this.props.handleChange}
                         handleSubmit={this.props.handleSubmit}
+                        handleCardInputChange={this.props.handleCardInputChange}
                         />
                 }}/>
             </div>  

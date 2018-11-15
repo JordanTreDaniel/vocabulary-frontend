@@ -29,10 +29,15 @@ class App extends Component {
               category={this.state.category}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
+              handleCardInputChange={this.handleCardInputChange}
             />
         }}/>
       </div>
     );
+  }
+  handleCardInputChange = (e) => {
+    e.persist();
+    console.log(e);
   }
   handleChange = (e) => {
     e.preventDefault();
