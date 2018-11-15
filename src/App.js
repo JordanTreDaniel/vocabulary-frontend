@@ -35,9 +35,9 @@ class App extends Component {
       </div>
     );
   }
-  handleCardInputChange = (e) => {
+  handleCardInputChange = (e, idx) => {
     e.persist();
-    console.log(e);
+    
   }
   handleChange = (e) => {
     e.preventDefault();

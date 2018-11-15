@@ -16,21 +16,27 @@ const CardForm = (props) => {
                 type="text"
                 name="term"
                 value={props.card.term}
-                onChange={props.handleCardInputChange}
+                onChange={(e) => {
+                    props.handleCardInputChange(e, props.idx)
+                }}
                 />
             <FormControl.Feedback />
             <FormControl
                 type="text"
                 name="def"
                 value={props.card.def}
-                onChange={props.handleCardInputChange}
+                onChange={(e) => {
+                    props.handleCardInputChange(e, props.idx)
+                }}
                 />
             <FormControl.Feedback />
             <FormControl
                 type="text"
                 name="desc"
                 value={props.card.desc}
-                onChange={props.handleCardInputChange}
+                onChange={(e) => {
+                    props.handleCardInputChange(e, props.idx)
+                }}
                 />
             <FormControl.Feedback />
         </Fragment>

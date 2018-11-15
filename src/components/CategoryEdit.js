@@ -21,8 +21,15 @@ export default class CategoryEdit extends React.Component {
       this.props.handleSubmit();
     }
     renderCardForms = () => {
-      return this.props.category.cards.map((c) => {
-        return <CardForm card={c} handleCardInputChange={this.props.handleCardInputChange}/>
+      return this.props.category.cards.map((c, idx) => {
+        return (
+          <CardForm 
+            card={c} 
+            handleCardInputChange={this.props.handleCardInputChange}
+            key={idx}
+            idx={idx}
+          />
+        )
       })
     }
     render() {
@@ -60,8 +67,8 @@ export default class CategoryEdit extends React.Component {
             />
             <FormControl.Feedback />
             <HelpBlock>Validation is based on string length.</HelpBlock>
+            {this.renderCardForms()}
           </FormGroup>
-          {this.renderCardForms()}
           <Button bsStyle="primary" type="submit">Save Changes</Button>
         </form>
       ) : <Redirect to="/categories"/>;
