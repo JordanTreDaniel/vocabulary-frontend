@@ -8,11 +8,10 @@ class CategoryList extends React.Component {
         super(props);
         this.state = {
             direction: null,
-            index: 0
+            index: props.initialIndex
         }
     }
     handleSelect = (selectedIndex, e) => {
-        e.persist();
         this.setState({
             direction: e.direction,
             index: selectedIndex

@@ -16,7 +16,11 @@ class CategoryPage extends React.Component {
                             <Grid>
                                 <Row className="show-grid">
                                     <Col xs={12} md={12}>
-                                        <CategoryList categories={this.props.categories} fetchCategory={id => this.props.fetchCategory(id)}/>
+                                        <CategoryList 
+                                            categories={this.props.categories} 
+                                            fetchCategory={id => this.props.fetchCategory(id)}
+                                            initialIndex={this.findInitialIndex()}
+                                        />
                                     </Col>
                                 </Row>
                                 <Row className="show-grid">
@@ -44,7 +48,17 @@ class CategoryPage extends React.Component {
             </div>  
         )
     }
-
+    findInitialIndex = () => {
+        if (this.props.category != undefined) {
+            const id = this.props.category.id;
+            const category = this.props.categories.find((c) => {
+                return c.id === id;
+            })
+            const idx = this.props.categories.indexOf(category);
+            return idx
+        }
+        return null;
+    }
     componentDidMount() {
         this.props.fetchCategories();
     }
