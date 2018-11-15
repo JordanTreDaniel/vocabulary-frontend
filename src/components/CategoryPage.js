@@ -5,9 +5,6 @@ import TermContainer from './TermContainer';
 import {Grid, Row, Col } from 'react-bootstrap';
 import { Route } from "react-router-dom";
 class CategoryPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return (
             <div id="category-page-container">

@@ -1,7 +1,6 @@
 import React from 'react';
 import {    FormGroup, 
             FormControl, 
-            FormExample,
             ControlLabel,
             HelpBlock,
             Button
@@ -9,10 +8,6 @@ import {    FormGroup,
 import { Redirect } from "react-router-dom";
 import CardForm from './CardForm';
 export default class CategoryEdit extends React.Component {
-    constructor(props, context) {
-      super(props, context);
-    }
-
     getValidationState() {
       return  null;
     }

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { Route} from "react-router-dom";
 import CategoryPage from './components/CategoryPage'
 
 import './assets/stylesheets/App.css';
-import Category from './models/Category';
 const API = 'https://codecabulary.herokuapp.com/api/v1';
 const LOCAL = `http://localhost:3000/api/v1`
 class App extends Component {
@@ -35,6 +34,7 @@ class App extends Component {
       </div>
     );
   }
+
   handleCardInputChange = (e, idx) => {
     e.persist();
     this.setState((prevState) => {
@@ -65,9 +65,11 @@ class App extends Component {
       }
     })
   }
+
   handleSubmit = (event) => {
     this.updateCategory();
   }
+
   updateCategory = () => {
     // debugger
     fetch(`${LOCAL}/categories/${this.state.category.id}`, {
@@ -97,6 +99,7 @@ class App extends Component {
       debugger;
     })
   }
+
   fetchCategory = (id) => {
     fetch(`${LOCAL}/categories/${id}`)
     .then(res => res.json())
@@ -110,6 +113,7 @@ class App extends Component {
       throw err;
     })
   }
+
   fetchCategories = () => {
     fetch(`${LOCAL}/categories`)
       .then(res => res.json())

@@ -1,6 +1,5 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/lib/Carousel';
-import Button from 'react-bootstrap/lib/Carousel';
 import { Link } from "react-router-dom";
 
 

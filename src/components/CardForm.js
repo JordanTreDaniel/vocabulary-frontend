@@ -1,12 +1,5 @@
 import React, {Fragment} from 'react';
-import {    FormGroup, 
-            FormControl, 
-            FormExample,
-            ControlLabel,
-            HelpBlock,
-            Button
-        } from 'react-bootstrap/lib'
-import { Redirect} from "react-router-dom";
+import { FormControl } from 'react-bootstrap/lib';
 
 const CardForm = (props) => {
     return (

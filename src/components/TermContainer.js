@@ -17,7 +17,6 @@ class TermContainer extends React.Component {
   
     render() {
         let cards = this.props.cards.map((card, idx) => {
-            console.log(card)
             return (
                 <Tab eventKey={idx} title={card.term} key={card.id}>
                     <Term card={card}/>
