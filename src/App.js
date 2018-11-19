@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Route} from "react-router-dom";
 import CategoryPage from './components/CategoryPage'
-
 import './assets/stylesheets/App.css';
+import {connect } from 'react-redux';
+import { setCategories, setCategory } from './actions/actions.js'
 const API = 'https://codecabulary.herokuapp.com/api/v1';
 const LOCAL = `http://localhost:3000/api/v1`
+
+
 class App extends Component {
   constructor() {
     super();
@@ -19,13 +22,14 @@ class App extends Component {
         <Route 
           path={`${this.props.match.path}/categories`} 
           render={(props) => {
+            let { categories, cards, category } = this.props;
             return <CategoryPage 
-              fetchCategories={this.fetchCategories}
-              categories={this.state.categories}  
-              cards={this.state.cards}
-              fetchCategory={id => this.fetchCategory(id)}
+              categories={categories}  
+              cards={cards}
+              category={category}
               props={props}
-              category={this.state.category}
+              fetchCategories={this.fetchCategories}
+              fetchCategory={id => this.fetchCategory(id)}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
               handleCardInputChange={this.handleCardInputChange}
@@ -108,6 +112,7 @@ class App extends Component {
         category: res,
         cards: res.cards 
       })
+      this.props.setCategory(res);
     })
     .catch(err => {
       throw err;
@@ -123,6 +128,10 @@ class App extends Component {
             return a.id - b.id
           })
         })
+        this.props.setCategories(res.sort((a, b) => {
+          return a.id - b.id
+        }));
+
         //must set a default category for state to display
         this.fetchCategory(res[0].id)
       })
@@ -131,6 +140,13 @@ class App extends Component {
       })
   }
 }
+const mapStateToProps = (state) => {
+   return state;
+}
 
+const mapDispatchToProps = (dispatch) => ({
+  setCategories: (categoryArr) => dispatch(setCategories(categoryArr)),
+  setCategory: (categoryObj) => dispatch(setCategory(categoryObj))
+})
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

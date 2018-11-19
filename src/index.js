@@ -4,9 +4,13 @@ import './assets/stylesheets/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
+import {Provider} from 'react-redux';
+import {store} from './configureStore';
 const AppRouter = () => {
-    return <Router>
+
+    return (
+        <Provider store={store}>
+            <Router>
                 <>
                     <Link to="/">Home</Link>
                     <Link to="/categories">Categories</Link>
@@ -15,6 +19,8 @@ const AppRouter = () => {
                     <Route path="" component={App}/>
                 </>
             </Router>
+        </Provider>
+    )
 }
 
 ReactDOM.render(<AppRouter/>, document.getElementById('root'));
