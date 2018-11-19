@@ -3,7 +3,9 @@ import { bindActionCreators } from "redux";
 
 const initialState = {
     categories: [],
-    cards: [],
+    category: {
+        cards: []
+    }
 }
 
 const rootReducer = (prevState = initialState, action) => {

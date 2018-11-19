@@ -13,7 +13,6 @@ class App extends Component {
     super();
     this.state = {
       categories: [],
-      cards: [],
     }
   }
   render() {
@@ -25,7 +24,7 @@ class App extends Component {
             let { categories, cards, category } = this.props;
             return <CategoryPage 
               categories={categories}  
-              cards={cards}
+              cards={category.cards}
               category={category}
               props={props}
               fetchCategories={this.fetchCategories}
@@ -76,9 +75,9 @@ class App extends Component {
 
   updateCategory = () => {
     // debugger
-    fetch(`${LOCAL}/categories/${this.state.category.id}`, {
+    fetch(`${LOCAL}/categories/${this.props.category.id}`, {
       method: "PATCH",
-      body: JSON.stringify(this.state.category),
+      body: JSON.stringify(this.props.category),
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
