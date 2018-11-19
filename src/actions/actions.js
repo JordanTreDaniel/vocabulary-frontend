@@ -12,6 +12,6 @@ export const setCategories = (categoriesArr) => {
     return {type: SET_CATEGORIES, payload: categoriesArr}
 }
 
-export const setCategory = (categoryObj) => {
-    return {type: SET_CATEGORY, payload: categoryObj}
+export const setCategory = (categoryObj, cardsArr) => {
+    return {type: SET_CATEGORY, cards: cardsArr, category: categoryObj}
 }

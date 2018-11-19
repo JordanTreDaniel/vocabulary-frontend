@@ -108,11 +108,7 @@ class App extends Component {
     fetch(`${LOCAL}/categories/${id}`)
     .then(res => res.json())
     .then(res => {
-      this.setState({
-        category: res,
-        cards: res.cards 
-      })
-      this.props.setCategory(res);
+      this.props.setCategory(res, res.cards);
     })
     .catch(err => {
       throw err;
@@ -123,11 +119,6 @@ class App extends Component {
     fetch(`${LOCAL}/categories`)
       .then(res => res.json())
       .then(res => {
-        this.setState({
-          categories: res.sort((a, b) => {
-            return a.id - b.id
-          })
-        })
         this.props.setCategories(res.sort((a, b) => {
           return a.id - b.id
         }));
@@ -146,7 +137,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   setCategories: (categoryArr) => dispatch(setCategories(categoryArr)),
-  setCategory: (categoryObj) => dispatch(setCategory(categoryObj))
+  setCategory: (categoryObj, cardsArr) => dispatch(setCategory(categoryObj, cardsArr)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
