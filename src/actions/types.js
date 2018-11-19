@@ -3,3 +3,4 @@
 export const TEST = "TEST";
 export const SET_CATEGORIES = "SET_CATEGORIES";
 export const SET_CATEGORY = "SET_CATEGORY";
+export const HANDLE_CARD_INPUT_CHANGE = "HANDLE_CARD_INPUT_CHANGE";

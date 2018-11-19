@@ -1,7 +1,8 @@
 import {
     TEST,
     SET_CATEGORIES,
-    SET_CATEGORY
+    SET_CATEGORY,
+    HANDLE_CARD_INPUT_CHANGE
 } from './types';
 
 export const tester = () => {
@@ -12,6 +13,10 @@ export const setCategories = (categoriesArr) => {
     return {type: SET_CATEGORIES, payload: categoriesArr}
 }
 
-export const setCategory = (categoryObj, cardsArr) => {
-    return {type: SET_CATEGORY, cards: cardsArr, category: categoryObj}
+export const setCategory = (categoryObj) => {
+    return {type: SET_CATEGORY, category: categoryObj}
+}
+
+export const handleCardInputChange = (name, value, idx) => {
+    return {type: HANDLE_CARD_INPUT_CHANGE, name, value, idx}
 }

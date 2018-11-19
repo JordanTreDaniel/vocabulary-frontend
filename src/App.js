@@ -3,7 +3,7 @@ import { Route} from "react-router-dom";
 import CategoryPage from './components/CategoryPage'
 import './assets/stylesheets/App.css';
 import {connect } from 'react-redux';
-import { setCategories, setCategory } from './actions/actions.js'
+import { setCategories, setCategory, handleCardInputChange } from './actions/actions.js'
 const API = 'https://codecabulary.herokuapp.com/api/v1';
 const LOCAL = `http://localhost:3000/api/v1`
 
@@ -21,7 +21,7 @@ class App extends Component {
         <Route 
           path={`${this.props.match.path}/categories`} 
           render={(props) => {
-            let { categories, cards, category } = this.props;
+            let { categories, category } = this.props;
             return <CategoryPage 
               categories={categories}  
               cards={category.cards}
@@ -40,21 +40,8 @@ class App extends Component {
 
   handleCardInputChange = (e, idx) => {
     e.persist();
-    this.setState((prevState) => {
-      return {
-        category: {
-          ...prevState.category,
-          cards: [
-            ...prevState.category.cards.slice(0, idx),
-            {
-              ...prevState.category.cards[idx],
-              [e.target.name]: e.target.value
-            },
-            ...prevState.category.cards.slice(idx+1)
-          ]
-        }
-      }
-    });
+    let {name, value} = e.target;
+    this.props.handleCardInputChange(name, value, idx);
   }
   handleChange = (e) => {
     e.preventDefault();
@@ -107,7 +94,7 @@ class App extends Component {
     fetch(`${LOCAL}/categories/${id}`)
     .then(res => res.json())
     .then(res => {
-      this.props.setCategory(res, res.cards);
+      this.props.setCategory(res);
     })
     .catch(err => {
       throw err;
@@ -137,6 +124,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   setCategories: (categoryArr) => dispatch(setCategories(categoryArr)),
   setCategory: (categoryObj, cardsArr) => dispatch(setCategory(categoryObj, cardsArr)),
+  handleCardInputChange: (name, value, idx) => dispatch(handleCardInputChange(name, value, idx))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
