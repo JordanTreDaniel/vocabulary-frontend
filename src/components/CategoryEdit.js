@@ -20,7 +20,7 @@ export default class CategoryEdit extends React.Component {
         return (
           <CardForm 
             card={c} 
-            handleCardInputChange={this.props.handleCardInputChange}
+            handleCardFieldChange={this.props.handleCardFieldChange}
             key={idx}
             idx={idx}
           />
@@ -40,7 +40,7 @@ export default class CategoryEdit extends React.Component {
               name="name"
               value={this.props.category.name}
               placeholder="Enter text"
-              onChange={this.props.handleChange}
+              onChange={this.props.handleCategoryFieldChange}
             />
             <FormControl.Feedback />
             <ControlLabel>Category Description</ControlLabel>
@@ -49,7 +49,7 @@ export default class CategoryEdit extends React.Component {
               name="desc"
               value={this.props.category.desc}
               placeholder="Enter text"
-              onChange={this.props.handleChange}
+              onChange={this.props.handleCategoryFieldChange}
             />
             <FormControl.Feedback />
             <ControlLabel>Category Image URL</ControlLabel>
@@ -58,7 +58,7 @@ export default class CategoryEdit extends React.Component {
               name="img_url"
               value={this.props.category["img_url"]}
               placeholder="Enter text"
-              onChange={this.props.handleChange}
+              onChange={this.props.handleCategoryFieldChange}
             />
             <FormControl.Feedback />
             <HelpBlock>Validation is based on string length.</HelpBlock>

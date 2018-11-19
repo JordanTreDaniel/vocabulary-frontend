@@ -2,7 +2,8 @@ import {
     SET_CATEGORIES, 
     SET_CATEGORY, 
     TEST,
-    HANDLE_CARD_INPUT_CHANGE
+    HANDLE_CARD_FIELD_CHANGE,
+    HANDLE_CATEGORY_FIELD_CHANGE
  } from "./actions/types";
 import { bindActionCreators } from "redux";
 
@@ -21,8 +22,9 @@ const rootReducer = (prevState = initialState, action) => {
             return {...prevState, categories: action.payload};
         case SET_CATEGORY:
             return {...prevState, category: action.category};
-        case HANDLE_CARD_INPUT_CHANGE:
+        case HANDLE_CARD_FIELD_CHANGE:
             return {
+                ...prevState,
                 category: {
                   ...prevState.category,
                   cards: [
@@ -34,7 +36,15 @@ const rootReducer = (prevState = initialState, action) => {
                     ...prevState.category.cards.slice(action.idx+1)
                   ]
                 }
-              };
+            };
+        case HANDLE_CATEGORY_FIELD_CHANGE:
+            return {
+                ...prevState,
+                category: {
+                  ...prevState.category,
+                  [action.name]: action.value
+                }
+            }
         default: 
             return prevState
     }

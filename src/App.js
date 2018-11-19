@@ -3,7 +3,12 @@ import { Route} from "react-router-dom";
 import CategoryPage from './components/CategoryPage'
 import './assets/stylesheets/App.css';
 import {connect } from 'react-redux';
-import { setCategories, setCategory, handleCardInputChange } from './actions/actions.js'
+import { 
+  setCategories, 
+  setCategory, 
+  handleCardFieldChange,
+  handleCategoryFieldChange
+ } from './actions/actions.js'
 const API = 'https://codecabulary.herokuapp.com/api/v1';
 const LOCAL = `http://localhost:3000/api/v1`
 
@@ -29,31 +34,24 @@ class App extends Component {
               props={props}
               fetchCategories={this.fetchCategories}
               fetchCategory={id => this.fetchCategory(id)}
-              handleChange={this.handleChange}
+              handleCategoryFieldChange={this.handleCategoryFieldChange}
               handleSubmit={this.handleSubmit}
-              handleCardInputChange={this.handleCardInputChange}
+              handleCardFieldChange={this.handleCardFieldChange}
             />
         }}/>
       </div>
     );
   }
 
-  handleCardInputChange = (e, idx) => {
+  handleCardFieldChange = (e, idx) => {
     e.persist();
     let {name, value} = e.target;
-    this.props.handleCardInputChange(name, value, idx);
+    this.props.handleCardFieldChange(name, value, idx);
   }
-  handleChange = (e) => {
-    e.preventDefault();
+  handleCategoryFieldChange = (e) => {
     e.persist();
-    this.setState(prevState => {
-      return {
-        category: {
-          ...prevState.category,
-          [e.target.name]: e.target.value
-        },
-      }
-    })
+    let {name, value} = e.target;
+    this.props.handleCategoryFieldChange(name, value);
   }
 
   handleSubmit = (event) => {
@@ -124,7 +122,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   setCategories: (categoryArr) => dispatch(setCategories(categoryArr)),
   setCategory: (categoryObj, cardsArr) => dispatch(setCategory(categoryObj, cardsArr)),
-  handleCardInputChange: (name, value, idx) => dispatch(handleCardInputChange(name, value, idx))
+  handleCardFieldChange: (name, value, idx) => dispatch(handleCardFieldChange(name, value, idx)),
+  handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

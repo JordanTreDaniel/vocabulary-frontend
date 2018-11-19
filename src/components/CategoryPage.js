@@ -40,9 +40,9 @@ class CategoryPage extends React.Component {
                         category={this.props.category}
                         cards={this.props.cards}
                         {...props}
-                        handleChange={this.props.handleChange}
+                        handleCategoryFieldChange={this.props.handleCategoryFieldChange}
                         handleSubmit={this.props.handleSubmit}
-                        handleCardInputChange={this.props.handleCardInputChange}
+                        handleCardFieldChange={this.props.handleCardFieldChange}
                         />
                 }}/>
             </div>  
