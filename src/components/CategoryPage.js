@@ -4,12 +4,17 @@ import CategoryEdit from './CategoryEdit';
 import TermContainer from './TermContainer';
 import {Grid, Row, Col } from 'react-bootstrap';
 import { Route } from "react-router-dom";
+import {connect } from 'react-redux';
+import { 
+    fetchCategories, 
+    fetchCategory, 
+   } from '../actions/actions.js'
 class CategoryPage extends React.Component {
     render() {
         return (
             <div id="category-page-container">
                 <Route 
-                    path={`${this.props.props.match.path}`} 
+                    path={`${this.props.match.path}`} 
                     exact 
                     render={(props) => {
                         return (
@@ -25,20 +30,20 @@ class CategoryPage extends React.Component {
                                 </Row>
                                 <Row className="show-grid">
                                     <Col xs={12} md={12}>
-                                        <TermContainer cards={this.props.cards}/>
+                                        <TermContainer cards={this.props.category.cards}/>
                                     </Col>
                                 </Row>
                             </Grid>
                         )
                     }}/>
                 <Route 
-                    path={`${this.props.props.match.path}/:id/edit`} 
+                    path={`${this.props.match.path}/:id/edit`} 
                     exact 
                     render={(props) => {
                         return <CategoryEdit 
                         fetchCategory={() => this.props.fetchCategory(parseInt(props.match.params.id))}
                         category={this.props.category}
-                        cards={this.props.cards}
+                        cards={this.props.category.cards}
                         {...props}
                         handleCategoryFieldChange={this.props.handleCategoryFieldChange}
                         handleSubmit={this.props.handleSubmit}
@@ -62,6 +67,14 @@ class CategoryPage extends React.Component {
     componentDidMount() {
         this.props.fetchCategories();
     }
-   
 }
-export default CategoryPage;
+const mapDispatchToProps = (dispatch) => ({
+    fetchCategories: () => dispatch(fetchCategories()),
+    fetchCategory: (id) => dispatch(fetchCategory(id)),
+})
+const mapStateToProps = (state) => ({
+    category: state.category,
+    categories: state.categories
+})
+  
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);

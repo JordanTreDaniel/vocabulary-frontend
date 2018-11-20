@@ -7,7 +7,14 @@ import {    FormGroup,
         } from 'react-bootstrap/lib'
 import { Redirect } from "react-router-dom";
 import CardForm from './CardForm';
-export default class CategoryEdit extends React.Component {
+import {connect } from 'react-redux';
+
+import { 
+  handleCardFieldChange,
+  handleCategoryFieldChange,
+  updateCategory
+ } from '../actions/actions.js'
+class CategoryEdit extends React.Component {
     getValidationState() {
       return  null;
     }
@@ -20,12 +27,27 @@ export default class CategoryEdit extends React.Component {
         return (
           <CardForm 
             card={c} 
-            handleCardFieldChange={this.props.handleCardFieldChange}
+            handleCardFieldChange={this.handleCardFieldChange}
             key={idx}
             idx={idx}
           />
         )
       })
+    }
+    handleCardFieldChange = (e, idx) => {
+      e.persist();
+      let {name, value} = e.target;
+      this.props.handleCardFieldChange(name, value, idx);
+    }
+    handleCategoryFieldChange = (e) => {
+      e.persist();
+      let {name, value} = e.target;
+      this.props.handleCategoryFieldChange(name, value);
+    }
+
+    handleSubmit = (event) => {
+      this.props.updateCategory(this.props.category);
+      this.props.history.push('/categories')
     }
     render() {
       return this.props.category ? (
@@ -40,7 +62,7 @@ export default class CategoryEdit extends React.Component {
               name="name"
               value={this.props.category.name}
               placeholder="Enter text"
-              onChange={this.props.handleCategoryFieldChange}
+              onChange={this.handleCategoryFieldChange}
             />
             <FormControl.Feedback />
             <ControlLabel>Category Description</ControlLabel>
@@ -49,7 +71,7 @@ export default class CategoryEdit extends React.Component {
               name="desc"
               value={this.props.category.desc}
               placeholder="Enter text"
-              onChange={this.props.handleCategoryFieldChange}
+              onChange={this.handleCategoryFieldChange}
             />
             <FormControl.Feedback />
             <ControlLabel>Category Image URL</ControlLabel>
@@ -58,7 +80,7 @@ export default class CategoryEdit extends React.Component {
               name="img_url"
               value={this.props.category["img_url"]}
               placeholder="Enter text"
-              onChange={this.props.handleCategoryFieldChange}
+              onChange={this.handleCategoryFieldChange}
             />
             <FormControl.Feedback />
             <HelpBlock>Validation is based on string length.</HelpBlock>
@@ -69,4 +91,13 @@ export default class CategoryEdit extends React.Component {
       ) : <Redirect to="/categories"/>;
     }
   }
-  
+  const mapDispatchToProps = (dispatch) => ({
+    handleCardFieldChange: (name, value, idx) => dispatch(handleCardFieldChange(name, value, idx)),
+    handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value)),
+    updateCategory: (category) => dispatch(updateCategory(category))
+})
+const mapStateToProps = (state) => ({
+    category: state.category,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryEdit);
