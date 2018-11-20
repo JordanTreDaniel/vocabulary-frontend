@@ -1,5 +1,4 @@
 import {
-    TEST,
     SET_CATEGORIES,
     SET_CATEGORY,
     HANDLE_CARD_FIELD_CHANGE,

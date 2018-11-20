@@ -64,7 +64,7 @@ class CategoryPage extends React.Component {
         }
         return null;
     }
-    componentDidMount() {
+    componentWillMount() {
         this.props.fetchCategories();
     }
 }
