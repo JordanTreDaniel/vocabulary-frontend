@@ -54,7 +54,7 @@ class CategoryPage extends React.Component {
         )
     }
     findInitialIndex = () => {
-        if (this.props.category != undefined) {
+        if (this.props.category !== undefined) {
             const id = this.props.category.id;
             const category = this.props.categories.find((c) => {
                 return c.id === id;

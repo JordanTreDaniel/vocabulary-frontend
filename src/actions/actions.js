@@ -3,7 +3,6 @@ import {
     SET_CATEGORY,
     HANDLE_CARD_FIELD_CHANGE,
     HANDLE_CATEGORY_FIELD_CHANGE,
-    UPDATE_CATEGORY
 } from './types';
 const LOCAL = `http://localhost:3000/api/v1`
 

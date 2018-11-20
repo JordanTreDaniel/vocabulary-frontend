@@ -6,8 +6,6 @@ import {
     HANDLE_CATEGORY_FIELD_CHANGE,
     UPDATE_CATEGORY
  } from "./actions/types";
-import { bindActionCreators } from "redux";
-import { updateCategory } from "./actions/actions";
 
 const initialState = {
     categories: [],
