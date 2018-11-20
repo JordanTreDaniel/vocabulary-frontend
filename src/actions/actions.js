@@ -3,7 +3,8 @@ import {
     SET_CATEGORIES,
     SET_CATEGORY,
     HANDLE_CARD_FIELD_CHANGE,
-    HANDLE_CATEGORY_FIELD_CHANGE
+    HANDLE_CATEGORY_FIELD_CHANGE,
+    UPDATE_CATEGORY
 } from './types';
 
 export const tester = () => {
@@ -24,4 +25,8 @@ export const handleCardFieldChange = (name, value, idx) => {
 
 export const handleCategoryFieldChange = (name, value) => {
     return {type: HANDLE_CATEGORY_FIELD_CHANGE, name, value}
+}
+
+export const updateCategory = () => {
+    return {type: UPDATE_CATEGORY}
 }

@@ -7,7 +7,8 @@ import {
   setCategories, 
   setCategory, 
   handleCardFieldChange,
-  handleCategoryFieldChange
+  handleCategoryFieldChange,
+  updateCategory
  } from './actions/actions.js'
 const API = 'https://codecabulary.herokuapp.com/api/v1';
 const LOCAL = `http://localhost:3000/api/v1`
@@ -59,7 +60,6 @@ class App extends Component {
   }
 
   updateCategory = () => {
-    // debugger
     fetch(`${LOCAL}/categories/${this.props.category.id}`, {
       method: "PATCH",
       body: JSON.stringify(this.props.category),
@@ -70,17 +70,7 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(category => {
-      this.setState(prevState => {
-        let cats = prevState.categories;
-        let oldCategory = cats.find((cat) => {
-          return cat.id === category.id;
-        })
-        cats[cats.indexOf(oldCategory)] = category;
-        return {
-          category: category,
-          categories: cats
-        }
-      })
+      this.props.updateCategory()
       this.props.history.push(`/categories`)
     })
     .catch(err => {
@@ -106,7 +96,6 @@ class App extends Component {
         this.props.setCategories(res.sort((a, b) => {
           return a.id - b.id
         }));
-
         //must set a default category for state to display
         this.fetchCategory(res[0].id)
       })
@@ -115,15 +104,17 @@ class App extends Component {
       })
   }
 }
-const mapStateToProps = (state) => {
-   return state;
-}
+const mapStateToProps = (state) => ({
+  category: state.category,
+  categories: state.categories
+})
 
 const mapDispatchToProps = (dispatch) => ({
   setCategories: (categoryArr) => dispatch(setCategories(categoryArr)),
   setCategory: (categoryObj, cardsArr) => dispatch(setCategory(categoryObj, cardsArr)),
   handleCardFieldChange: (name, value, idx) => dispatch(handleCardFieldChange(name, value, idx)),
-  handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value))
+  handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value)),
+  updateCategory: () => dispatch(updateCategory())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

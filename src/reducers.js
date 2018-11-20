@@ -3,9 +3,11 @@ import {
     SET_CATEGORY, 
     TEST,
     HANDLE_CARD_FIELD_CHANGE,
-    HANDLE_CATEGORY_FIELD_CHANGE
+    HANDLE_CATEGORY_FIELD_CHANGE,
+    UPDATE_CATEGORY
  } from "./actions/types";
 import { bindActionCreators } from "redux";
+import { updateCategory } from "./actions/actions";
 
 const initialState = {
     categories: [],
@@ -44,6 +46,16 @@ const rootReducer = (prevState = initialState, action) => {
                   ...prevState.category,
                   [action.name]: action.value
                 }
+            }
+        case UPDATE_CATEGORY:
+            let cats = prevState.categories;
+            let oldCategory = cats.find((cat) => {
+                return cat.id === prevState.category.id;
+            })
+            cats[cats.indexOf(oldCategory)] = prevState.category;
+            return {
+                ...prevState,
+                categories: cats
             }
         default: 
             return prevState
