@@ -21,7 +21,8 @@ const rootReducer = (prevState = initialState, action) => {
         case TEST: 
             return {...prevState, message: action.payload};
         case SET_CATEGORIES: 
-            return {...prevState, categories: action.payload};
+            let {categories, category } = action
+            return {...prevState, categories, category};
         case SET_CATEGORY:
             return {...prevState, category: action.category};
         case HANDLE_CARD_FIELD_CHANGE:

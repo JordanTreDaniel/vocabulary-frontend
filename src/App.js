@@ -4,8 +4,8 @@ import CategoryPage from './components/CategoryPage'
 import './assets/stylesheets/App.css';
 import {connect } from 'react-redux';
 import { 
-  setCategories, 
-  setCategory, 
+  fetchCategories, 
+  fetchCategory, 
   handleCardFieldChange,
   handleCategoryFieldChange,
   updateCategory
@@ -33,8 +33,8 @@ class App extends Component {
               cards={category.cards}
               category={category}
               props={props}
-              fetchCategories={this.fetchCategories}
-              fetchCategory={id => this.fetchCategory(id)}
+              fetchCategories={this.props.fetchCategories}
+              fetchCategory={id => this.props.fetchCategory(id)}
               handleCategoryFieldChange={this.handleCategoryFieldChange}
               handleSubmit={this.handleSubmit}
               handleCardFieldChange={this.handleCardFieldChange}
@@ -56,52 +56,8 @@ class App extends Component {
   }
 
   handleSubmit = (event) => {
-    this.updateCategory();
-  }
-
-  updateCategory = () => {
-    fetch(`${LOCAL}/categories/${this.props.category.id}`, {
-      method: "PATCH",
-      body: JSON.stringify(this.props.category),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      }
-    })
-    .then(res => res.json())
-    .then(category => {
-      this.props.updateCategory()
-      this.props.history.push(`/categories`)
-    })
-    .catch(err => {
-      debugger;
-    })
-  }
-
-  fetchCategory = (id) => {
-    fetch(`${LOCAL}/categories/${id}`)
-    .then(res => res.json())
-    .then(res => {
-      this.props.setCategory(res);
-    })
-    .catch(err => {
-      throw err;
-    })
-  }
-
-  fetchCategories = () => {
-    fetch(`${LOCAL}/categories`)
-      .then(res => res.json())
-      .then(res => {
-        this.props.setCategories(res.sort((a, b) => {
-          return a.id - b.id
-        }));
-        //must set a default category for state to display
-        this.fetchCategory(res[0].id)
-      })
-      .catch(err => {
-        throw err;
-      })
+    this.props.updateCategory(this.props.category);
+    this.props.history.push('/categories')
   }
 }
 const mapStateToProps = (state) => ({
@@ -110,11 +66,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setCategories: (categoryArr) => dispatch(setCategories(categoryArr)),
-  setCategory: (categoryObj, cardsArr) => dispatch(setCategory(categoryObj, cardsArr)),
+  fetchCategories: () => dispatch(fetchCategories()),
+  fetchCategory: (id) => dispatch(fetchCategory(id)),
   handleCardFieldChange: (name, value, idx) => dispatch(handleCardFieldChange(name, value, idx)),
   handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value)),
-  updateCategory: () => dispatch(updateCategory())
+  updateCategory: (category) => dispatch(updateCategory(category))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
