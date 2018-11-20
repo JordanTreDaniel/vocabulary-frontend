@@ -45,7 +45,6 @@ export const fetchCategory = (id) => {
 }
 
 export const setCategory = (categoryObj) => {
-
     return {type: SET_CATEGORY, category: categoryObj}
 }
 

@@ -15,7 +15,11 @@ const initialState = {
         cards: []
     }
 }
-
+const insertNewCategory = (categories, newCategory) => {
+    const idx = categories.map((c) => c.id ).indexOf(newCategory.id);
+    categories.splice(idx, 1, newCategory);
+    return categories;
+}
 const rootReducer = (prevState = initialState, action) => {
     switch (action.type) {
         case TEST: 
@@ -24,7 +28,10 @@ const rootReducer = (prevState = initialState, action) => {
             let {categories, category } = action
             return {...prevState, categories, category};
         case SET_CATEGORY:
-            return {...prevState, category: action.category};
+            return {...prevState, 
+                        category: action.category, 
+                        categories: insertNewCategory(prevState.categories, action.category)
+                    };
         case HANDLE_CARD_FIELD_CHANGE:
             return {
                 ...prevState,
