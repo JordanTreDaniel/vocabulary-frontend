@@ -29,8 +29,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "redux-devtools": "^3.4.2",
-    "webpack": "^4.26.0",
-    "webpack-cli": "^3.1.2"
+    "redux-devtools": "^3.4.2"
   }
 }

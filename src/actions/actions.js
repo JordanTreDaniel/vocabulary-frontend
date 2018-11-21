@@ -5,11 +5,11 @@ import {
     HANDLE_CATEGORY_FIELD_CHANGE,
 } from './types';
 const LOCAL = `http://localhost:3000/api/v1`
-
+const REMOTE = `https://codecabulary-api.herokuapp.com/api/v1`
 
 export const fetchCategories = () => {
     return (dispatch) => {
-        fetch(`${LOCAL}/categories`)
+        fetch(`${REMOTE}/categories`)
         .then(res => res.json())
         .then(res => {
             res.sort((a, b) => {
@@ -27,11 +27,12 @@ export const setCategories = (categories) => {
     if (!category.cards) {
         category = {...category, cards: []}
     }
+    debugger
     return {type: SET_CATEGORIES, categories, category}
 }
 export const fetchCategory = (id) => {
     return (dispatch) => {
-        fetch(`${LOCAL}/categories/${id}`)
+        fetch(`${REMOTE}/categories/${id}`)
             .then(res => res.json())
             .then(res => {
                 dispatch(setCategory(res));
@@ -48,7 +49,7 @@ export const setCategory = (categoryObj) => {
 
 export const updateCategory = (category) => {
     return (dispatch) => {
-        fetch(`${LOCAL}/categories/${category.id}`, {
+        fetch(`${REMOTE}/categories/${category.id}`, {
             method: "PATCH",
             body: JSON.stringify(category),
             headers: {
