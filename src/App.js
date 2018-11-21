@@ -4,6 +4,7 @@ import CategoryPage from './components/CategoryPage'
 import './assets/stylesheets/App.css';
 class App extends Component {
   render() {
+    console.log("The variable is", process.env.REACT_APP_API_URL)
     return (
       <div className="app-page-container">
         <Route 
