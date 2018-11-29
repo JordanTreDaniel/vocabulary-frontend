@@ -11,6 +11,7 @@ import {
    } from '../actions/actions.js'
 class CategoryPage extends React.Component {
     render() {
+
         return (
             <div id="category-page-container">
                 <Route 
@@ -24,7 +25,7 @@ class CategoryPage extends React.Component {
                                         <CategoryList 
                                             categories={this.props.categories} 
                                             fetchCategory={id => this.props.fetchCategory(id)}
-                                            initialIndex={this.findInitialIndex()}
+                                            initialIndex={this.props.selectedCategoryIndex}
                                         />
                                     </Col>
                                 </Row>
@@ -40,9 +41,9 @@ class CategoryPage extends React.Component {
                     path={`${this.props.match.path}/:id/edit`} 
                     exact 
                     render={(props) => {
+                        console.log("category", this.props.category)
                         return <CategoryEdit 
                         fetchCategory={() => this.props.fetchCategory(parseInt(props.match.params.id))}
-                        category={this.props.category}
                         cards={this.props.category.cards}
                         {...props}
                         handleCategoryFieldChange={this.props.handleCategoryFieldChange}
@@ -53,17 +54,17 @@ class CategoryPage extends React.Component {
             </div>  
         )
     }
-    findInitialIndex = () => {
-        if (this.props.category !== undefined) {
-            const id = this.props.category.id;
-            const category = this.props.categories.find((c) => {
-                return c.id === id;
-            })
-            const idx = this.props.categories.indexOf(category);
-            return idx
-        }
-        return null;
-    }
+    // findInitialIndex = () => {
+    //     if (this.props.category !== undefined) {
+    //         const id = this.props.category.id;
+    //         const category = this.props.categories.find((c) => {
+    //             return c.id === id;
+    //         })
+    //         const idx = this.props.categories.indexOf(category);
+    //         return idx
+    //     }
+    //     return null;
+    // }
     componentWillMount() {
         this.props.fetchCategories();
     }
@@ -73,8 +74,9 @@ const mapDispatchToProps = (dispatch) => ({
     fetchCategory: (id) => dispatch(fetchCategory(id)),
 })
 const mapStateToProps = (state) => ({
-    category: state.category,
-    categories: state.categories
+    selectedCategoryIndex: state.selectedCategoryIndex,
+    categories: state.categories,
+    category: state.categories[state.selectedCategoryIndex]
 })
   
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);

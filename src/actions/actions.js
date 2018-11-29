@@ -4,7 +4,7 @@ import {
     HANDLE_CARD_FIELD_CHANGE,
     HANDLE_CATEGORY_FIELD_CHANGE,
 } from './types';
-const REMOTE = `https://codecabulary-api.herokuapp.com/api/v1`
+
 
 export const fetchCategories = () => {
     return (dispatch) => {
@@ -22,11 +22,11 @@ export const fetchCategories = () => {
     }
 }
 export const setCategories = (categories) => {
-    let category = categories[0];
+    let category = categories[0]
     if (!category.cards) {
         category = {...category, cards: []}
     }
-    return {type: SET_CATEGORIES, categories, category}
+    return {type: SET_CATEGORIES, categories, selectedCategoryIndex: 0}
 }
 export const fetchCategory = (id) => {
     return (dispatch) => {

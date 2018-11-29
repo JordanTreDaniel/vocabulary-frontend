@@ -8,13 +8,16 @@ import {
  } from "./actions/types";
 
 const initialState = {
-    categories: [],
-    category: {
+    categories: [{
         cards: []
-    }
+    }],
+    selectedCategoryIndex: 0
+}
+const getCategoryIndex = (categories, id) => {
+    return categories.map((c) => c.id ).indexOf(id);
 }
 const insertUpdatedCategory = (categories, newCategory) => {
-    const idx = categories.map((c) => c.id ).indexOf(newCategory.id);
+    const idx = getCategoryIndex(categories, newCategory.id)
     categories.splice(idx, 1, newCategory);
     return categories;
 }
@@ -23,11 +26,11 @@ const rootReducer = (prevState = initialState, action) => {
         case TEST: 
             return {...prevState, message: action.payload};
         case SET_CATEGORIES: 
-            let {categories, category } = action
-            return {...prevState, categories, category};
+            let {categories, selectedCategoryIndex } = action
+            return {...prevState, categories, selectedCategoryIndex};
         case SET_CATEGORY:
             return {...prevState, 
-                        category: action.category, 
+                        selectedCategoryIndex: getCategoryIndex(prevState.categories, action.category.id), 
                         categories: insertUpdatedCategory(prevState.categories, action.category)
                     };
         case HANDLE_CARD_FIELD_CHANGE:

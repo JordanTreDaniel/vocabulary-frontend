@@ -50,6 +50,7 @@ class CategoryEdit extends React.Component {
       this.props.history.push('/categories')
     }
     render() {
+      debugger
       return this.props.category ? (
         <form onSubmit={this.handleSubmit}>
           <FormGroup
@@ -97,7 +98,7 @@ class CategoryEdit extends React.Component {
     updateCategory: (category) => dispatch(updateCategory(category))
 })
 const mapStateToProps = (state) => ({
-    category: state.category,
+    category: state.categories[state.selectedCategoryIndex],
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryEdit);
