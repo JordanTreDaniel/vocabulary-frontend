@@ -63,7 +63,6 @@ const rootReducer = (prevState = initialState, action) => {
                 categories: insertUpdatedCategory(prevState.categories, newCategory)
             }
         case UPDATE_CATEGORY:
-            debugger
             return {
                 ...prevState,
                 categories: insertUpdatedCategory(prevState.categories, action.category)

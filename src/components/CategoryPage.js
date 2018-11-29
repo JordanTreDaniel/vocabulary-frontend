@@ -11,7 +11,6 @@ import {
 } from '../actions/actions.js'
 class CategoryPage extends React.Component {
     render() {
-
         return (
             <div id="category-page-container">
                 <Route
@@ -53,17 +52,6 @@ class CategoryPage extends React.Component {
             </div>
         )
     }
-    // findInitialIndex = () => {
-    //     if (this.props.category !== undefined) {
-    //         const id = this.props.category.id;
-    //         const category = this.props.categories.find((c) => {
-    //             return c.id === id;
-    //         })
-    //         const idx = this.props.categories.indexOf(category);
-    //         return idx
-    //     }
-    //     return null;
-    // }
     componentWillMount() {
         this.props.fetchCategories();
     }
