@@ -1,11 +1,11 @@
-import { 
-    SET_CATEGORIES, 
-    SET_CATEGORY, 
+import {
+    SET_CATEGORIES,
+    SET_CATEGORY,
     TEST,
     HANDLE_CARD_FIELD_CHANGE,
     HANDLE_CATEGORY_FIELD_CHANGE,
     UPDATE_CATEGORY
- } from "./actions/types";
+} from "./actions/types";
 
 const initialState = {
     categories: [{
@@ -14,7 +14,7 @@ const initialState = {
     selectedCategoryIndex: 0
 }
 const getCategoryIndex = (categories, id) => {
-    return categories.map((c) => c.id ).indexOf(id);
+    return categories.map((c) => c.id).indexOf(id);
 }
 const insertUpdatedCategory = (categories, newCategory) => {
     const idx = getCategoryIndex(categories, newCategory.id)
@@ -22,51 +22,53 @@ const insertUpdatedCategory = (categories, newCategory) => {
     return categories;
 }
 const rootReducer = (prevState = initialState, action) => {
+    let newCategory,
+        oldCategory;
     switch (action.type) {
-        case TEST: 
-            return {...prevState, message: action.payload};
-        case SET_CATEGORIES: 
-            let {categories, selectedCategoryIndex } = action
-            return {...prevState, categories, selectedCategoryIndex};
+        case TEST:
+            return { ...prevState, message: action.payload };
+        case SET_CATEGORIES:
+            let { categories, selectedCategoryIndex } = action
+            return { ...prevState, categories, selectedCategoryIndex };
         case SET_CATEGORY:
-            return {...prevState, 
-                        selectedCategoryIndex: getCategoryIndex(prevState.categories, action.category.id), 
-                        categories: insertUpdatedCategory(prevState.categories, action.category)
-                    };
-        case HANDLE_CARD_FIELD_CHANGE:
             return {
                 ...prevState,
-                category: {
-                  ...prevState.category,
-                  cards: [
-                    ...prevState.category.cards.slice(0, action.idx),
+                selectedCategoryIndex: getCategoryIndex(prevState.categories, action.category.id),
+                categories: insertUpdatedCategory(prevState.categories, action.category)
+            };
+        case HANDLE_CARD_FIELD_CHANGE:
+            oldCategory = { ...prevState.categories[prevState.selectedCategoryIndex] }
+            newCategory = {
+                ...oldCategory,
+                cards: [
+                    ...oldCategory.cards.slice(0, action.idx),
                     {
-                      ...prevState.category.cards[action.idx],
-                      [action.name]: action.value
+                        ...oldCategory.cards[action.idx],
+                        [action.name]: action.value
                     },
-                    ...prevState.category.cards.slice(action.idx+1)
-                  ]
-                }
+                    ...oldCategory.cards.slice(action.idx + 1)
+                ]
+            }
+            return {
+                ...prevState,
+                categories: insertUpdatedCategory(prevState.categories, newCategory)
             };
         case HANDLE_CATEGORY_FIELD_CHANGE:
+            newCategory = {
+                ...prevState.categories[prevState.selectedCategoryIndex],
+                [action.name]: action.value
+            }
             return {
                 ...prevState,
-                category: {
-                  ...prevState.category,
-                  [action.name]: action.value
-                }
+                categories: insertUpdatedCategory(prevState.categories, newCategory)
             }
         case UPDATE_CATEGORY:
-            let cats = prevState.categories;
-            let oldCategory = cats.find((cat) => {
-                return cat.id === prevState.category.id;
-            })
-            cats[cats.indexOf(oldCategory)] = prevState.category;
+            debugger
             return {
                 ...prevState,
-                categories: cats
+                categories: insertUpdatedCategory(prevState.categories, action.category)
             }
-        default: 
+        default:
             return prevState
     }
 }
