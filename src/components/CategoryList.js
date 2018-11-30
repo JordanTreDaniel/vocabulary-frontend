@@ -16,22 +16,18 @@ class CategoryList extends React.Component {
             direction: e.direction,
             index: selectedIndex
         })
-        this.findSelectedCategory(selectedIndex);
-    }
-    findSelectedCategory = (idx) => {
-        let cat = this.props.categories[idx];
-        this.props.fetchCategory(parseInt(cat.id));
+        this.props.selectCategory(selectedIndex);
     }
     render() {
         let carouselItems = this.props.categories.map((category, index) => {
             return (
-                <Carousel.Item 
-                    key={index} 
+                <Carousel.Item
+                    key={index}
                     id={category.id}
-                    className="carousel-item" 
-                    style={{backgroundColor: `black`, height: "300px"}}
+                    className="carousel-item"
+                    style={{ backgroundColor: `black`, height: "300px" }}
                 >
-                    <img src={category['img_url']} alt={category.name}/>
+                    <img src={category['img_url']} alt={category.name} />
                     <Carousel.Caption>
                         <h3>{category.name}</h3>
                         <p>{category.desc}</p>
@@ -48,7 +44,8 @@ class CategoryList extends React.Component {
                 activeIndex={this.state.index}
                 direction={this.state.direction}
                 onSelect={(key, event) => {
-                    return this.handleSelect(key, event)}
+                    return this.handleSelect(key, event)
+                }
                 }
             >
                 {carouselItems}
