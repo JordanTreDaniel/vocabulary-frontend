@@ -4,7 +4,8 @@ import {
     HANDLE_CARD_FIELD_CHANGE,
     HANDLE_CATEGORY_FIELD_CHANGE,
     UPDATE_CATEGORY,
-    SELECT_CATEGORY
+    SELECT_CATEGORY,
+    ADD_CARD
 } from './types';
 
 
@@ -62,11 +63,13 @@ export const updateCategory = (category) => {
                 dispatch({ type: UPDATE_CATEGORY, category })
             })
             .catch(err => {
-                debugger;
+                console.log(err)
             })
     }
 }
-
+export const addCard = () => {
+    return { type: ADD_CARD }
+}
 export const selectCategory = (idx) => {
     return { type: SELECT_CATEGORY, idx }
 }

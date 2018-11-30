@@ -13,7 +13,8 @@ import { connect } from 'react-redux';
 import {
   handleCardFieldChange,
   handleCategoryFieldChange,
-  updateCategory
+  updateCategory,
+  addCard,
 } from '../actions/actions.js'
 class CategoryEdit extends React.Component {
   getValidationState() {
@@ -34,6 +35,10 @@ class CategoryEdit extends React.Component {
         />
       )
     })
+  }
+  addCard = () => {
+    this.props.addCard();
+    this.forceUpdate();
   }
   handleCardFieldChange = (e, idx) => {
     e.persist();
@@ -86,8 +91,9 @@ class CategoryEdit extends React.Component {
           <FormControl.Feedback />
           <HelpBlock>Validation is based on string length.</HelpBlock>
           {this.renderCardForms()}
+          <Button bsStyle="primary" onClick={this.addCard}>New Card</Button>
         </FormGroup>
-        <Button bsStyle="primary" type="submit">Save Changes</Button>
+        <Button bsStyle="success" type="submit">Save Changes</Button>
       </form>
     ) : <Redirect to="/categories" />;
   }
@@ -95,7 +101,8 @@ class CategoryEdit extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   handleCardFieldChange: (name, value, idx) => dispatch(handleCardFieldChange(name, value, idx)),
   handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value)),
-  updateCategory: (category) => dispatch(updateCategory(category))
+  updateCategory: (category) => dispatch(updateCategory(category)),
+  addCard: () => dispatch(addCard())
 })
 const mapStateToProps = (state) => ({
   category: state.categories[state.selectedCategoryIndex],

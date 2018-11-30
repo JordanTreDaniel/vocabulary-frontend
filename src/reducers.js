@@ -5,7 +5,8 @@ import {
     HANDLE_CARD_FIELD_CHANGE,
     HANDLE_CATEGORY_FIELD_CHANGE,
     UPDATE_CATEGORY,
-    SELECT_CATEGORY
+    SELECT_CATEGORY,
+    ADD_CARD
 } from "./actions/types";
 
 const initialState = {
@@ -69,10 +70,20 @@ const rootReducer = (prevState = initialState, action) => {
                 categories: insertUpdatedCategory(prevState.categories, action.category)
             }
         case SELECT_CATEGORY:
-            debugger
             return {
                 ...prevState,
                 selectedCategoryIndex: action.idx
+            }
+        case ADD_CARD:
+            let c = prevState.categories[prevState.selectedCategoryIndex]
+            c.cards.push({
+                term: "New Term",
+                def: "Defintion: (Don't use the term in the definition)",
+                desc: "Give more context"
+            })
+            return {
+                ...prevState,
+                categories: insertUpdatedCategory(prevState.categories, c)
             }
         default:
             return prevState
