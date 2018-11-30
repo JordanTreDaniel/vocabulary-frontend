@@ -13,6 +13,7 @@ const initialState = {
     }],
     selectedCategoryIndex: 0
 }
+
 const getCategoryIndex = (categories, id) => {
     return categories.map((c) => c.id).indexOf(id);
 }
