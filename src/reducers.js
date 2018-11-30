@@ -4,7 +4,8 @@ import {
     TEST,
     HANDLE_CARD_FIELD_CHANGE,
     HANDLE_CATEGORY_FIELD_CHANGE,
-    UPDATE_CATEGORY
+    UPDATE_CATEGORY,
+    SELECT_CATEGORY
 } from "./actions/types";
 
 const initialState = {
@@ -66,6 +67,12 @@ const rootReducer = (prevState = initialState, action) => {
             return {
                 ...prevState,
                 categories: insertUpdatedCategory(prevState.categories, action.category)
+            }
+        case SELECT_CATEGORY:
+            debugger
+            return {
+                ...prevState,
+                selectedCategoryIndex: action.idx
             }
         default:
             return prevState

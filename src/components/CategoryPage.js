@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import {
     fetchCategories,
     fetchCategory,
+    selectCategory
 } from '../actions/actions.js'
 class CategoryPage extends React.Component {
     render() {
@@ -23,7 +24,7 @@ class CategoryPage extends React.Component {
                                     <Col xs={12} md={12}>
                                         <CategoryList
                                             categories={this.props.categories}
-                                            fetchCategory={id => this.props.fetchCategory(id)}
+                                            selectCategory={id => this.props.selectCategory(id)}
                                             initialIndex={this.props.selectedCategoryIndex}
                                         />
                                     </Col>
@@ -59,6 +60,7 @@ class CategoryPage extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
     fetchCategories: () => dispatch(fetchCategories()),
     fetchCategory: (id) => dispatch(fetchCategory(id)),
+    selectCategory: (idx) => dispatch(selectCategory(idx))
 })
 const mapStateToProps = (state) => ({
     selectedCategoryIndex: state.selectedCategoryIndex,
