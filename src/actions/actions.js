@@ -61,6 +61,7 @@ export const updateCategory = (category) => {
         })
             .then(res => res.json())
             .then(category => {
+                debugger
                 dispatch({ type: UPDATE_CATEGORY, category })
             })
             .catch(err => {
