@@ -3,23 +3,54 @@ import CategoryList from './CategoryList';
 import CategoryEdit from './CategoryEdit';
 import TermContainer from './TermContainer';
 import { Grid, Row, Col } from 'react-bootstrap';
+import {
+    Button
+} from 'react-bootstrap/lib'
 import { Route } from "react-router-dom";
 import { connect } from 'react-redux';
 import {
     fetchCategories,
     fetchCategory,
-    selectCategory
+    selectCategory,
+    createCategory
 } from '../actions/actions.js'
 class CategoryPage extends React.Component {
     render() {
         return (
             <div id="category-page-container">
                 <Route
+                    path={`${this.props.match.path}/:id/edit`}
+                    exact
+                    render={(props) => {
+                        return <CategoryEdit
+                            {...props}
+                            handleCategoryFieldChange={this.props.handleCategoryFieldChange}
+                            handleSubmit={this.props.handleSubmit}
+                            handleCardFieldChange={this.props.handleCardFieldChange}
+                        />
+                    }} />
+                <Route
+                    path={`${this.props.match.path}/new`}
+                    exact
+                    render={(props) => {
+                        return <CategoryEdit
+                            {...props}
+                            handleCategoryFieldChange={this.props.handleCategoryFieldChange}
+                            handleSubmit={this.props.handleSubmit}
+                            handleCardFieldChange={this.props.handleCardFieldChange}
+                        />
+                    }} />
+                <Route
                     path={`${this.props.match.path}`}
                     exact
                     render={(props) => {
                         return (
                             <Grid>
+                                <Row className="show-grid">
+                                    <Col xs={12} md={12}>
+                                        <Button bsStyle="success" onClick={this.createCategory}>New Category</Button>
+                                    </Col>
+                                </Row>
                                 <Row className="show-grid">
                                     <Col xs={12} md={12}>
                                         <CategoryList
@@ -37,35 +68,29 @@ class CategoryPage extends React.Component {
                             </Grid>
                         )
                     }} />
-                <Route
-                    path={`${this.props.match.path}/:id/edit`}
-                    exact
-                    render={(props) => {
-                        return <CategoryEdit
-                            fetchCategory={() => this.props.fetchCategory(parseInt(props.match.params.id))}
-                            cards={this.props.category.cards}
-                            {...props}
-                            handleCategoryFieldChange={this.props.handleCategoryFieldChange}
-                            handleSubmit={this.props.handleSubmit}
-                            handleCardFieldChange={this.props.handleCardFieldChange}
-                        />
-                    }} />
             </div>
         )
     }
     componentWillMount() {
         this.props.fetchCategories();
     }
+    createCategory = () => {
+        this.props.createCategory();
+        this.props.history.push('/categories/new')
+    }
 }
 const mapDispatchToProps = (dispatch) => ({
     fetchCategories: () => dispatch(fetchCategories()),
     fetchCategory: (id) => dispatch(fetchCategory(id)),
-    selectCategory: (idx) => dispatch(selectCategory(idx))
+    selectCategory: (idx) => dispatch(selectCategory(idx)),
+    createCategory: () => dispatch(createCategory())
 })
-const mapStateToProps = (state) => ({
-    selectedCategoryIndex: state.selectedCategoryIndex,
-    categories: state.categories,
-    category: state.categories[state.selectedCategoryIndex]
-})
+const mapStateToProps = (state) => {
+    return ({
+        selectedCategoryIndex: state.selectedCategoryIndex,
+        categories: state.categories,
+        category: state.categories[state.selectedCategoryIndex]
+    })
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);

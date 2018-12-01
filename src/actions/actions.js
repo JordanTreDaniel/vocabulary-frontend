@@ -5,7 +5,8 @@ import {
     HANDLE_CATEGORY_FIELD_CHANGE,
     UPDATE_CATEGORY,
     SELECT_CATEGORY,
-    ADD_CARD
+    ADD_CARD,
+    ADD_CATEGORY
 } from './types';
 
 
@@ -72,6 +73,19 @@ export const addCard = () => {
 }
 export const selectCategory = (idx) => {
     return { type: SELECT_CATEGORY, idx }
+}
+export const createCategory = () => {
+    const category = {
+        name: "New Category",
+        desc: "Description",
+        "img_url": "Image URL here",
+        cards: [{
+            term: "New Term",
+            def: "Defintion: (Don't use the term in the definition)",
+            desc: "Give more context"
+        }]
+    }
+    return { type: ADD_CATEGORY, category }
 }
 export const handleCardFieldChange = (name, value, idx) => {
     return { type: HANDLE_CARD_FIELD_CHANGE, name, value, idx }
