@@ -9,3 +9,5 @@ export const UPDATE_CATEGORY = "UPDATE_CATEGORY";
 export const SELECT_CATEGORY = "SELECT_CATEGORY";
 export const ADD_CARD = "ADD_CARD";
 export const ADD_CATEGORY = "ADD_CATEGORY";
+export const DELETE_CARD = "DELETE_CARD";
+

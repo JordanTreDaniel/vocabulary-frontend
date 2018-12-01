@@ -15,6 +15,7 @@ import {
   handleCategoryFieldChange,
   updateCategory,
   addCard,
+  deleteCard
 } from '../actions/actions.js'
 class CategoryEdit extends React.Component {
   getValidationState() {
@@ -32,6 +33,7 @@ class CategoryEdit extends React.Component {
           handleCardFieldChange={this.handleCardFieldChange}
           key={idx}
           idx={idx}
+          deleteCard={(id) => this.props.deleteCard(id)}
         />
       )
     })
@@ -102,7 +104,8 @@ const mapDispatchToProps = (dispatch) => ({
   handleCardFieldChange: (name, value, idx) => dispatch(handleCardFieldChange(name, value, idx)),
   handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value)),
   updateCategory: (category) => dispatch(updateCategory(category)),
-  addCard: () => dispatch(addCard())
+  addCard: () => dispatch(addCard()),
+  deleteCard: (id) => dispatch(deleteCard(id))
 })
 const mapStateToProps = (state) => ({
   category: state.categories[state.selectedCategoryIndex],

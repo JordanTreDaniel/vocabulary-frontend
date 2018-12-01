@@ -1,5 +1,8 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import { FormControl } from 'react-bootstrap/lib';
+import {
+    Button
+} from 'react-bootstrap/lib'
 
 const CardForm = (props) => {
     return (
@@ -12,7 +15,7 @@ const CardForm = (props) => {
                 onChange={(e) => {
                     props.handleCardFieldChange(e, props.idx)
                 }}
-                />
+            />
             <FormControl.Feedback />
             <FormControl
                 type="text"
@@ -21,7 +24,7 @@ const CardForm = (props) => {
                 onChange={(e) => {
                     props.handleCardFieldChange(e, props.idx)
                 }}
-                />
+            />
             <FormControl.Feedback />
             <FormControl
                 type="text"
@@ -30,8 +33,10 @@ const CardForm = (props) => {
                 onChange={(e) => {
                     props.handleCardFieldChange(e, props.idx)
                 }}
-                />
+            />
             <FormControl.Feedback />
+            <Button bsStyle="danger" onClick={() => props.deleteCard(props.card.id)}>Delete Card</Button>
+
         </Fragment>
     )
 }

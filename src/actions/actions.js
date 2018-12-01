@@ -9,7 +9,18 @@ import {
     ADD_CATEGORY
 } from './types';
 
-
+export const deleteCard = (id) => {
+    return (dispatch) => {
+        fetch(`${process.env.REACT_APP_API_URL}/cards/${id}/delete`)
+            .then(res => res.json())
+            .then(res => {
+                debugger
+            })
+            .catch(err => {
+                throw err;
+            })
+    }
+}
 export const fetchCategories = () => {
     return (dispatch) => {
         fetch(`${process.env.REACT_APP_API_URL}/categories`)
@@ -61,7 +72,6 @@ export const updateCategory = (category) => {
         })
             .then(res => res.json())
             .then(category => {
-                debugger
                 dispatch({ type: UPDATE_CATEGORY, category })
             })
             .catch(err => {
