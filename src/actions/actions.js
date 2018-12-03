@@ -5,24 +5,27 @@ import {
     HANDLE_CATEGORY_FIELD_CHANGE,
     UPDATE_CATEGORY,
     SELECT_CATEGORY,
+    SELECT_CATEGORY_BY_ID,
     ADD_CARD,
     ADD_CATEGORY,
     DELETE_CATEGORY,
     DELETE_CARD
 } from './types';
+import Category from '../models/Category'
 const HEADERS = {
     "Content-Type": "application/json",
     "Accept": "application/json"
 }
 export const deleteCard = (id) => {
     return (dispatch) => {
-        fetch(`${process.env.REACT_APP_API_URL}/cards/${id}`, {
+        return fetch(`${process.env.REACT_APP_API_URL}/cards/${id}`, {
             method: 'DELETE',
             ...HEADERS
         })
             .then(res => res.json())
             .then(response => {
                 dispatch({ type: DELETE_CARD, response, id })
+                return response
             })
             .catch(err => {
                 throw err;
@@ -44,19 +47,23 @@ export const fetchCategories = () => {
             })
     }
 }
-export const setCategories = (categories) => {
-    let category = categories[0]
+export const setCategories = (categories, index = 0) => {
+    let category = categories[index]
     if (!category.cards) {
         category = { ...category, cards: [] }
     }
-    return { type: SET_CATEGORIES, categories, selectedCategoryIndex: 0 }
+    return { type: SET_CATEGORIES, categories, selectedCategoryIndex: index }
 }
 export const fetchCategory = (id) => {
     return (dispatch) => {
         fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`)
             .then(res => res.json())
-            .then(res => {
-                dispatch(setCategory(res));
+            .then(category => {
+                if (category.id === undefined) {
+                    dispatch(setCategory(new Category()))
+                } else {
+                    dispatch(setCategory(category));
+                }
             })
             .catch(err => {
                 throw err;
@@ -101,6 +108,9 @@ export const addCard = () => {
 }
 export const selectCategory = (idx) => {
     return { type: SELECT_CATEGORY, idx }
+}
+export const selectCategoryById = (id) => {
+    return { type: SELECT_CATEGORY_BY_ID, id }
 }
 export const createCategory = () => {
     const category = {

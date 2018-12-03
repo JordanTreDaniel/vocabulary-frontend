@@ -6,11 +6,13 @@ import {
     HANDLE_CATEGORY_FIELD_CHANGE,
     UPDATE_CATEGORY,
     SELECT_CATEGORY,
+    SELECT_CATEGORY_BY_ID,
     ADD_CARD,
     ADD_CATEGORY,
     DELETE_CATEGORY,
     DELETE_CARD
 } from "./actions/types";
+import { fetchCategory } from "./actions/actions";
 
 const initialState = {
     categories: [{
@@ -48,8 +50,8 @@ const rootReducer = (prevState = initialState, action) => {
         case SET_CATEGORY:
             return {
                 ...prevState,
-                selectedCategoryIndex: getIndexFromId(prevState.categories, action.category.id),
-                categories: insertUpdatedCategory(prevState.categories, action.category)
+                selectedCategoryIndex: 0,
+                categories: [action.category]
             };
         case HANDLE_CARD_FIELD_CHANGE:
             oldCategory = { ...prevState.categories[prevState.selectedCategoryIndex] }
@@ -88,6 +90,16 @@ const rootReducer = (prevState = initialState, action) => {
                 ...prevState,
                 selectedCategoryIndex: action.idx
             }
+        case SELECT_CATEGORY_BY_ID:
+            if (prevState.categories[prevState.selectedCategoryIndex].id === undefined) {
+                fetchCategory(action.id)
+            } else {
+                return {
+                    ...prevState,
+                    selectedCategoryIndex: getIndexFromId(prevState.categories, action.id)
+                }
+            }
+            return prevState;
         case ADD_CARD:
             let c = prevState.categories[prevState.selectedCategoryIndex]
             c.cards.push({

@@ -16,7 +16,9 @@ import {
   updateCategory,
   addCard,
   deleteCard,
-  deleteCategory
+  deleteCategory,
+  selectCategoryById,
+  fetchCategory
 } from '../actions/actions.js'
 
 const mapDispatchToProps = (dispatch) => ({
@@ -25,13 +27,13 @@ const mapDispatchToProps = (dispatch) => ({
   updateCategory: (category) => dispatch(updateCategory(category)),
   addCard: () => dispatch(addCard()),
   deleteCard: (id) => dispatch(deleteCard(id)),
-  deleteCategory: (id) => dispatch(deleteCategory(id))
+  deleteCategory: (id) => dispatch(deleteCategory(id)),
+  selectCategoryById: (id) => dispatch(selectCategoryById(id)),
+  fetchCategory: (id) => dispatch(fetchCategory(id))
 })
 const mapStateToProps = (state) => ({
   category: state.categories[state.selectedCategoryIndex],
 })
-
-
 
 class CategoryEdit extends React.Component {
   getValidationState() {
@@ -44,22 +46,16 @@ class CategoryEdit extends React.Component {
     event.preventDefault();
     this.props.handleSubmit();
   }
-  renderCardForms = () => {
-    return this.props.category.cards.map((c, idx) => {
-      return (
-        <CardForm
-          card={c}
-          handleCardFieldChange={this.handleCardFieldChange}
-          key={idx}
-          idx={idx}
-          deleteCard={(id) => this.props.deleteCard(id)}
-        />
-      )
-    })
-  }
   addCard = () => {
     this.props.addCard();
     this.forceUpdate();
+  }
+  deleteCard = (id) => {
+    this.props.deleteCard(id)
+      .then(res => {
+        this.forceUpdate();
+        console.log(res.message)
+      });
   }
   handleCardFieldChange = (e, idx) => {
     e.persist();
@@ -80,6 +76,22 @@ class CategoryEdit extends React.Component {
   deleteCategory = (id) => {
     this.props.deleteCategory(id);
     this.goToCategories();
+  }
+  componentWillMount = () => {
+    this.props.fetchCategory(parseInt(this.props.match.params.id))
+  }
+  renderCardForms = () => {
+    return this.props.category.cards.map((c, idx) => {
+      return (
+        <CardForm
+          card={c}
+          handleCardFieldChange={this.handleCardFieldChange}
+          key={idx}
+          idx={idx}
+          deleteCard={(id) => this.deleteCard(id)}
+        />
+      )
+    })
   }
   render() {
     const { category } = this.props;

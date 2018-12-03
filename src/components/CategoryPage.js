@@ -10,36 +10,36 @@ import { Route } from "react-router-dom";
 import { connect } from 'react-redux';
 import {
     fetchCategories,
-    fetchCategory,
     selectCategory,
     createCategory
 } from '../actions/actions.js'
+
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchCategories: () => dispatch(fetchCategories()),
+    selectCategory: (idx) => dispatch(selectCategory(idx)),
+    createCategory: () => dispatch(createCategory())
+})
+const mapStateToProps = (state) => {
+    return ({
+        selectedCategoryIndex: state.selectedCategoryIndex,
+        categories: state.categories,
+        category: state.categories[state.selectedCategoryIndex]
+    })
+}
+
+
 class CategoryPage extends React.Component {
+    componentWillMount() {
+        this.props.fetchCategories();
+    }
+    createCategory = () => {
+        this.props.createCategory();
+        this.props.history.push('/categories/new')
+    }
     render() {
         return (
             <div id="category-page-container">
-                <Route
-                    path={`${this.props.match.path}/:id/edit`}
-                    exact
-                    render={(props) => {
-                        return <CategoryEdit
-                            {...props}
-                            handleCategoryFieldChange={this.props.handleCategoryFieldChange}
-                            handleSubmit={this.props.handleSubmit}
-                            handleCardFieldChange={this.props.handleCardFieldChange}
-                        />
-                    }} />
-                <Route
-                    path={`${this.props.match.path}/new`}
-                    exact
-                    render={(props) => {
-                        return <CategoryEdit
-                            {...props}
-                            handleCategoryFieldChange={this.props.handleCategoryFieldChange}
-                            handleSubmit={this.props.handleSubmit}
-                            handleCardFieldChange={this.props.handleCardFieldChange}
-                        />
-                    }} />
                 <Route
                     path={`${this.props.match.path}`}
                     exact
@@ -71,26 +71,7 @@ class CategoryPage extends React.Component {
             </div>
         )
     }
-    componentWillMount() {
-        this.props.fetchCategories();
-    }
-    createCategory = () => {
-        this.props.createCategory();
-        this.props.history.push('/categories/new')
-    }
 }
-const mapDispatchToProps = (dispatch) => ({
-    fetchCategories: () => dispatch(fetchCategories()),
-    fetchCategory: (id) => dispatch(fetchCategory(id)),
-    selectCategory: (idx) => dispatch(selectCategory(idx)),
-    createCategory: () => dispatch(createCategory())
-})
-const mapStateToProps = (state) => {
-    return ({
-        selectedCategoryIndex: state.selectedCategoryIndex,
-        categories: state.categories,
-        category: state.categories[state.selectedCategoryIndex]
-    })
-}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage);
