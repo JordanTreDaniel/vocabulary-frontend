@@ -6,7 +6,8 @@ import {
     UPDATE_CATEGORY,
     SELECT_CATEGORY,
     ADD_CARD,
-    ADD_CATEGORY
+    ADD_CATEGORY,
+    DELETE_CATEGORY
 } from './types';
 
 export const deleteCard = (id) => {
@@ -56,6 +57,18 @@ export const fetchCategory = (id) => {
     }
 }
 
+export const deleteCategory = (id) => {
+    return (dispatch) => {
+        fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`, {
+            method: 'DELETE',
+            Accept: 'applicaton/json',
+        })
+            .then(res => res.json())
+            .then(res => {
+                dispatch({ type: DELETE_CATEGORY, id })
+            })
+    }
+}
 export const setCategory = (categoryObj) => {
     return { type: SET_CATEGORY, category: categoryObj }
 }
