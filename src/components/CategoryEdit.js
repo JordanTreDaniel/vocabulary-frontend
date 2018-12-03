@@ -42,10 +42,7 @@ class CategoryEdit extends React.Component {
   goToCategories = () => {
     this.props.history.push('/categories')
   }
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.handleSubmit();
-  }
+
   addCard = () => {
     this.props.addCard();
     this.forceUpdate();

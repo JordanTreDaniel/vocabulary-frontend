@@ -1,6 +1,5 @@
 import React from 'react';
 import CategoryList from './CategoryList';
-import CategoryEdit from './CategoryEdit';
 import TermContainer from './TermContainer';
 import { Grid, Row, Col } from 'react-bootstrap';
 import {
@@ -31,13 +30,16 @@ const mapStateToProps = (state) => {
 
 class CategoryPage extends React.Component {
     componentWillMount() {
+        debugger
         this.props.fetchCategories();
     }
+
     createCategory = () => {
         this.props.createCategory();
         this.props.history.push('/categories/new')
     }
     render() {
+        debugger
         return (
             <div id="category-page-container">
                 <Route

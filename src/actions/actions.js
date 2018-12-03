@@ -56,18 +56,18 @@ export const setCategories = (categories, index = 0) => {
 }
 export const fetchCategory = (id) => {
     return (dispatch) => {
-        fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`)
-            .then(res => res.json())
-            .then(category => {
-                if (category.id === undefined) {
-                    dispatch(setCategory(new Category()))
-                } else {
+        if (isNaN(id)) {
+            dispatch(setCategory(new Category()))
+        } else {
+            fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`)
+                .then(res => res.json())
+                .then(category => {
                     dispatch(setCategory(category));
-                }
-            })
-            .catch(err => {
-                throw err;
-            })
+                })
+                .catch(err => {
+                    throw err;
+                })
+        }
     }
 }
 
@@ -97,6 +97,7 @@ export const updateCategory = (category) => {
             .then(res => res.json())
             .then(category => {
                 dispatch({ type: UPDATE_CATEGORY, category })
+                return category
             })
             .catch(err => {
                 console.log(err)
