@@ -80,6 +80,7 @@ const rootReducer = (prevState = initialState, action) => {
                 categories: insertUpdatedCategory(prevState.categories, newCategory)
             }
         case UPDATE_CATEGORY:
+            debugger
             return {
                 ...prevState,
                 categories: insertUpdatedCategory(prevState.categories, action.category)
@@ -119,6 +120,7 @@ const rootReducer = (prevState = initialState, action) => {
                 categories: prevState.categories
             }
         case DELETE_CATEGORY:
+            debugger
             return {
                 ...prevState,
                 categories: removeCategoryById(prevState.categories, action.id),

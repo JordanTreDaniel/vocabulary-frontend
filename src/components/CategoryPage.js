@@ -30,7 +30,6 @@ const mapStateToProps = (state) => {
 
 class CategoryPage extends React.Component {
     componentWillMount() {
-        debugger
         this.props.fetchCategories();
     }
 
