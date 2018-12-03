@@ -15,10 +15,14 @@ import {
   handleCategoryFieldChange,
   updateCategory,
   addCard,
+  deleteCategory
 } from '../actions/actions.js'
 class CategoryEdit extends React.Component {
   getValidationState() {
     return null;
+  }
+  goToCategories = () => {
+    this.props.history.push('/categories')
   }
   handleSubmit = (event) => {
     event.preventDefault();
@@ -53,10 +57,16 @@ class CategoryEdit extends React.Component {
 
   handleSubmit = (event) => {
     this.props.updateCategory(this.props.category);
-    this.props.history.push('/categories')
+    this.goToCategories();
+  }
+
+  deleteCategory = (id) => {
+    this.props.deleteCategory(id);
+    this.goToCategories();
   }
   render() {
-    return this.props.category ? (
+    const { category } = this.props;
+    return category ? (
       <form onSubmit={this.handleSubmit}>
         <FormGroup
           controlId="formBasicText"
@@ -66,7 +76,7 @@ class CategoryEdit extends React.Component {
           <FormControl
             type="text"
             name="name"
-            value={this.props.category.name}
+            value={category.name}
             placeholder="Enter text"
             onChange={this.handleCategoryFieldChange}
           />
@@ -75,7 +85,7 @@ class CategoryEdit extends React.Component {
           <FormControl
             type="text"
             name="desc"
-            value={this.props.category.desc}
+            value={category.desc}
             placeholder="Enter text"
             onChange={this.handleCategoryFieldChange}
           />
@@ -84,7 +94,7 @@ class CategoryEdit extends React.Component {
           <FormControl
             type="text"
             name="img_url"
-            value={this.props.category["img_url"]}
+            value={category["img_url"]}
             placeholder="Enter text"
             onChange={this.handleCategoryFieldChange}
           />
@@ -94,6 +104,13 @@ class CategoryEdit extends React.Component {
           <Button bsStyle="primary" onClick={this.addCard}>New Card</Button>
         </FormGroup>
         <Button bsStyle="success" type="submit">Save Changes</Button>
+        {/* Only show delete button if the category has been saved to db */}
+        {category.id ?
+          <Button bsStyle="danger" onClick={() => this.deleteCategory(category.id)}>Delete {category.name}</Button>
+          :
+          null
+        }
+
       </form>
     ) : <Redirect to="/categories" />;
   }
@@ -102,7 +119,8 @@ const mapDispatchToProps = (dispatch) => ({
   handleCardFieldChange: (name, value, idx) => dispatch(handleCardFieldChange(name, value, idx)),
   handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value)),
   updateCategory: (category) => dispatch(updateCategory(category)),
-  addCard: () => dispatch(addCard())
+  addCard: () => dispatch(addCard()),
+  deleteCategory: (id) => dispatch(deleteCategory(id))
 })
 const mapStateToProps = (state) => ({
   category: state.categories[state.selectedCategoryIndex],

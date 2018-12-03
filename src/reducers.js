@@ -7,7 +7,8 @@ import {
     UPDATE_CATEGORY,
     SELECT_CATEGORY,
     ADD_CARD,
-    ADD_CATEGORY
+    ADD_CATEGORY,
+    DELETE_CATEGORY
 } from "./actions/types";
 
 const initialState = {
@@ -23,6 +24,11 @@ const insertUpdatedCategory = (categories, newCategory) => {
     const idx = getCategoryIndex(categories, newCategory.id)
     categories.splice(idx, 1, newCategory);
     return categories;
+}
+
+const removeCategoryById = (categories, id) => {
+    categories.splice(getCategoryIndex(categories, id), 1)
+    return categories
 }
 const rootReducer = (prevState = initialState, action) => {
     let newCategory,
@@ -71,6 +77,7 @@ const rootReducer = (prevState = initialState, action) => {
                 categories: insertUpdatedCategory(prevState.categories, action.category)
             }
         case SELECT_CATEGORY:
+            console.log("Selected Category:", prevState.categories[action.idx])
             return {
                 ...prevState,
                 selectedCategoryIndex: action.idx
@@ -93,8 +100,14 @@ const rootReducer = (prevState = initialState, action) => {
                 selectedCategoryIndex: prevState.categories.length - 1,
                 categories: prevState.categories
             }
+        case DELETE_CATEGORY:
+            return {
+                ...prevState,
+                categories: removeCategoryById(prevState.categories, action.id),
+                selectedCategoryIndex: 0
+            }
         default:
-            return prevState
+            return prevState;
     }
 }
 
