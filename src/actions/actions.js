@@ -7,15 +7,22 @@ import {
     SELECT_CATEGORY,
     ADD_CARD,
     ADD_CATEGORY,
-    DELETE_CATEGORY
+    DELETE_CATEGORY,
+    DELETE_CARD
 } from './types';
-
+const HEADERS = {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+}
 export const deleteCard = (id) => {
     return (dispatch) => {
-        fetch(`${process.env.REACT_APP_API_URL}/cards/${id}/delete`)
+        fetch(`${process.env.REACT_APP_API_URL}/cards/${id}`, {
+            method: 'DELETE',
+            ...HEADERS
+        })
             .then(res => res.json())
-            .then(res => {
-                debugger
+            .then(response => {
+                dispatch({ type: DELETE_CARD, response, id })
             })
             .catch(err => {
                 throw err;
@@ -61,11 +68,11 @@ export const deleteCategory = (id) => {
     return (dispatch) => {
         fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`, {
             method: 'DELETE',
-            Accept: 'applicaton/json',
+            ...HEADERS
         })
             .then(res => res.json())
-            .then(res => {
-                dispatch({ type: DELETE_CATEGORY, id })
+            .then(response => {
+                dispatch({ type: DELETE_CATEGORY, id, response })
             })
     }
 }
@@ -78,10 +85,7 @@ export const updateCategory = (category) => {
         fetch(`${process.env.REACT_APP_API_URL}/categories/${category.id}`, {
             method: "PATCH",
             body: JSON.stringify(category),
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
+            headers: HEADERS
         })
             .then(res => res.json())
             .then(category => {

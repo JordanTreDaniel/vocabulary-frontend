@@ -5,13 +5,14 @@ import {
 } from 'react-bootstrap/lib'
 
 const CardForm = (props) => {
+    const { card } = props;
     return (
         <Fragment>
-            <h3>{props.card.term}</h3>
+            <h3>{card.term}</h3>
             <FormControl
                 type="text"
                 name="term"
-                value={props.card.term}
+                value={card.term}
                 onChange={(e) => {
                     props.handleCardFieldChange(e, props.idx)
                 }}
@@ -20,7 +21,7 @@ const CardForm = (props) => {
             <FormControl
                 type="text"
                 name="def"
-                value={props.card.def}
+                value={card.def}
                 onChange={(e) => {
                     props.handleCardFieldChange(e, props.idx)
                 }}
@@ -29,14 +30,18 @@ const CardForm = (props) => {
             <FormControl
                 type="text"
                 name="desc"
-                value={props.card.desc}
+                value={card.desc}
                 onChange={(e) => {
                     props.handleCardFieldChange(e, props.idx)
                 }}
             />
             <FormControl.Feedback />
-            <Button bsStyle="danger" onClick={() => props.deleteCard(props.card.id)}>Delete Card</Button>
 
+            {card.id ?
+                <Button bsStyle="danger" onClick={() => props.deleteCard(card.id)}>Delete Card</Button>
+                :
+                null
+            }
         </Fragment>
     )
 }

@@ -11,3 +11,4 @@ export const ADD_CARD = "ADD_CARD";
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const DELETE_CARD = "DELETE_CARD";
 export const DELETE_CATEGORY = "DELETE_CATEGORY";
+

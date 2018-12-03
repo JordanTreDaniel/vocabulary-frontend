@@ -18,6 +18,21 @@ import {
   deleteCard,
   deleteCategory
 } from '../actions/actions.js'
+
+const mapDispatchToProps = (dispatch) => ({
+  handleCardFieldChange: (name, value, idx) => dispatch(handleCardFieldChange(name, value, idx)),
+  handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value)),
+  updateCategory: (category) => dispatch(updateCategory(category)),
+  addCard: () => dispatch(addCard()),
+  deleteCard: (id) => dispatch(deleteCard(id)),
+  deleteCategory: (id) => dispatch(deleteCategory(id))
+})
+const mapStateToProps = (state) => ({
+  category: state.categories[state.selectedCategoryIndex],
+})
+
+
+
 class CategoryEdit extends React.Component {
   getValidationState() {
     return null;
@@ -112,21 +127,10 @@ class CategoryEdit extends React.Component {
           :
           null
         }
-
       </form>
     ) : <Redirect to="/categories" />;
   }
 }
-const mapDispatchToProps = (dispatch) => ({
-  handleCardFieldChange: (name, value, idx) => dispatch(handleCardFieldChange(name, value, idx)),
-  handleCategoryFieldChange: (name, value) => dispatch(handleCategoryFieldChange(name, value)),
-  updateCategory: (category) => dispatch(updateCategory(category)),
-  addCard: () => dispatch(addCard()),
-  deleteCard: (id) => dispatch(deleteCard(id)),
-  deleteCategory: (id) => dispatch(deleteCategory(id))
-})
-const mapStateToProps = (state) => ({
-  category: state.categories[state.selectedCategoryIndex],
-})
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryEdit);

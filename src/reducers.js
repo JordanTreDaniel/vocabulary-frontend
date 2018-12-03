@@ -8,7 +8,8 @@ import {
     SELECT_CATEGORY,
     ADD_CARD,
     ADD_CATEGORY,
-    DELETE_CATEGORY
+    DELETE_CATEGORY,
+    DELETE_CARD
 } from "./actions/types";
 
 const initialState = {
@@ -17,17 +18,22 @@ const initialState = {
     }],
     selectedCategoryIndex: 0
 }
-const getCategoryIndex = (categories, id) => {
-    return categories.map((c) => c.id).indexOf(id);
+const getIndexFromId = (array, id) => {
+    return array.map((c) => c.id).indexOf(id);
 }
 const insertUpdatedCategory = (categories, newCategory) => {
-    const idx = getCategoryIndex(categories, newCategory.id)
+    const idx = getIndexFromId(categories, newCategory.id)
     categories.splice(idx, 1, newCategory);
     return categories;
 }
-
+const removeCardById = (category, id) => {
+    let cards = category.cards;
+    cards.splice(getIndexFromId(cards, id), 1)
+    category.cards = cards;
+    return category;
+}
 const removeCategoryById = (categories, id) => {
-    categories.splice(getCategoryIndex(categories, id), 1)
+    categories.splice(getIndexFromId(categories, id), 1)
     return categories
 }
 const rootReducer = (prevState = initialState, action) => {
@@ -42,7 +48,7 @@ const rootReducer = (prevState = initialState, action) => {
         case SET_CATEGORY:
             return {
                 ...prevState,
-                selectedCategoryIndex: getCategoryIndex(prevState.categories, action.category.id),
+                selectedCategoryIndex: getIndexFromId(prevState.categories, action.category.id),
                 categories: insertUpdatedCategory(prevState.categories, action.category)
             };
         case HANDLE_CARD_FIELD_CHANGE:
@@ -105,6 +111,12 @@ const rootReducer = (prevState = initialState, action) => {
                 ...prevState,
                 categories: removeCategoryById(prevState.categories, action.id),
                 selectedCategoryIndex: 0
+            }
+        case DELETE_CARD:
+            const category = removeCardById(prevState.categories[prevState.selectedCategoryIndex], action.id)
+            return {
+                ...prevState,
+                categories: insertUpdatedCategory(prevState.categories, category)
             }
         default:
             return prevState;
