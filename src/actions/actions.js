@@ -70,10 +70,22 @@ export const fetchCategory = (id) => {
         }
     }
 }
-
+export const createCategory = () => {
+    const category = {
+        name: "New Category",
+        desc: "Description",
+        "img_url": "Image URL here",
+        cards: [{
+            term: "New Term",
+            def: "Defintion: (Don't use the term in the definition)",
+            desc: "Give more context"
+        }]
+    }
+    return { type: ADD_CATEGORY, category }
+}
 export const deleteCategory = (id) => {
     return (dispatch) => {
-        fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`, {
+        return fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`, {
             method: 'DELETE',
             ...HEADERS
         })
@@ -112,19 +124,6 @@ export const selectCategory = (idx) => {
 }
 export const selectCategoryById = (id) => {
     return { type: SELECT_CATEGORY_BY_ID, id }
-}
-export const createCategory = () => {
-    const category = {
-        name: "New Category",
-        desc: "Description",
-        "img_url": "Image URL here",
-        cards: [{
-            term: "New Term",
-            def: "Defintion: (Don't use the term in the definition)",
-            desc: "Give more context"
-        }]
-    }
-    return { type: ADD_CATEGORY, category }
 }
 export const handleCardFieldChange = (name, value, idx) => {
     return { type: HANDLE_CARD_FIELD_CHANGE, name, value, idx }

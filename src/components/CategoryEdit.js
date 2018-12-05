@@ -18,7 +18,9 @@ import {
   deleteCard,
   deleteCategory,
   selectCategoryById,
-  fetchCategory
+  fetchCategory,
+  createCategory
+
 } from '../actions/actions.js'
 
 const mapDispatchToProps = (dispatch) => ({
@@ -27,9 +29,10 @@ const mapDispatchToProps = (dispatch) => ({
   updateCategory: (category) => dispatch(updateCategory(category)),
   addCard: () => dispatch(addCard()),
   deleteCard: (id) => dispatch(deleteCard(id)),
-  deleteCategory: (id) => dispatch(deleteCategory(id)),
+  deleteCategory: (id) => deleteCategory(id),
   selectCategoryById: (id) => dispatch(selectCategoryById(id)),
-  fetchCategory: (id) => dispatch(fetchCategory(id))
+  fetchCategory: (id) => dispatch(fetchCategory(id)),
+  createCategory: () => dispatch(createCategory())
 })
 const mapStateToProps = (state) => ({
   category: state.categories[state.selectedCategoryIndex],
@@ -54,6 +57,13 @@ class CategoryEdit extends React.Component {
         console.log(res.message)
       });
   }
+  deleteCategory = (id) => {
+    this.props.deleteCategory(id)
+      .then(() => {
+        this.goToCategories();
+      });
+
+  }
   handleCardFieldChange = (e, idx) => {
     e.persist();
     let { name, value } = e.target;
@@ -70,12 +80,15 @@ class CategoryEdit extends React.Component {
     this.goToCategories();
   }
 
-  deleteCategory = (id) => {
-    this.props.deleteCategory(id);
-    this.goToCategories();
-  }
+
   componentWillMount = () => {
-    this.props.fetchCategory(parseInt(this.props.match.params.id))
+    debugger
+    const { url } = this.props.match;
+    if (url === "/categories/new") {
+      this.props.createCategory();
+    } else if (url === `/categories/${this.props.category.id}/edit`) {
+      this.props.fetchCategory(parseInt(this.props.match.params.id))
+    }
   }
   renderCardForms = () => {
     return this.props.category.cards.map((c, idx) => {

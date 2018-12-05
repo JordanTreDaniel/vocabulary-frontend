@@ -10,16 +10,15 @@ import { connect } from 'react-redux';
 import {
     fetchCategories,
     selectCategory,
-    createCategory
 } from '../actions/actions.js'
 
 
 const mapDispatchToProps = (dispatch) => ({
     fetchCategories: () => dispatch(fetchCategories()),
     selectCategory: (idx) => dispatch(selectCategory(idx)),
-    createCategory: () => dispatch(createCategory())
 })
 const mapStateToProps = (state) => {
+    debugger
     return ({
         selectedCategoryIndex: state.selectedCategoryIndex,
         categories: state.categories,
@@ -34,11 +33,9 @@ class CategoryPage extends React.Component {
     }
 
     createCategory = () => {
-        this.props.createCategory();
         this.props.history.push('/categories/new')
     }
     render() {
-        debugger
         return (
             <div id="category-page-container">
                 <Route

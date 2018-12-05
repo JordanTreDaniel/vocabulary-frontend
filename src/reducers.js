@@ -41,6 +41,7 @@ const removeCategoryById = (categories, id) => {
 const rootReducer = (prevState = initialState, action) => {
     let newCategory,
         oldCategory;
+    debugger
     switch (action.type) {
         case TEST:
             return { ...prevState, message: action.payload };
@@ -50,9 +51,62 @@ const rootReducer = (prevState = initialState, action) => {
         case SET_CATEGORY:
             return {
                 ...prevState,
-                selectedCategoryIndex: 0,
-                categories: [action.category]
+                selectedCategoryIndex: getIndexFromId(prevState.categories, action.category.id),
+                categories: prevState.categories
             };
+        case SELECT_CATEGORY:
+            console.log("Selected Category:", prevState.categories[action.idx])
+            return {
+                ...prevState,
+                selectedCategoryIndex: action.idx
+            }
+        case SELECT_CATEGORY_BY_ID:
+            if (prevState.categories[prevState.selectedCategoryIndex].id === undefined) {
+                fetchCategory(action.id)
+            } else {
+                return {
+                    ...prevState,
+                    selectedCategoryIndex: getIndexFromId(prevState.categories, action.id)
+                }
+            }
+            return prevState;
+        case UPDATE_CATEGORY:
+            debugger
+            return {
+                ...prevState,
+                categories: insertUpdatedCategory(prevState.categories, action.category)
+            }
+        case ADD_CATEGORY:
+            prevState.categories.push(action.category)
+            return {
+                ...prevState,
+                selectedCategoryIndex: prevState.categories.length - 1,
+                categories: prevState.categories
+            }
+        case ADD_CARD:
+            let c = prevState.categories[prevState.selectedCategoryIndex]
+            c.cards.push({
+                term: "New Term",
+                def: "Defintion: (Don't use the term in the definition)",
+                desc: "Give more context"
+            })
+            return {
+                ...prevState,
+                categories: insertUpdatedCategory(prevState.categories, c)
+            }
+        case DELETE_CARD:
+            const category = removeCardById(prevState.categories[prevState.selectedCategoryIndex], action.id)
+            return {
+                ...prevState,
+                categories: insertUpdatedCategory(prevState.categories, category)
+            }
+        case DELETE_CATEGORY:
+            debugger
+            return {
+                ...prevState,
+                categories: removeCategoryById(prevState.categories, action.id),
+                selectedCategoryIndex: 0
+            }
         case HANDLE_CARD_FIELD_CHANGE:
             oldCategory = { ...prevState.categories[prevState.selectedCategoryIndex] }
             newCategory = {
@@ -78,59 +132,6 @@ const rootReducer = (prevState = initialState, action) => {
             return {
                 ...prevState,
                 categories: insertUpdatedCategory(prevState.categories, newCategory)
-            }
-        case UPDATE_CATEGORY:
-            debugger
-            return {
-                ...prevState,
-                categories: insertUpdatedCategory(prevState.categories, action.category)
-            }
-        case SELECT_CATEGORY:
-            console.log("Selected Category:", prevState.categories[action.idx])
-            return {
-                ...prevState,
-                selectedCategoryIndex: action.idx
-            }
-        case SELECT_CATEGORY_BY_ID:
-            if (prevState.categories[prevState.selectedCategoryIndex].id === undefined) {
-                fetchCategory(action.id)
-            } else {
-                return {
-                    ...prevState,
-                    selectedCategoryIndex: getIndexFromId(prevState.categories, action.id)
-                }
-            }
-            return prevState;
-        case ADD_CARD:
-            let c = prevState.categories[prevState.selectedCategoryIndex]
-            c.cards.push({
-                term: "New Term",
-                def: "Defintion: (Don't use the term in the definition)",
-                desc: "Give more context"
-            })
-            return {
-                ...prevState,
-                categories: insertUpdatedCategory(prevState.categories, c)
-            }
-        case ADD_CATEGORY:
-            prevState.categories.push(action.category)
-            return {
-                ...prevState,
-                selectedCategoryIndex: prevState.categories.length - 1,
-                categories: prevState.categories
-            }
-        case DELETE_CATEGORY:
-            debugger
-            return {
-                ...prevState,
-                categories: removeCategoryById(prevState.categories, action.id),
-                selectedCategoryIndex: 0
-            }
-        case DELETE_CARD:
-            const category = removeCardById(prevState.categories[prevState.selectedCategoryIndex], action.id)
-            return {
-                ...prevState,
-                categories: insertUpdatedCategory(prevState.categories, category)
             }
         default:
             return prevState;
