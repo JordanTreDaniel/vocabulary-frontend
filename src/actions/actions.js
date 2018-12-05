@@ -83,6 +83,23 @@ export const createCategory = () => {
     }
     return { type: ADD_CATEGORY, category }
 }
+export const saveNewCategory = (category) => {
+    return (dispatch) => {
+        return fetch(`${process.env.REACT_APP_API_URL}/categories`, {
+            method: "POST",
+            body: JSON.stringify(category),
+            headers: HEADERS
+        })
+            .then(res => res.json())
+            .then(category => {
+                dispatch({ type: UPDATE_CATEGORY, category })
+                // return category // commenting this out bc i don't think it's needed. might be messing up save functionality
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+}
 export const deleteCategory = (id) => {
     return (dispatch) => {
         return fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`, {

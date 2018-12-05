@@ -19,7 +19,8 @@ import {
   deleteCategory,
   selectCategoryById,
   fetchCategory,
-  createCategory
+  createCategory,
+  saveNewCategory
 
 } from '../actions/actions.js'
 
@@ -32,7 +33,8 @@ const mapDispatchToProps = (dispatch) => ({
   deleteCategory: (id) => deleteCategory(id),
   selectCategoryById: (id) => dispatch(selectCategoryById(id)),
   fetchCategory: (id) => dispatch(fetchCategory(id)),
-  createCategory: () => dispatch(createCategory())
+  createCategory: () => dispatch(createCategory()),
+  saveNewCategory: (category) => dispatch(saveNewCategory(category))
 })
 const mapStateToProps = (state) => ({
   category: state.categories[state.selectedCategoryIndex],
@@ -76,21 +78,21 @@ class CategoryEdit extends React.Component {
   }
 
   handleSubmit = (event) => {
-    this.props.updateCategory(this.props.category)
-      .then(() => {
-        this.goToCategories();
-      });
+    (this.props.category.id ?
+      this.props.updateCategory(this.props.category)
+      :
+      this.props.saveNewCategory(this.props.category)
+    ).then(() => {
+      this.goToCategories();
+    })
   }
 
 
   componentWillMount = () => {
-    debugger
     const { url } = this.props.match;
     if (url === "/categories/new") {
       this.props.createCategory();
-    }   //else if (url === `/categories/${this.props.category.id}/edit`) {
-    //   this.props.fetchCategory(parseInt(this.props.match.params.id))
-    // }
+    }
   }
   renderCardForms = () => {
     return this.props.category.cards.map((c, idx) => {

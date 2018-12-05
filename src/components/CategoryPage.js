@@ -36,6 +36,8 @@ class CategoryPage extends React.Component {
         this.props.history.push('/categories/new')
     }
     render() {
+        debugger
+
         return (
             <div id="category-page-container">
                 <Route
