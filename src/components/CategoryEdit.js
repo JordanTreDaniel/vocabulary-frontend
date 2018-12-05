@@ -18,7 +18,6 @@ import {
   deleteCard,
   deleteCategory,
   selectCategoryById,
-  fetchCategory,
   createCategory,
   saveNewCategory
 
@@ -32,13 +31,15 @@ const mapDispatchToProps = (dispatch) => ({
   deleteCard: (id) => dispatch(deleteCard(id)),
   deleteCategory: (id) => dispatch(deleteCategory(id)),
   selectCategoryById: (id) => dispatch(selectCategoryById(id)),
-  fetchCategory: (id) => dispatch(fetchCategory(id)),
   createCategory: () => dispatch(createCategory()),
   saveNewCategory: (category) => dispatch(saveNewCategory(category)),
 })
-const mapStateToProps = (state) => ({
-  category: state.categories[state.selectedCategoryIndex],
-})
+const mapStateToProps = (state) => {
+  debugger
+  return ({
+    category: state.categories[state.selectedCategoryIndex],
+  })
+}
 
 class CategoryEdit extends React.Component {
   getValidationState() {
@@ -88,12 +89,13 @@ class CategoryEdit extends React.Component {
   }
 
 
-  componentWillMount = () => {
-    const { url } = this.props.match;
-    if (url === "/categories/new") {
-      this.props.createCategory();
-    }
-  }
+  // componentWillMount = () => {
+  //   debugger
+  //   const { url } = this.props.match;
+  //   if (url === "/categories/new") {
+  //     this.props.createCategory();
+  //   }
+  // }
   renderCardForms = () => {
     return this.props.category.cards.map((c, idx) => {
       return (
@@ -108,8 +110,9 @@ class CategoryEdit extends React.Component {
     })
   }
   render() {
+    debugger
     const { category } = this.props;
-    return category ? (
+    return /*category ? */(
       <form>
         <FormGroup
           controlId="formBasicText"
@@ -154,7 +157,7 @@ class CategoryEdit extends React.Component {
           null
         }
       </form>
-    ) : <Redirect to="/categories" />;
+    ) /*: <Redirect to="/categories" />;*/
   }
 }
 

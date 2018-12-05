@@ -13,11 +13,10 @@ import {
     DELETE_CARD
 } from "./actions/types";
 import { fetchCategory } from "./actions/actions";
+import Category from './models/Category'
 
 const initialState = {
-    categories: [{
-        cards: []
-    }],
+    categories: [new Category()],
     selectedCategoryIndex: 0
 }
 const getIndexFromId = (array, id) => {
@@ -71,13 +70,13 @@ const rootReducer = (prevState = initialState, action) => {
             }
             return prevState;
         case UPDATE_CATEGORY:
-            debugger
             return {
                 ...prevState,
                 categories: insertUpdatedCategory(prevState.categories, action.category)
             }
         case ADD_CATEGORY:
             prevState.categories.push(action.category)
+            debugger
             return {
                 ...prevState,
                 selectedCategoryIndex: prevState.categories.length - 1,
@@ -101,7 +100,6 @@ const rootReducer = (prevState = initialState, action) => {
                 categories: insertUpdatedCategory(prevState.categories, category)
             }
         case DELETE_CATEGORY:
-            debugger
             return {
                 ...prevState,
                 categories: removeCategoryById(prevState.categories, action.id),
