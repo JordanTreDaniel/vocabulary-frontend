@@ -101,7 +101,7 @@ export const setCategory = (categoryObj) => {
 
 export const updateCategory = (category) => {
     return (dispatch) => {
-        fetch(`${process.env.REACT_APP_API_URL}/categories/${category.id}`, {
+        return fetch(`${process.env.REACT_APP_API_URL}/categories/${category.id}`, {
             method: "PATCH",
             body: JSON.stringify(category),
             headers: HEADERS
@@ -109,7 +109,7 @@ export const updateCategory = (category) => {
             .then(res => res.json())
             .then(category => {
                 dispatch({ type: UPDATE_CATEGORY, category })
-                return category
+                // return category // commenting this out bc i don't think it's needed. might be messing up save functionality
             })
             .catch(err => {
                 console.log(err)

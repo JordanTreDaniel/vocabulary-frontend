@@ -76,8 +76,10 @@ class CategoryEdit extends React.Component {
   }
 
   handleSubmit = (event) => {
-    this.props.updateCategory(this.props.category);
-    this.goToCategories();
+    this.props.updateCategory(this.props.category)
+      .then(() => {
+        this.goToCategories();
+      });
   }
 
 
@@ -86,9 +88,9 @@ class CategoryEdit extends React.Component {
     const { url } = this.props.match;
     if (url === "/categories/new") {
       this.props.createCategory();
-    } else if (url === `/categories/${this.props.category.id}/edit`) {
-      this.props.fetchCategory(parseInt(this.props.match.params.id))
-    }
+    }   //else if (url === `/categories/${this.props.category.id}/edit`) {
+    //   this.props.fetchCategory(parseInt(this.props.match.params.id))
+    // }
   }
   renderCardForms = () => {
     return this.props.category.cards.map((c, idx) => {
@@ -106,7 +108,7 @@ class CategoryEdit extends React.Component {
   render() {
     const { category } = this.props;
     return category ? (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <FormGroup
           controlId="formBasicText"
           validationState={this.getValidationState()}
@@ -142,7 +144,7 @@ class CategoryEdit extends React.Component {
           {this.renderCardForms()}
           <Button bsStyle="primary" onClick={this.addCard}>New Card</Button>
         </FormGroup>
-        <Button bsStyle="success" type="submit">Save Changes</Button>
+        <Button bsStyle="success" onClick={this.handleSubmit}>Save Changes</Button>
         {/* Only show delete button if the category has been saved to db */}
         {category.id ?
           <Button bsStyle="danger" onClick={() => this.deleteCategory(category.id)}>Delete {category.name}</Button>
