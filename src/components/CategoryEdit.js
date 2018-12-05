@@ -30,11 +30,11 @@ const mapDispatchToProps = (dispatch) => ({
   updateCategory: (category) => dispatch(updateCategory(category)),
   addCard: () => dispatch(addCard()),
   deleteCard: (id) => dispatch(deleteCard(id)),
-  deleteCategory: (id) => deleteCategory(id),
+  deleteCategory: (id) => dispatch(deleteCategory(id)),
   selectCategoryById: (id) => dispatch(selectCategoryById(id)),
   fetchCategory: (id) => dispatch(fetchCategory(id)),
   createCategory: () => dispatch(createCategory()),
-  saveNewCategory: (category) => dispatch(saveNewCategory(category))
+  saveNewCategory: (category) => dispatch(saveNewCategory(category)),
 })
 const mapStateToProps = (state) => ({
   category: state.categories[state.selectedCategoryIndex],

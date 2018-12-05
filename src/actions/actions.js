@@ -25,7 +25,7 @@ export const deleteCard = (id) => {
             .then(res => res.json())
             .then(response => {
                 dispatch({ type: DELETE_CARD, response, id })
-                return response
+                // return response
             })
             .catch(err => {
                 throw err;
