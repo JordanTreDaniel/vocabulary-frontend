@@ -1,6 +1,6 @@
 import React from 'react';
 import Term from './Term';
-import { Tab } from 'semantic-ui-react';
+import { Tab, Reveal, Image, Card } from 'semantic-ui-react';
 
 class TermContainer extends React.Component {
     constructor(props) {
@@ -20,7 +20,7 @@ class TermContainer extends React.Component {
                 menuItem: card.term, render: () => {
                     return (
                         <Tab.Pane>
-                            {card.term}
+                            <Term card={card}></Term>
                         </Tab.Pane>
                     )
                 }
