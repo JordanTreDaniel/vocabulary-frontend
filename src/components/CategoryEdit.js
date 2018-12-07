@@ -88,14 +88,6 @@ class CategoryEdit extends React.Component {
     })
   }
 
-
-  // componentWillMount = () => {
-  //   debugger
-  //   const { url } = this.props.match;
-  //   if (url === "/categories/new") {
-  //     this.props.createCategory();
-  //   }
-  // }
   renderCardForms = () => {
     return this.props.category.cards.map((c, idx) => {
       return (

@@ -1,3 +1,4 @@
+import { Button } from 'semantic-ui-react';
 import React from 'react';
 import Carousel from 'react-bootstrap/lib/Carousel';
 import { Link } from "react-router-dom";
@@ -35,6 +36,7 @@ class CategoryList extends React.Component {
                             pathname: `/categories/${category.id}/edit`,
                             state: { category: category }
                         }}>Edit {category.name}</Link>
+                        <Button>Click Here</Button>
                     </Carousel.Caption>
                 </Carousel.Item>
             )
