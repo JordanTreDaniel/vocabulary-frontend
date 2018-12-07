@@ -12,7 +12,9 @@
     "react-scripts": "2.0.5",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "semantic-ui-react": "^0.83.0"
+    "semantic-ui-react": "^0.83.0",
+    "redux-devtools": "^3.4.2",
+    "redux-devtools-extension": "^2.13.7"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,8 +31,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "redux-devtools": "^3.4.2",
-    "redux-devtools-extension": "^2.13.7"
-  }
+  "devDependencies": {}
 }
