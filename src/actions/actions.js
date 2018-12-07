@@ -20,7 +20,9 @@ export const deleteCard = (id) => {
     return (dispatch) => {
         return fetch(`${process.env.REACT_APP_API_URL}/cards/${id}`, {
             method: 'DELETE',
-            ...HEADERS
+            headers: {
+                ...HEADERS
+            }
         })
             .then(res => res.json())
             .then(response => {
