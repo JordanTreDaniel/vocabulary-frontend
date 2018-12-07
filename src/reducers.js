@@ -45,8 +45,8 @@ const rootReducer = (prevState = initialState, action) => {
         case TEST:
             return { ...prevState, message: action.payload };
         case SET_CATEGORIES:
-            let { categories, selectedCategoryIndex } = action
-            return { ...prevState, categories, selectedCategoryIndex };
+            let { categories } = action
+            return { ...prevState, categories };
         case SET_CATEGORY:
             return {
                 ...prevState,

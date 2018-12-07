@@ -47,12 +47,12 @@ export const fetchCategories = () => {
             })
     }
 }
-export const setCategories = (categories, index = 0) => {
-    let category = categories[index]
-    if (!category.cards) {
-        category = { ...category, cards: [] }
-    }
-    return { type: SET_CATEGORIES, categories, selectedCategoryIndex: index }
+export const setCategories = (categories) => {
+    // let category = categories[index]
+    // if (!category.cards) {
+    //     category = { ...category, cards: [] }
+    // }
+    return { type: SET_CATEGORIES, categories }
 }
 export const fetchCategory = (id) => {
     return (dispatch) => {
