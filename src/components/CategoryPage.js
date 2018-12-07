@@ -242,8 +242,10 @@ class CategoryPage extends React.Component {
                             stretched
                         >
                             <Grid.Row>
+                                <Button onClick={this.createCategory}>New Category</Button>
+                            </Grid.Row>
+                            <Grid.Row>
                                 <Grid.Column width={4}>
-                                    <Button onClick={this.createCategory}>New Category</Button>
                                     <CategoryList
                                         categories={this.props.categories}
                                         selectCategory={id => this.props.selectCategory(id)}
@@ -251,9 +253,6 @@ class CategoryPage extends React.Component {
                                     />
                                 </Grid.Column>
                                 <Grid.Column width={10}>
-
-                                </Grid.Column>
-                                <Grid.Column width={4}>
                                     <TermContainer cards={this.props.category.cards} />
                                 </Grid.Column>
                             </Grid.Row>

@@ -1,8 +1,7 @@
-import { Button } from 'semantic-ui-react';
-import React from 'react';
-import Carousel from 'react-bootstrap/lib/Carousel';
-import { Link } from "react-router-dom";
 
+import React from 'react';
+import { Grid, Image, Card } from 'semantic-ui-react';
+import Category from '../models/Category';
 
 class CategoryList extends React.Component {
     constructor(props) {
@@ -12,46 +11,29 @@ class CategoryList extends React.Component {
             index: props.initialIndex
         }
     }
-    handleSelect = (selectedIndex, e) => {
-        this.setState({
-            direction: e.direction,
-            index: selectedIndex
-        })
-        this.props.selectCategory(selectedIndex);
-    }
     render() {
-        let carouselItems = this.props.categories.map((category, index) => {
+        let categoryItems = this.props.categories.map((category, index) => {
             return (
-                <Carousel.Item
-                    key={index}
-                    id={category.id}
-                    className="carousel-item"
-                    style={{ backgroundColor: `black`, height: "300px" }}
-                >
-                    <img src={category['img_url']} alt={category.name} />
-                    <Carousel.Caption>
-                        <h3>{category.name}</h3>
-                        <p>{category.desc}</p>
-                        <Link to={{
-                            pathname: `/categories/${category.id}/edit`,
-                            state: { category: category }
-                        }}>Edit {category.name}</Link>
-                        <Button>Click Here</Button>
-                    </Carousel.Caption>
-                </Carousel.Item>
+                <Card onClick={() => this.props.selectCategory(index)}>
+                    <Image src={category["img_url"]} />
+                    <Card.Content>
+                        <Card.Header>{category.name}</Card.Header>
+                        <Card.Meta>
+                            <span className='date'>Joined in 2015</span>
+                        </Card.Meta>
+                        <Card.Description>{category.desc}</Card.Description>
+                    </Card.Content>
+                </Card>
             )
         });
         return (
-            < Carousel
-                activeIndex={this.state.index}
-                direction={this.state.direction}
-                onSelect={(key, event) => {
-                    return this.handleSelect(key, event)
-                }
-                }
-            >
-                {carouselItems}
-            </ Carousel>
+            <Grid>
+                <Grid.Row style={{ "overflow-x": "scroll", "max-height": 500 }}>
+                    <Grid.Column>
+                        {categoryItems}
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         )
     }
 }
