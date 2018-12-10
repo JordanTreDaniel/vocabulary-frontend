@@ -19,7 +19,7 @@ class TermContainer extends React.Component {
             return {
                 menuItem: card.term, render: () => {
                     return (
-                        <Tab.Pane>
+                        <Tab.Pane key={idx}>
                             <Term card={card}></Term>
                         </Tab.Pane>
                     )

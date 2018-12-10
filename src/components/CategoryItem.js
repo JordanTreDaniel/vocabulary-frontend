@@ -1,16 +1,16 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/lib/Carousel';
+import { Grid, Image, Card, Icon } from 'semantic-ui-react';
 
 const CategoryItem = (props) => {
-    let { category } = this.props
+    let { category, index, selectCategory } = props;
     return (
-        <Carousel.Item>
-            <img width={900} height={500} alt="900x500" src={category["img_url"]} />
-            <Carousel.Caption>
-                <h3>{category.name}</h3>
-                <p>{category.desc}</p>
-            </Carousel.Caption>
-        </Carousel.Item>
+        <Card onClick={() => selectCategory(index)} >
+            <Image src={category["img_url"]} className="category-list-image" />
+            <Card.Content>
+                <Card.Header>{category.name}</Card.Header>
+            </Card.Content>
+        </Card>
     )
 }
 

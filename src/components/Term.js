@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab, Card } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 class Term extends React.Component {
     constructor() {
         super();
@@ -21,9 +21,6 @@ class Term extends React.Component {
                 <Card onClick={this.toggleDisplay}>
                     <Card.Content>
                         <Card.Header>{card.term}</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>Joined in 2015</span>
-                        </Card.Meta>
                         <Card.Description>{card.def}</Card.Description>
                     </Card.Content>
                 </Card >

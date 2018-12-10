@@ -40,7 +40,7 @@ const removeCategoryById = (categories, id) => {
 const rootReducer = (prevState = initialState, action) => {
     let newCategory,
         oldCategory;
-    debugger
+
     switch (action.type) {
         case TEST:
             return { ...prevState, message: action.payload };
@@ -76,7 +76,7 @@ const rootReducer = (prevState = initialState, action) => {
             }
         case ADD_CATEGORY:
             prevState.categories.push(action.category)
-            debugger
+
             return {
                 ...prevState,
                 selectedCategoryIndex: prevState.categories.length - 1,

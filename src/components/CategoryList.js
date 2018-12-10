@@ -1,41 +1,48 @@
 
 import React from 'react';
-import { Grid, Image, Card } from 'semantic-ui-react';
-import Category from '../models/Category';
+import { Card, Icon } from 'semantic-ui-react';
+import CategoryItem from './CategoryItem';
+import {
+    fetchCategories,
+    selectCategory,
+} from '../actions/actions.js'
+import { connect } from 'react-redux';
 
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchCategories: () => dispatch(fetchCategories()),
+    selectCategory: (idx) => dispatch(selectCategory(idx)),
+})
 class CategoryList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            direction: null,
-            index: props.initialIndex
-        }
+
+    createCategory = () => {
+        this.props.history.push('/categories/new')
     }
-    render() {
+
+    render = () => {
         let categoryItems = this.props.categories.map((category, index) => {
             return (
-                <Card onClick={() => this.props.selectCategory(index)}>
-                    <Image src={category["img_url"]} />
-                    <Card.Content>
-                        <Card.Header>{category.name}</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>Joined in 2015</span>
-                        </Card.Meta>
-                        <Card.Description>{category.desc}</Card.Description>
-                    </Card.Content>
-                </Card>
+                <CategoryItem
+                    index={index}
+                    category={category}
+                    selectCategory={idx => this.props.selectCategory(idx)}
+                />
             )
         });
         return (
-            <Grid>
-                <Grid.Row style={{ "overflow-x": "scroll", "max-height": 500 }}>
-                    <Grid.Column>
-                        {categoryItems}
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            <>
+                <Card onClick={() => this.createCategory()}>
+                    <Card.Content>
+                        <Card.Header>
+                            <Icon name="plus circle" className="category-list-image" />
+                            Add a Category
+                        </Card.Header>
+                    </Card.Content>
+                </Card>
+                {categoryItems}
+            </>
         )
     }
 }
 
-export default CategoryList;
+export default connect(null, mapDispatchToProps)(CategoryList);

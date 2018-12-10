@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch) => ({
   saveNewCategory: (category) => dispatch(saveNewCategory(category)),
 })
 const mapStateToProps = (state) => {
-  debugger
+  
   return ({
     category: state.categories[state.selectedCategoryIndex],
   })
@@ -102,7 +102,7 @@ class CategoryEdit extends React.Component {
     })
   }
   render() {
-    debugger
+    
     const { category } = this.props;
     return /*category ? */(
       <form>

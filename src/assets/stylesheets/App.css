@@ -1,3 +1,6 @@
+html, body {
+  height: 100%;
+}
 .App {
   text-align: center;
 }
@@ -23,6 +26,29 @@
 }
 #root {
   height: 100%;
+}
+#category-page-grid {
+  height: 100%;
+}
+#category-list {
+  width: 25%;
+  top: 0px;
+  bottom: 0px;
+  position: fixed;
+  overflow-y: scroll;
+}
+#category-list * {
+  margin: auto;
+}
+#term-container {
+  margin-left: 25%;
+}
+.category-list-image {
+  width:100px;
+   height:100px;
+  margin: auto;
+/*Scale down will take the necessary specified space that is 100px x 100px without stretching the image*/
+    object-fit:scale-down;
 }
 @keyframes App-logo-spin {
   from {
