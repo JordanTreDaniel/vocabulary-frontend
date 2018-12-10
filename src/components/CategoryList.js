@@ -26,6 +26,7 @@ class CategoryList extends React.Component {
                     index={index}
                     category={category}
                     selectCategory={idx => this.props.selectCategory(idx)}
+                    key={index}
                 />
             )
         });

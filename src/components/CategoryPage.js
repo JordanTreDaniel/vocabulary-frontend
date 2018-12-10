@@ -47,13 +47,7 @@ class CategoryPage extends React.Component {
 
     render = () => {
         return (
-            <div
-                container
-                text-align
-                divided
-                stretched
-                id="category-page-grid"
-            >
+            <>
                 <div id="category-list">
                     <CategoryList
                         categories={this.props.categories}
@@ -61,10 +55,8 @@ class CategoryPage extends React.Component {
                         {...this.props}
                     />
                 </div>
-                <div id="term-container">
-                    <TermContainer cards={this.props.category.cards} />
-                </div>
-            </div>
+                <TermContainer cards={this.props.category.cards} />
+            </>
 
         )
     }

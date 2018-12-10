@@ -16,26 +16,15 @@ class TermContainer extends React.Component {
 
     render() {
         let cards = this.props.cards.map((card, idx) => {
-            return {
-                menuItem: card.term, render: () => {
-                    return (
-                        <Tab.Pane key={idx}>
-                            <Term card={card}></Term>
-                        </Tab.Pane>
-                    )
-                }
-            }
+            return (
+                <Term card={card}></Term>
+            )
         });
 
         return (
-            <Tab
-                activeIndex={this.state.key}
-                onTabChange={(e, data) => this.handleSelect(data.activeIndex)}
-                panes={cards}
-                menu={{ pointing: true }}
-            >
+            <div id="term-container">
                 {cards}
-            </Tab >
+            </div>
         );
     }
 }

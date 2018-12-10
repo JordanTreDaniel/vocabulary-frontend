@@ -16,20 +16,21 @@ class Term extends React.Component {
     }
     render = () => {
         const { card } = this.props;
-        return (
+        const content = (
             this.state.display ?
-                <Card onClick={this.toggleDisplay}>
-                    <Card.Content>
-                        <Card.Header>{card.term}</Card.Header>
-                        <Card.Description>{card.def}</Card.Description>
-                    </Card.Content>
-                </Card >
+                <Card.Content>
+                    <Card.Header>{card.term}</Card.Header>
+                    <Card.Description>{card.def}</Card.Description>
+                </Card.Content>
                 :
-                <Card onClick={this.toggleDisplay}>
-                    <Card.Content>
-                        <Card.Header>{card.term}</Card.Header>
-                    </Card.Content>
-                </Card >
+                <Card.Content>
+                    <Card.Header>{card.term}</Card.Header>
+                </Card.Content>
+        )
+        return (
+            <Card onClick={this.toggleDisplay} className="term-card">
+                {content}
+            </Card >
         )
     }
 }
