@@ -18,12 +18,12 @@ class Term extends React.Component {
         const { card } = this.props;
         const content = (
             this.state.display ?
-                <Card.Content>
+                <Card.Content className="term-card-content">
                     <Card.Header>{card.term}</Card.Header>
                     <Card.Description>{card.def}</Card.Description>
                 </Card.Content>
                 :
-                <Card.Content>
+                <Card.Content className="term-card-content">
                     <Card.Header>{card.term}</Card.Header>
                 </Card.Content>
         )
