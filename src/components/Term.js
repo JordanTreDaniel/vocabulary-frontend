@@ -18,7 +18,10 @@ class Term extends React.Component {
         const { card } = this.props;
         const content = (
             this.state.display ?
-                <Card.Content className="term-card-content">
+                <Card.Content
+                    className="term-card-content"
+                    textAlign="center"
+                >
                     <Card.Header>{card.term}</Card.Header>
                     <Card.Description>{card.def}</Card.Description>
                 </Card.Content>
@@ -28,7 +31,12 @@ class Term extends React.Component {
                 </Card.Content>
         )
         return (
-            <Card onClick={this.toggleDisplay} className="term-card">
+            <Card
+                as="div"
+                onClick={this.toggleDisplay}
+                className="term-card"
+                raised
+            >
                 {content}
             </Card >
         )

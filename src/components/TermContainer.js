@@ -1,6 +1,6 @@
 import React from 'react';
 import Term from './Term';
-import { Tab, Reveal, Image, Card } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 class TermContainer extends React.Component {
     constructor(props) {
@@ -22,9 +22,9 @@ class TermContainer extends React.Component {
         });
 
         return (
-            <div id="term-container">
+            <Card.Group id="term-container">
                 {cards}
-            </div>
+            </Card.Group>
         );
     }
 }
