@@ -54,9 +54,13 @@ html, body {
 ::-webkit-scrollbar {
   display:none;
 }
+.category-info {
+  margin-left: 25%;
 
+}
 #term-container {
   margin-left: 25%;
+
   padding: 10%;
   display: flex;
   flex-flow: row wrap;
@@ -64,6 +68,7 @@ html, body {
   align-content: space-between;
   align-items: baseline;
 }
+
 .term-card {
   padding: auto;
 }
