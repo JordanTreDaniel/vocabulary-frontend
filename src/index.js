@@ -6,14 +6,12 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './configureStore';
-import NavigationMenu from './components/NavigationMenu';
 const AppRouter = () => {
 
     return (
         <Provider store={store}>
             <Router>
                 <>
-                    <NavigationMenu />
                     <Route path="" component={App} />
                 </>
             </Router>

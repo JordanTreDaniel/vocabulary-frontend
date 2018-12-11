@@ -4,37 +4,42 @@ import React from 'react';
 
 
 export default class NavigationMenu extends React.Component {
-    state = { activeItem: 'home' }
+    state = { activeItem: this.props.location.pathname }
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
     render() {
+        debugger
         const { activeItem } = this.state
 
         return (
             <Segment inverted id="navigation-menu">
                 <Menu inverted pointing secondary>
                     <Link to="/">
-                        <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
+                        <Menu.Item
+                            name='home'
+                            active={activeItem === '/'}
+                            onClick={this.handleItemClick}
+                        />
                     </Link>
                     <Link to="/categories">
                         <Menu.Item
                             name='categories'
-                            active={activeItem === 'categories'}
+                            active={activeItem === '/categories'}
                             onClick={this.handleItemClick}
                         />
                     </Link>
                     <Link to="/terms">
                         <Menu.Item
                             name='terms'
-                            active={activeItem === 'terms'}
+                            active={activeItem === '/terms'}
                             onClick={this.handleItemClick}
                         />
                     </Link>
                     <Link to="/tags">
                         <Menu.Item
                             name='tags'
-                            active={activeItem === 'tags'}
+                            active={activeItem === '/tags'}
                             onClick={this.handleItemClick}
                         />
                     </Link>
