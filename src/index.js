@@ -3,25 +3,25 @@ import ReactDOM from 'react-dom';
 import './assets/stylesheets/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './configureStore';
+import NavigationMenu from './components/NavigationMenu';
 const AppRouter = () => {
 
     return (
         <Provider store={store}>
             <Router>
                 <>
-                    <Link to="/">Home</Link>
-                    <Link to="/categories">Categories</Link>
-                    <Link to="/tags">Tags</Link>
-                    <Link to="/terms">Terms</Link>
+                    <NavigationMenu />
                     <Route path="" component={App} />
                 </>
             </Router>
         </Provider>
     )
 }
+
+
 
 ReactDOM.render(<AppRouter />, document.getElementById('root'));
 

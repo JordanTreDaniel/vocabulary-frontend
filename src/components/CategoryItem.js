@@ -6,7 +6,6 @@ const CategoryItem = (props) => {
     let { category, index, selectCategory } = props;
     return (
         <Card onClick={() => selectCategory(index)} >
-            <Image src={category["img_url"]} className="category-list-image" />
             <Card.Content>
                 <Card.Header>{category.name}</Card.Header>
             </Card.Content>
