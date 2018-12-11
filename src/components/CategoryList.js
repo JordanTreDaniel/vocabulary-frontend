@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, Icon } from 'semantic-ui-react';
-import CategoryItem from './CategoryItem';
+import CategoryListItem from './CategoryListItem';
 import {
     fetchCategories,
     selectCategory,
@@ -22,7 +22,7 @@ class CategoryList extends React.Component {
     render = () => {
         let categoryItems = this.props.categories.map((category, index) => {
             return (
-                <CategoryItem
+                <CategoryListItem
                     index={index}
                     category={category}
                     selectCategory={idx => this.props.selectCategory(idx)}

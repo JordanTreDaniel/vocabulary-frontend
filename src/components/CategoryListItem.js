@@ -1,8 +1,7 @@
 import React from 'react'
-import Carousel from 'react-bootstrap/lib/Carousel';
-import { Grid, Image, Card, Icon } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
-const CategoryItem = (props) => {
+const CategoryListItem = (props) => {
     let { category, index, selectCategory } = props;
     return (
         <Card onClick={() => selectCategory(index)} >
@@ -14,4 +13,4 @@ const CategoryItem = (props) => {
 }
 
 
-export default CategoryItem;
+export default CategoryListItem;
