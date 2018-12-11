@@ -1,22 +1,6 @@
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-import {
-    Button,
-    Container,
-    Divider,
-    Grid,
-    Header,
-    Icon,
-    Image,
-    List,
-    Menu,
-    Responsive,
-    Segment,
-    Sidebar,
-    Visibility,
-} from 'semantic-ui-react'
+import React from 'react'
 import CategoryList from './CategoryList';
-import TermContainer from './TermContainer';
+import CategoryInfo from './CategoryInfo';
 import { connect } from 'react-redux';
 import {
     fetchCategories,
@@ -55,7 +39,7 @@ class CategoryPage extends React.Component {
                         {...this.props}
                     />
                 </div>
-                <TermContainer cards={this.props.category.cards} />
+                <CategoryInfo category={this.props.category} />
             </>
 
         )
