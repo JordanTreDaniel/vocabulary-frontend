@@ -71,7 +71,7 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;
   object-fit:scale-down;
-
+  margin: auto;
 }
 #term-container {
   margin: 0 5%;
