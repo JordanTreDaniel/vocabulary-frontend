@@ -18,7 +18,9 @@ class CategoryList extends React.Component {
     createCategory = () => {
         this.props.history.push('/categories/new')
     }
-
+    goToCategory = (name) => {
+        this.props.history.push(`categories/${name}`)
+    }
     render = () => {
         let categoryItems = this.props.categories.map((category, index) => {
             return (
@@ -27,6 +29,7 @@ class CategoryList extends React.Component {
                     category={category}
                     selectCategory={idx => this.props.selectCategory(idx)}
                     key={index}
+                    goToCategory={name => this.goToCategory(name)}
                 />
             )
         });

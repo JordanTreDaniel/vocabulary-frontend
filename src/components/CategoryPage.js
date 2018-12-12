@@ -12,7 +12,7 @@ class CategoryPage extends React.Component {
     render = () => {
         return (
             <>
-                <CategoryInfo category={this.props.category} />
+                <CategoryInfo category={this.props.category} {...this.props} />
             </>
 
         )

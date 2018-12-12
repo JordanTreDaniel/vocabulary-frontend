@@ -6,43 +6,38 @@ import React from 'react';
 export default class NavigationMenu extends React.Component {
     state = { activeItem: this.props.location.pathname }
 
-    handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+    handleItemClick = (e, { name }) => {
+        this.setState({ activeItem: name }, () => {
+            this.props.history.push(`/${name}`)
+        })
+    }
 
     render() {
-        debugger
         const { activeItem } = this.state
 
         return (
             <Segment inverted id="navigation-menu">
                 <Menu inverted pointing secondary>
-                    <Link to="/">
-                        <Menu.Item
-                            name='home'
-                            active={activeItem === '/'}
-                            onClick={this.handleItemClick}
-                        />
-                    </Link>
-                    <Link to="/categories">
-                        <Menu.Item
-                            name='categories'
-                            active={activeItem === '/categories'}
-                            onClick={this.handleItemClick}
-                        />
-                    </Link>
-                    <Link to="/terms">
-                        <Menu.Item
-                            name='terms'
-                            active={activeItem === '/terms'}
-                            onClick={this.handleItemClick}
-                        />
-                    </Link>
-                    <Link to="/tags">
-                        <Menu.Item
-                            name='tags'
-                            active={activeItem === '/tags'}
-                            onClick={this.handleItemClick}
-                        />
-                    </Link>
+                    <Menu.Item
+                        name='home'
+                        active={activeItem === '/'}
+                        onClick={this.handleItemClick}
+                    />
+                    <Menu.Item
+                        name='categories'
+                        active={activeItem === '/categories'}
+                        onClick={this.handleItemClick}
+                    />
+                    <Menu.Item
+                        name='terms'
+                        active={activeItem === '/terms'}
+                        onClick={this.handleItemClick}
+                    />
+                    <Menu.Item
+                        name='tags'
+                        active={activeItem === '/tags'}
+                        onClick={this.handleItemClick}
+                    />
                 </Menu>
             </Segment>
         )

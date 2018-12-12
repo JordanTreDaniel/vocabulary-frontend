@@ -139,7 +139,18 @@ export const addCard = () => {
     return { type: ADD_CARD }
 }
 export const selectCategory = (idx) => {
-    return { type: SELECT_CATEGORY, idx }
+    return (dispatch) => {
+        const promise = new Promise(function (resolve, reject) {
+            dispatch({ type: SELECT_CATEGORY, idx })
+            resolve("success")
+        });
+
+        return promise.then(res => {
+            return res;
+        });
+
+    }
+
 }
 export const selectCategoryById = (id) => {
     return { type: SELECT_CATEGORY_BY_ID, id }

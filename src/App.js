@@ -48,7 +48,7 @@ class App extends Component {
               return <CategoryEdit {...props} />
             }} />
           <Route
-            path={`${this.props.match.path}/categories/:id`}
+            path={`${this.props.match.path}/categories/:name`}
             render={(props) => {
               return <CategoryPage {...props} />
             }} />
