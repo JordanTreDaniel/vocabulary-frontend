@@ -1,5 +1,6 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react'
+import { Grid, Icon } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 const CategoryInfo = ({ category }) => {
     return (
         <>
@@ -8,7 +9,15 @@ const CategoryInfo = ({ category }) => {
             >
                 <Grid>
                     <Grid.Row>
-                        <span>{category.cards.length} cards</span>
+
+                        <Grid.Column>
+                            <span>{category.cards.length} cards</span>
+                        </Grid.Column>
+                        <Grid.Column floated="right" textAlign="center">
+                            <Link to={`/categories/${category.id}/edit`}>
+                                <h4>Edit {category.name}<Icon name="pencil"></Icon></h4>
+                            </Link>
+                        </Grid.Column>
                     </Grid.Row>
                     <Grid.Row columns={12} divided>
                         <Grid.Column width={2}>

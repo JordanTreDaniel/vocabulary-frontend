@@ -76,7 +76,7 @@ html, body {
 #term-container {
   margin: 0 5%;
 
-  padding: 10%;
+  padding: 1%;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
