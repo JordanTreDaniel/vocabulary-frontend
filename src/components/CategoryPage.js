@@ -1,6 +1,7 @@
 import React from 'react'
 import CategoryInfo from './CategoryInfo';
 import { connect } from 'react-redux';
+import TermContainer from './TermContainer';
 
 const mapStateToProps = (state) => {
     return ({
@@ -13,6 +14,7 @@ class CategoryPage extends React.Component {
         return (
             <>
                 <CategoryInfo category={this.props.category} {...this.props} />
+                <TermContainer cards={this.props.category.cards} />
             </>
 
         )

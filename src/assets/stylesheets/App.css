@@ -1,6 +1,9 @@
 html, body {
   height: 100%;
 }
+#root {
+  height: 100%;
+}
 .App {
   text-align: center;
 }
@@ -24,8 +27,8 @@ html, body {
 .App-link {
   color: #61dafb;
 }
-#root {
-  height: 100%;
+#navigation-menu {
+  margin: 0;
 }
 #category-page-grid {
   height: 100%;
@@ -55,11 +58,23 @@ html, body {
   display:none;
 }
 .category-info {
-  margin-left: 25%;
+ margin: 0 5%;
+ padding: 5%;
+ font-optical-sizing: auto;
+ font-weight: 200;
+}
+.category-thumbnail {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit:scale-down;
 
 }
 #term-container {
-  margin-left: 25%;
+  margin: 0 5%;
 
   padding: 10%;
   display: flex;

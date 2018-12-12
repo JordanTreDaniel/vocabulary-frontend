@@ -17,7 +17,7 @@ class TermContainer extends React.Component {
     render() {
         let cards = this.props.cards.map((card, idx) => {
             return (
-                <Term card={card}></Term>
+                <Term card={card} key={idx}></Term>
             )
         });
 

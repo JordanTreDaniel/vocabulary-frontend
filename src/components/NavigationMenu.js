@@ -19,13 +19,8 @@ export default class NavigationMenu extends React.Component {
             <Segment inverted id="navigation-menu">
                 <Menu inverted pointing secondary>
                     <Menu.Item
-                        name='home'
-                        active={activeItem === '/'}
-                        onClick={this.handleItemClick}
-                    />
-                    <Menu.Item
                         name='categories'
-                        active={activeItem === '/categories'}
+                        active={activeItem === '/'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item
