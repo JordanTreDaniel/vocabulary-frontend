@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Card, Container } from 'semantic-ui-react';
+import { Form, Button, Card, Container, Grid } from 'semantic-ui-react';
 import CardForm from './CardForm';
 import { connect } from 'react-redux';
 
@@ -52,56 +52,58 @@ class CategoryForm extends React.Component {
 
     const { category } = this.props;
     return (
-      <>
-        <Container>
+      <Grid divided="vertically" container>
+        <Grid.Row>
+          <Button basic color="black">Cancel</Button>
+          <Button basic color="green" onClick={this.handleSubmit}>Save Changes</Button>
           { /* Only show delete button if the category has been saved to db */
             category.id ?
               <Button basic color="red" onClick={() => this.deleteCategory(category.id)}>Delete {category.name}</Button>
               :
               null
           }
-          <Button basic color="green" onClick={this.handleSubmit}>Save Changes</Button>
-        </Container>
-        <Card>
-          <Card.Content>
-            <Form
-              controlId="formBasicText"
-              size="massive"
-            >
-              <Form.Field>
-                <input
-                  name="name"
-                  value={category.name}
-                  placeholder="Category Name"
-                  onChange={this.handleCategoryFieldChange}
-                />
-              </Form.Field>
-              <Form.Field type="textarea">
-                <input
-                  name="desc"
-                  value={category.desc}
-                  placeholder="Category Description"
-                  onChange={this.handleCategoryFieldChange}
-                />
-              </Form.Field>
-              <Form.Field>
-                <input
-                  name="img_url"
-                  value={category["img_url"]}
-                  placeholder="Category Image URL"
-                  onChange={this.handleCategoryFieldChange}
-                />
-              </Form.Field>
-            </Form>
-          </Card.Content>
-          <Card.Content extra>
-            <div className='ui two buttons'>
-              <Button basic color='blue' onClick={this.addCard}>New Card</Button>
-            </div>
-          </Card.Content>
-        </Card>
-        {this.renderCardForms()}
-      </>
+        </Grid.Row>
+        <Grid.Row>
+          <Card fluid>
+            <Card.Content>
+              <Form
+                controlId="formBasicText"
+                size="massive"
+              >
+                <Form.Field>
+                  <input
+                    name="name"
+                    value={category.name}
+                    placeholder="Category Name"
+                    onChange={this.handleCategoryFieldChange}
+                  />
+                </Form.Field>
+                <Form.Field type="textarea">
+                  <input
+                    name="desc"
+                    value={category.desc}
+                    placeholder="Category Description"
+                    onChange={this.handleCategoryFieldChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <input
+                    name="img_url"
+                    value={category["img_url"]}
+                    placeholder="Category Image URL"
+                    onChange={this.handleCategoryFieldChange}
+                  />
+                </Form.Field>
+              </Form>
+            </Card.Content>
+          </Card>
+        </Grid.Row>
+        <Grid.Row>
+          <Button basic color='blue' onClick={this.addCard}>New Card</Button>
+          {this.renderCardForms()}
+        </Grid.Row>
+
+      </Grid>
     )
   }
   goToCategories = () => {
