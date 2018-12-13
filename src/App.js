@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom";
 import CategoryPage from './components/CategoryPage'
-import CategoryEdit from './components/CategoryEdit'
+import CategoryForm from './components/CategoryForm'
 import NavigationMenu from './components/NavigationMenu';
 import CategoryList from './components/CategoryList';
 import { connect } from 'react-redux';
@@ -39,13 +39,13 @@ class App extends Component {
             path={`${this.props.match.path}/categories/:id/edit`}
             exact
             render={(props) => {
-              return <CategoryEdit {...props} />
+              return <CategoryForm {...props} />
             }} />
           <Route
             path={`${this.props.match.path}/categories/new`}
             exact
             render={(props) => {
-              return <CategoryEdit {...props} />
+              return <CategoryForm {...props} />
             }} />
           <Route
             path={`${this.props.match.path}/categories/:name`}
