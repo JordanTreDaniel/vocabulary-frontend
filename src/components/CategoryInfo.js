@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Icon } from 'semantic-ui-react';
+import { Grid, Icon, Popup } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 const CategoryInfo = ({ category }) => {
     return (
@@ -13,19 +13,22 @@ const CategoryInfo = ({ category }) => {
                         <Grid.Column>
                             <span>{category.cards.length} cards</span>
                         </Grid.Column>
-                        <Grid.Column floated="right" textAlign="center">
-                            <Link to={`/categories/${category.id}/edit`}>
-                                <h4>Edit {category.name}<Icon name="pencil"></Icon></h4>
-                            </Link>
-                        </Grid.Column>
                     </Grid.Row>
                     <Grid.Row columns={12} divided>
-                        <Grid.Column width={2}>
+                        <Grid.Column width={3}>
                             <div className="category-thumbnail" style={{ backgroundImage: `url(${category['img_url']})` }}></div>
                         </Grid.Column>
-                        <Grid.Column width={10} textAlign="left" verticalAlign="middle">
+                        <Grid.Column width={9} textAlign="left" verticalAlign="middle">
                             <h1>{category.name}</h1>
                         </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row divided>
+                        <Link to={`/categories`}>
+                            <Popup trigger={<Icon size="large" color="green" bordered name="backward" circular></Icon>} content='Back to all categories' />
+                        </Link>
+                        <Link to={`/categories/${category.id}/edit`}>
+                            <Popup trigger={<Icon size="large" color="red" bordered name="pencil" circular></Icon>} content={`Edit ${category.name}`} />
+                        </Link>
                     </Grid.Row>
                     <Grid.Row>
                         <p>{category.desc}</p>
