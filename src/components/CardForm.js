@@ -7,7 +7,6 @@ const CardForm = (props) => {
         <Card className="card-form" fluid>
             <Card.Content>
                 <Form size="big">
-                    <h3>{card.term}</h3>
                     <Form.Field
                         type="text"
                         placeholder="Term"

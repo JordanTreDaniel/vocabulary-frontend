@@ -75,7 +75,6 @@ html, body {
 }
 #term-container {
   margin: 0 5%;
-
   padding: 1%;
   display: flex;
   flex-flow: row wrap;
@@ -83,7 +82,12 @@ html, body {
   align-content: space-between;
   align-items: baseline;
 }
-
+#category-form-container {
+  padding: 20px;
+}
+#category-form-container .row {
+  margin: auto;
+}
 .term-card {
   padding: auto;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Card, Container, Grid } from 'semantic-ui-react';
+import { Form, Button, Card, Grid, Icon } from 'semantic-ui-react';
 import CardForm from './CardForm';
 import { connect } from 'react-redux';
 
@@ -54,7 +54,7 @@ class CategoryForm extends React.Component {
 
     const { category } = this.props;
     return (
-      <Grid divided="vertically" container>
+      <Grid divided="vertically" container stackable id="category-form-container">
         <Grid.Row>
           <Button basic color="black">Cancel</Button>
           <Button basic color="green" onClick={this.handleSubmit}>Save Changes</Button>
@@ -99,7 +99,11 @@ class CategoryForm extends React.Component {
         </Grid.Row>
         <Grid.Row columns={2} stretched>
           <Grid.Column>
-            <Button fluid basic color='blue' onClick={this.addCard}>New Card</Button>
+            <Button fluid basic color='green' onClick={this.addCard}>
+              <h3>New Term</h3>
+              <br></br>
+              <Icon name="plus" circular size="big" />
+            </Button>
           </Grid.Column>
           {this.renderCardForms()}
         </Grid.Row>
