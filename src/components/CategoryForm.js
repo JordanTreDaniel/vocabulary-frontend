@@ -38,13 +38,15 @@ class CategoryForm extends React.Component {
   renderCardForms = () => {
     return this.props.category.cards.map((c, idx) => {
       return (
-        <CardForm
-          card={c}
-          handleCardFieldChange={this.handleCardFieldChange}
-          key={idx}
-          idx={idx}
-          deleteCard={(id) => this.deleteCard(id)}
-        />
+        <Grid.Column>
+          <CardForm
+            card={c}
+            handleCardFieldChange={this.handleCardFieldChange}
+            key={idx}
+            idx={idx}
+            deleteCard={(id) => this.deleteCard(id)}
+          />
+        </Grid.Column>
       )
     })
   }
@@ -70,36 +72,35 @@ class CategoryForm extends React.Component {
                 controlId="formBasicText"
                 size="massive"
               >
-                <Form.Field>
-                  <input
-                    name="name"
-                    value={category.name}
-                    placeholder="Category Name"
-                    onChange={this.handleCategoryFieldChange}
-                  />
+                <Form.Field
+                  control="input"
+                  name="name"
+                  value={category.name}
+                  placeholder="Category Name"
+                  onChange={this.handleCategoryFieldChange}>
                 </Form.Field>
-                <Form.Field type="textarea">
-                  <input
-                    name="desc"
-                    value={category.desc}
-                    placeholder="Category Description"
-                    onChange={this.handleCategoryFieldChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <input
-                    name="img_url"
-                    value={category["img_url"]}
-                    placeholder="Category Image URL"
-                    onChange={this.handleCategoryFieldChange}
-                  />
+                <Form.TextArea
+                  name="desc"
+                  value={category.desc}
+                  placeholder="Category Description"
+                  onChange={this.handleCategoryFieldChange}>
+                </Form.TextArea>
+                <Form.Field
+                  name="img_url"
+                  value={category["img_url"]}
+                  placeholder="Category Image URL"
+                  onChange={this.handleCategoryFieldChange}
+                  control="input"
+                >
                 </Form.Field>
               </Form>
             </Card.Content>
           </Card>
         </Grid.Row>
-        <Grid.Row>
-          <Button basic color='blue' onClick={this.addCard}>New Card</Button>
+        <Grid.Row columns={2} stretched>
+          <Grid.Column>
+            <Button fluid basic color='blue' onClick={this.addCard}>New Card</Button>
+          </Grid.Column>
           {this.renderCardForms()}
         </Grid.Row>
 
