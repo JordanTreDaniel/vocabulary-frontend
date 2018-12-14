@@ -82,10 +82,10 @@ html, body {
   align-content: space-between;
   align-items: baseline;
 }
-#category-form-container {
+.category-and-cards-container {
   padding: 20px;
 }
-#category-form-container .row {
+.category-and-cards-container .row {
   margin: auto;
 }
 .term-card {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Form, Button, Card } from 'semantic-ui-react';
 
 const CardForm = (props) => {

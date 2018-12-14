@@ -1,6 +1,6 @@
 import React from 'react';
 import Term from './Term';
-import { Card } from 'semantic-ui-react';
+import { Card, Grid } from 'semantic-ui-react';
 
 class TermContainer extends React.Component {
     constructor(props) {
@@ -17,14 +17,16 @@ class TermContainer extends React.Component {
     render() {
         let cards = this.props.cards.map((card, idx) => {
             return (
-                <Term card={card} key={idx}></Term>
+                <Grid.Column>
+                    <Term card={card} key={idx}></Term>
+                </Grid.Column>
             )
         });
 
         return (
-            <Card.Group id="term-container">
+            <Grid.Row stretched columns={2}>
                 {cards}
-            </Card.Group>
+            </Grid.Row>
         );
     }
 }

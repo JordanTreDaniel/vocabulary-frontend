@@ -54,7 +54,7 @@ class CategoryForm extends React.Component {
 
     const { category } = this.props;
     return (
-      <Grid divided="vertically" container stackable id="category-form-container">
+      <Grid divided="vertically" container stackable className="category-and-cards-container">
         <Grid.Row>
           <Button basic color="black">Cancel</Button>
           <Button basic color="green" onClick={this.handleSubmit}>Save Changes</Button>

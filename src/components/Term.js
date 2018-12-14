@@ -36,6 +36,7 @@ class Term extends React.Component {
                 onClick={this.toggleDisplay}
                 className="term-card"
                 raised
+                fluid
             >
                 {content}
             </Card >
