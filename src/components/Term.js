@@ -42,7 +42,6 @@ class Term extends React.Component {
                 fluid
                 centered
                 color="red"
-                textAlign="center"
             >
                 {content}
             </Card >

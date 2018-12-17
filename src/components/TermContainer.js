@@ -17,8 +17,8 @@ class TermContainer extends React.Component {
     render() {
         let cards = this.props.cards.map((card, idx) => {
             return (
-                <Grid.Column>
-                    <Term card={card} key={idx}></Term>
+                <Grid.Column key={idx}>
+                    <Term card={card} ></Term>
                 </Grid.Column>
             )
         });

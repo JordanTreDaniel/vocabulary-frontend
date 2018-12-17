@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Icon, Popup } from 'semantic-ui-react';
+import { Grid, Icon, Popup, Divider } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 const CategoryInfo = ({ category }) => {
     return (
@@ -14,13 +14,16 @@ const CategoryInfo = ({ category }) => {
                             <span>{category.cards.length} cards</span>
                         </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row columns={12} divided>
-                        <Grid.Column width={3}>
+                    <Grid.Row>
+                        <Grid.Column
+                            textAlign="left"
+                            floated="left"
+                            id="category-pic-and-title"
+                        >
                             <div className="category-thumbnail" style={{ backgroundImage: `url(${category['img_url']})` }}></div>
-                        </Grid.Column>
-                        <Grid.Column width={9} textAlign="left" verticalAlign="middle">
                             <h1>{category.name}</h1>
                         </Grid.Column>
+                        {/* <Divider vertical ></Divider> */}
                     </Grid.Row>
                     <Grid.Row divided>
                         <Link to={`/categories`}>

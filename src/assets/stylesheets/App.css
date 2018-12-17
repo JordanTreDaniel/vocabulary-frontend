@@ -63,6 +63,10 @@ html, body {
  font-optical-sizing: auto;
  font-weight: 200;
 }
+#category-pic-and-title {
+  display: flex;
+  flex-flow: row nowrap;
+}
 .category-thumbnail {
   width: 100px;
   height: 100px;
@@ -71,7 +75,8 @@ html, body {
   background-repeat: no-repeat;
   background-size: cover;
   object-fit:scale-down;
-  margin: auto;
+  margin: auto 20px;
+  /* margin: 0px; */
 }
 #term-container {
   margin: 0 5%;
