@@ -36,10 +36,12 @@ class CategoryList extends React.Component {
             )
         });
         return (
+
             <>
                 <Grid
                     container
                     stackable
+                    divided="vertically"
                     className="category-and-cards-container"
                 >
                     <Grid.Row columns={2} stretched>
