@@ -34,15 +34,15 @@ const mapStateToProps = (state) => {
   })
 }
 
+
 class CategoryForm extends React.Component {
   renderCardForms = () => {
     return this.props.category.cards.map((c, idx) => {
       return (
-        <Grid.Column>
+        <Grid.Column key={idx}>
           <CardForm
             card={c}
             handleCardFieldChange={this.handleCardFieldChange}
-            key={idx}
             idx={idx}
             deleteCard={(id) => this.deleteCard(id)}
           />
@@ -69,7 +69,7 @@ class CategoryForm extends React.Component {
           <Card fluid>
             <Card.Content>
               <Form
-                controlId="formBasicText"
+                // controlId="formBasicText"
                 size="massive"
               >
                 <Form.Field
@@ -107,7 +107,6 @@ class CategoryForm extends React.Component {
           </Grid.Column>
           {this.renderCardForms()}
         </Grid.Row>
-
       </Grid>
     )
   }

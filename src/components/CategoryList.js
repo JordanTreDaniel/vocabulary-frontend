@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card, Icon, Grid, Button } from 'semantic-ui-react';
 import CategoryListItem from './CategoryListItem';
 import {
     fetchCategories,
@@ -24,26 +24,35 @@ class CategoryList extends React.Component {
     render = () => {
         let categoryItems = this.props.categories.map((category, index) => {
             return (
-                <CategoryListItem
-                    index={index}
-                    category={category}
-                    selectCategory={idx => this.props.selectCategory(idx)}
-                    key={index}
-                    goToCategory={name => this.goToCategory(name)}
-                />
+                <Grid.Column>
+                    <CategoryListItem
+                        index={index}
+                        category={category}
+                        selectCategory={idx => this.props.selectCategory(idx)}
+                        key={index}
+                        goToCategory={name => this.goToCategory(name)}
+                    />
+                </Grid.Column>
             )
         });
         return (
             <>
-                <Card onClick={() => this.createCategory()}>
-                    <Card.Content>
-                        <Card.Header>
-                            <Icon name="plus circle" className="category-list-image" />
-                            Add a Category
-                        </Card.Header>
-                    </Card.Content>
-                </Card>
-                {categoryItems}
+                <Grid
+                    container
+                    stackable
+                    className="category-and-cards-container"
+                >
+                    <Grid.Row columns={2} stretched>
+                        <Grid.Column>
+                            <Button fluid basic color='green' onClick={() => this.createCategory()}>
+                                <h3>New Category</h3>
+                                <br></br>
+                                <Icon name="plus" circular size="big" />
+                            </Button>
+                        </Grid.Column>
+                        {categoryItems}
+                    </Grid.Row>
+                </Grid>
             </>
         )
     }
