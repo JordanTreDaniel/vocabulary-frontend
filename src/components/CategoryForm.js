@@ -50,6 +50,30 @@ class CategoryForm extends React.Component {
       )
     })
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   render() {
 
     const { category } = this.props;
