@@ -26,7 +26,10 @@ class Term extends React.Component {
                     <Card.Description>{card.def}</Card.Description>
                 </Card.Content>
                 :
-                <Card.Content className="term-card-content">
+                <Card.Content
+                    className="term-card-content"
+                    textAlign="center"
+                >
                     <Card.Header>{card.term}</Card.Header>
                 </Card.Content>
         )
@@ -37,6 +40,9 @@ class Term extends React.Component {
                 className="term-card"
                 raised
                 fluid
+                centered
+                color="red"
+                textAlign="center"
             >
                 {content}
             </Card >

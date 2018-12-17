@@ -93,11 +93,14 @@ html, body {
 }
 .term-card-content {
   margin: auto;
+  padding: auto;
   width: 100%;
-  max-width: 200px;
-  max-height: 300px;
   min-width: 100px;
-  min-height: 150px;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 @keyframes App-logo-spin {
   from {
