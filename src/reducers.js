@@ -14,13 +14,15 @@ import {
 } from "./actions/types";
 import { fetchCategory } from "./actions/actions";
 import Category from './models/Category'
+import Term from "./models/Term";
 
 const initialState = {
     categories: [new Category()],
     selectedCategoryIndex: 0
 }
 const getIndexFromId = (array, id) => {
-    return array.map((c) => c.id).indexOf(id);
+    const idx = array.map((c) => c.id).indexOf(id);
+    return idx > 0 ? idx : 0;
 }
 const insertUpdatedCategory = (categories, newCategory) => {
     const idx = getIndexFromId(categories, newCategory.id)
@@ -48,13 +50,13 @@ const rootReducer = (prevState = initialState, action) => {
             let { categories } = action
             return { ...prevState, categories };
         case SET_CATEGORY:
+            debugger
             return {
                 ...prevState,
                 selectedCategoryIndex: getIndexFromId(prevState.categories, action.category.id),
-                categories: prevState.categories
+                categories: insertUpdatedCategory(prevState.categories, action.category)
             };
         case SELECT_CATEGORY:
-            console.log("Selected Category:", prevState.categories[action.idx])
             return {
                 ...prevState,
                 selectedCategoryIndex: action.idx
@@ -83,11 +85,7 @@ const rootReducer = (prevState = initialState, action) => {
             }
         case ADD_CARD:
             let c = prevState.categories[prevState.selectedCategoryIndex]
-            c.cards.push({
-                term: "New Term",
-                def: "Defintion: (Don't use the term in the definition)",
-                desc: "Give more context"
-            })
+            c.cards.push(new Term());
             return {
                 ...prevState,
                 categories: insertUpdatedCategory(prevState.categories, c)

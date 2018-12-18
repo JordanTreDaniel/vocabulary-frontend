@@ -12,7 +12,8 @@ import {
   deleteCategory,
   selectCategoryById,
   createCategory,
-  saveNewCategory
+  saveNewCategory,
+  fetchCategory
 
 } from '../actions/actions.js'
 
@@ -26,6 +27,7 @@ const mapDispatchToProps = (dispatch) => ({
   selectCategoryById: (id) => dispatch(selectCategoryById(id)),
   createCategory: () => dispatch(createCategory()),
   saveNewCategory: (category) => dispatch(saveNewCategory(category)),
+  fetchCategory: (id) => dispatch(fetchCategory(id)),
 })
 const mapStateToProps = (state) => {
   return ({
@@ -35,6 +37,12 @@ const mapStateToProps = (state) => {
 
 
 class CategoryForm extends React.Component {
+  componentDidMount = () => {
+    const currentId = parseInt(this.props.match.params.id)
+    if (this.props.match.path.match("edit") && this.props.category.id !== currentId) {
+      this.props.fetchCategory(currentId);
+    }
+  }
   renderCardForms = () => {
     return this.props.category.cards.map((c, idx) => {
       return (
