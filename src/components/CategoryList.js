@@ -29,7 +29,7 @@ class CategoryList extends React.Component {
     render = () => {
         let categoryItems = this.props.categories.map((category, index) => {
             return (
-                <Grid.Column>
+                <Grid.Column key={index}>
                     <CategoryListItem
                         index={index}
                         category={category}
