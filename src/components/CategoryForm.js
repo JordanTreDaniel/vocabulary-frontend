@@ -34,6 +34,8 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => {
   return ({
     category: state.categories[state.selectedCategoryIndex],
+    loading: state.loading,
+    errors: state.errors
   })
 }
 
@@ -43,7 +45,9 @@ class CategoryForm extends React.Component {
     const currentId = parseInt(this.props.match.params.id)
     if (this.props.match.path.match("edit") && this.props.category.id !== currentId) {
       this.props.categoriesAreLoading();
-      this.props.fetchCategory(currentId);
+      setTimeout(() => {
+        this.props.fetchCategory(currentId);
+      }, 2000)
     }
   }
   renderCardForms = () => {
@@ -63,60 +67,67 @@ class CategoryForm extends React.Component {
   render() {
     const { category } = this.props;
     return (
-      <Grid divided="vertically" container stackable className="category-and-cards-container">
-        <Grid.Row>
-          <Button basic color="black" onClick={this.props.history.goBack}>Cancel</Button>
-          <Button basic color="green" onClick={this.handleSubmit}>Save Changes</Button>
-          { /* Only show delete button if the category has been saved to db */
-            category.id ?
-              <Button basic color="red" onClick={() => this.deleteCategory(category.id)}>Delete {category.name}</Button>
-              :
-              null
-          }
-        </Grid.Row>
-        <Grid.Row>
-          <Card fluid>
-            <Card.Content>
-              <Form
-                // controlId="formBasicText"
-                size="massive"
-              >
-                <Form.Field
-                  control="input"
-                  name="name"
-                  value={category.name}
-                  placeholder="Category Name"
-                  onChange={this.handleCategoryFieldChange}>
-                </Form.Field>
-                <Form.TextArea
-                  name="desc"
-                  value={category.desc}
-                  placeholder="Category Description"
-                  onChange={this.handleCategoryFieldChange}>
-                </Form.TextArea>
-                <Form.Field
-                  name="img_url"
-                  value={category["img_url"]}
-                  placeholder="Category Image URL"
-                  onChange={this.handleCategoryFieldChange}
-                  control="input"
-                >
-                </Form.Field>
-              </Form>
-            </Card.Content>
-          </Card>
-        </Grid.Row>
-        <Grid.Row columns={2} stretched>
-          <Grid.Column>
-            <Button fluid basic color='green' onClick={this.addCard}>
-              <h3>New Term</h3>
-              <br></br>
-              <Icon name="plus" circular size="big" />
-            </Button>
-          </Grid.Column>
-          {this.renderCardForms()}
-        </Grid.Row>
-      </Grid>
+      <>
+        {
+          this.props.loading ?
+            <Icon name="spinner" size="huge" />
+            :
+            <Grid divided="vertically" container stackable className="category-and-cards-container">
+              <Grid.Row>
+                <Button basic color="black" onClick={this.props.history.goBack}>Cancel</Button>
+                <Button basic color="green" onClick={this.handleSubmit}>Save Changes</Button>
+                { /* Only show delete button if the category has been saved to db */
+                  category.id ?
+                    <Button basic color="red" onClick={() => this.deleteCategory(category.id)}>Delete {category.name}</Button>
+                    :
+                    null
+                }
+              </Grid.Row>
+              <Grid.Row>
+                <Card fluid>
+                  <Card.Content>
+                    <Form
+                      // controlId="formBasicText"
+                      size="massive"
+                    >
+                      <Form.Field
+                        control="input"
+                        name="name"
+                        value={category.name}
+                        placeholder="Category Name"
+                        onChange={this.handleCategoryFieldChange}>
+                      </Form.Field>
+                      <Form.TextArea
+                        name="desc"
+                        value={category.desc}
+                        placeholder="Category Description"
+                        onChange={this.handleCategoryFieldChange}>
+                      </Form.TextArea>
+                      <Form.Field
+                        name="img_url"
+                        value={category["img_url"]}
+                        placeholder="Category Image URL"
+                        onChange={this.handleCategoryFieldChange}
+                        control="input"
+                      >
+                      </Form.Field>
+                    </Form>
+                  </Card.Content>
+                </Card>
+              </Grid.Row>
+              <Grid.Row columns={2} stretched>
+                <Grid.Column>
+                  <Button fluid basic color='green' onClick={this.addCard}>
+                    <h3>New Term</h3>
+                    <br></br>
+                    <Icon name="plus" circular size="big" />
+                  </Button>
+                </Grid.Column>
+                {this.renderCardForms()}
+              </Grid.Row>
+            </Grid>
+        }
+      </>
     )
   }
   goToCategories = () => {

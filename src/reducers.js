@@ -58,7 +58,8 @@ const rootReducer = (prevState = initialState, action) => {
             return {
                 ...prevState,
                 selectedCategoryIndex: getIndexFromId(prevState.categories, action.category.id),
-                categories: insertUpdatedCategory(prevState.categories, action.category)
+                categories: insertUpdatedCategory(prevState.categories, action.category),
+                loading: false
             };
         case SELECT_CATEGORY:
             return {
