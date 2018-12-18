@@ -6,17 +6,27 @@ import {
     fetchCategories,
     selectCategory,
     createCategory,
+    categoriesAreLoading,
 } from '../actions/actions.js'
 import { connect } from 'react-redux';
 
-
+const mapStateToProps = (state) => {
+    return ({
+        selectedCategoryIndex: state.selectedCategoryIndex,
+        categories: state.categories,
+        loading: state.loading,
+        errors: state.errors
+    })
+}
 const mapDispatchToProps = (dispatch) => ({
     fetchCategories: () => dispatch(fetchCategories()),
     selectCategory: (idx) => dispatch(selectCategory(idx)),
     createCategory: () => dispatch(createCategory()),
+    categoriesAreLoading: () => dispatch(categoriesAreLoading()),
 })
 class CategoryList extends React.Component {
     componentWillMount = () => {
+        this.props.categoriesAreLoading();
         this.props.fetchCategories();
     }
     createCategory = () => {
@@ -43,26 +53,31 @@ class CategoryList extends React.Component {
         return (
 
             <>
-                <Grid
-                    container
-                    stackable
-                    divided="vertically"
-                    className="category-and-cards-container"
-                >
-                    <Grid.Row columns={2} stretched>
-                        <Grid.Column>
-                            <Button fluid basic color='green' onClick={() => this.createCategory()}>
-                                <h3>New Category</h3>
-                                <br></br>
-                                <Icon name="plus" circular size="big" />
-                            </Button>
-                        </Grid.Column>
-                        {categoryItems}
-                    </Grid.Row>
-                </Grid>
+                {
+                    this.props.loading ?
+                        <Icon name="spinner" size="huge" />
+                        :
+                        <Grid
+                            container
+                            stackable
+                            divided="vertically"
+                            className="category-and-cards-container"
+                        >
+                            <Grid.Row columns={2} stretched>
+                                <Grid.Column>
+                                    <Button fluid basic color='green' onClick={() => this.createCategory()}>
+                                        <h3>New Category</h3>
+                                        <br></br>
+                                        <Icon name="plus" circular size="big" />
+                                    </Button>
+                                </Grid.Column>
+                                {categoryItems}
+                            </Grid.Row>
+                        </Grid>
+                }
             </>
         )
     }
 }
 
-export default connect(null, mapDispatchToProps)(CategoryList);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);

@@ -9,12 +9,17 @@ import {
     ADD_CARD,
     ADD_CATEGORY,
     DELETE_CATEGORY,
-    DELETE_CARD
+    DELETE_CARD,
+    CATEGORIES_ARE_LOADING
 } from './types';
 import Category from '../models/Category'
 const HEADERS = {
     "Content-Type": "application/json",
     "Accept": "application/json"
+}
+
+export const categoriesAreLoading = () => {
+    return { type: CATEGORIES_ARE_LOADING }
 }
 export const deleteCard = (id) => {
     return (dispatch) => {
@@ -49,11 +54,8 @@ export const fetchCategories = () => {
             })
     }
 }
+
 export const setCategories = (categories) => {
-    // let category = categories[index]
-    // if (!category.cards) {
-    //     category = { ...category, cards: [] }
-    // }
     return { type: SET_CATEGORIES, categories }
 }
 export const fetchCategory = (id) => {

@@ -13,7 +13,8 @@ import {
   selectCategoryById,
   createCategory,
   saveNewCategory,
-  fetchCategory
+  fetchCategory,
+  categoriesAreLoading
 
 } from '../actions/actions.js'
 
@@ -28,6 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
   createCategory: () => dispatch(createCategory()),
   saveNewCategory: (category) => dispatch(saveNewCategory(category)),
   fetchCategory: (id) => dispatch(fetchCategory(id)),
+  categoriesAreLoading: () => dispatch(categoriesAreLoading())
 })
 const mapStateToProps = (state) => {
   return ({
@@ -40,6 +42,7 @@ class CategoryForm extends React.Component {
   componentDidMount = () => {
     const currentId = parseInt(this.props.match.params.id)
     if (this.props.match.path.match("edit") && this.props.category.id !== currentId) {
+      this.props.categoriesAreLoading();
       this.props.fetchCategory(currentId);
     }
   }

@@ -10,7 +10,8 @@ import {
     ADD_CARD,
     ADD_CATEGORY,
     DELETE_CATEGORY,
-    DELETE_CARD
+    DELETE_CARD,
+    CATEGORIES_ARE_LOADING
 } from "./actions/types";
 import { fetchCategory } from "./actions/actions";
 import Category from './models/Category'
@@ -18,7 +19,9 @@ import Term from "./models/Term";
 
 const initialState = {
     categories: [new Category()],
-    selectedCategoryIndex: 0
+    selectedCategoryIndex: 0,
+    loading: false,
+    errors: []
 }
 const getIndexFromId = (array, id) => {
     const idx = array.map((c) => c.id).indexOf(id);
@@ -46,11 +49,12 @@ const rootReducer = (prevState = initialState, action) => {
     switch (action.type) {
         case TEST:
             return { ...prevState, message: action.payload };
+        case CATEGORIES_ARE_LOADING:
+            return { ...prevState, loading: true }
         case SET_CATEGORIES:
             let { categories } = action
-            return { ...prevState, categories };
+            return { ...prevState, categories, loading: false };
         case SET_CATEGORY:
-            debugger
             return {
                 ...prevState,
                 selectedCategoryIndex: getIndexFromId(prevState.categories, action.category.id),

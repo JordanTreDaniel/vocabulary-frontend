@@ -9,25 +9,19 @@ import './assets/stylesheets/App.css';
 import {
   selectCategory,
 } from './actions/actions.js'
-
+import { Icon } from 'semantic-ui-react'
 
 
 const mapDispatchToProps = (dispatch) => ({
   selectCategory: (idx) => dispatch(selectCategory(idx)),
 })
-const mapStateToProps = (state) => {
-  return ({
-    selectedCategoryIndex: state.selectedCategoryIndex,
-    categories: state.categories,
-  })
-}
-
 
 class App extends Component {
   render() {
     return (
       <>
         <NavigationMenu {...this.props} />
+
         <Switch className="app-page-container">
           <Route
             path={`${this.props.match.path}/categories/:id/edit`}
@@ -53,8 +47,6 @@ class App extends Component {
                 <>
                   <div id="category-list">
                     <CategoryList
-                      categories={this.props.categories}
-                      initialIndex={this.props.selectedCategoryIndex}
                       {...this.props}
                     />
                   </div>
@@ -67,4 +59,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
