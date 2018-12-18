@@ -76,7 +76,6 @@ const rootReducer = (prevState = initialState, action) => {
             }
         case ADD_CATEGORY:
             prevState.categories.push(action.category)
-
             return {
                 ...prevState,
                 selectedCategoryIndex: prevState.categories.length - 1,

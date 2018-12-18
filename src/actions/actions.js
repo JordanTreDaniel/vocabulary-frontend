@@ -73,16 +73,7 @@ export const fetchCategory = (id) => {
     }
 }
 export const createCategory = () => {
-    const category = {
-        name: "New Category",
-        desc: "Description",
-        "img_url": "Image URL here",
-        cards: [{
-            term: "New Term",
-            def: "Defintion: (Don't use the term in the definition)",
-            desc: "Give more context"
-        }]
-    }
+    const category = new Category();
     return { type: ADD_CATEGORY, category }
 }
 export const saveNewCategory = (category) => {

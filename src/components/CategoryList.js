@@ -5,6 +5,7 @@ import CategoryListItem from './CategoryListItem';
 import {
     fetchCategories,
     selectCategory,
+    createCategory,
 } from '../actions/actions.js'
 import { connect } from 'react-redux';
 
@@ -12,12 +13,14 @@ import { connect } from 'react-redux';
 const mapDispatchToProps = (dispatch) => ({
     fetchCategories: () => dispatch(fetchCategories()),
     selectCategory: (idx) => dispatch(selectCategory(idx)),
+    createCategory: () => dispatch(createCategory()),
 })
 class CategoryList extends React.Component {
     componentWillMount = () => {
         this.props.fetchCategories();
     }
     createCategory = () => {
+        this.props.createCategory();
         this.props.history.push('/categories/new')
     }
     goToCategory = (name) => {
