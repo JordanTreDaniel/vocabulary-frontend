@@ -54,7 +54,7 @@ class CategoryForm extends React.Component {
     return (
       <Grid divided="vertically" container stackable className="category-and-cards-container">
         <Grid.Row>
-          <Button basic color="black">Cancel</Button>
+          <Button basic color="black" onClick={this.props.history.goBack}>Cancel</Button>
           <Button basic color="green" onClick={this.handleSubmit}>Save Changes</Button>
           { /* Only show delete button if the category has been saved to db */
             category.id ?
