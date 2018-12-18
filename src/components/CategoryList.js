@@ -2,6 +2,7 @@
 import React from 'react';
 import { Icon, Grid, Button } from 'semantic-ui-react';
 import CategoryListItem from './CategoryListItem';
+import LoadingIcon from './LoadingIcon';
 import {
     fetchCategories,
     selectCategory,
@@ -55,7 +56,7 @@ class CategoryList extends React.Component {
             <>
                 {
                     this.props.loading ?
-                        <Icon name="spinner" size="huge" />
+                        <LoadingIcon />
                         :
                         <Grid
                             container
@@ -79,5 +80,4 @@ class CategoryList extends React.Component {
         )
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);

@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Button, Card, Grid, Icon } from 'semantic-ui-react';
 import CardForm from './CardForm';
 import { connect } from 'react-redux';
+import LoadingIcon from './LoadingIcon';
 
 import {
   handleCardFieldChange,
@@ -45,9 +46,7 @@ class CategoryForm extends React.Component {
     const currentId = parseInt(this.props.match.params.id)
     if (this.props.match.path.match("edit") && this.props.category.id !== currentId) {
       this.props.categoriesAreLoading();
-      setTimeout(() => {
-        this.props.fetchCategory(currentId);
-      }, 2000)
+      this.props.fetchCategory(currentId);
     }
   }
   renderCardForms = () => {
@@ -70,7 +69,7 @@ class CategoryForm extends React.Component {
       <>
         {
           this.props.loading ?
-            <Icon name="spinner" size="huge" />
+            <LoadingIcon />
             :
             <Grid divided="vertically" container stackable className="category-and-cards-container">
               <Grid.Row>

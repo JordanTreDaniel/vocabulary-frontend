@@ -12,7 +12,31 @@ html, body {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
 }
-
+#loading-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  padding: auto;
+  animation: Icon-Spin 1.5s linear infinite;
+}
+#loading-icon::before {
+  margin: auto;
+  width: 100%;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes Icon-Spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -78,12 +102,4 @@ html, body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
