@@ -28,7 +28,6 @@ const mapDispatchToProps = (dispatch) => ({
   saveNewCategory: (category) => dispatch(saveNewCategory(category)),
 })
 const mapStateToProps = (state) => {
-
   return ({
     category: state.categories[state.selectedCategoryIndex],
   })
@@ -50,32 +49,7 @@ class CategoryForm extends React.Component {
       )
     })
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   render() {
-
     const { category } = this.props;
     return (
       <Grid divided="vertically" container stackable className="category-and-cards-container">

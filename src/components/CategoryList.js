@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Card, Icon, Grid, Button } from 'semantic-ui-react';
+import { Icon, Grid, Button } from 'semantic-ui-react';
 import CategoryListItem from './CategoryListItem';
 import {
     fetchCategories,
@@ -14,7 +14,9 @@ const mapDispatchToProps = (dispatch) => ({
     selectCategory: (idx) => dispatch(selectCategory(idx)),
 })
 class CategoryList extends React.Component {
-
+    componentWillMount = () => {
+        this.props.fetchCategories();
+    }
     createCategory = () => {
         this.props.history.push('/categories/new')
     }

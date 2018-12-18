@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Icon, Popup, Divider } from 'semantic-ui-react';
+import { Grid, Icon, Popup } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 const CategoryInfo = ({ category }) => {
     return (
