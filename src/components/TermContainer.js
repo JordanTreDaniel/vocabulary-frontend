@@ -1,6 +1,6 @@
 import React from 'react';
 import Term from './Term';
-import { Card, Grid } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 
 class TermContainer extends React.Component {
     constructor(props) {

@@ -4,12 +4,13 @@ import CategoryPage from './components/CategoryPage'
 import CategoryForm from './components/CategoryForm'
 import NavigationMenu from './components/NavigationMenu';
 import CategoryList from './components/CategoryList';
+import CategoryErrors from './components/CategoryErrors';
+
 import { connect } from 'react-redux';
 import './assets/stylesheets/App.css';
 import {
   selectCategory,
 } from './actions/actions.js'
-import { Icon } from 'semantic-ui-react'
 
 
 const mapDispatchToProps = (dispatch) => ({
@@ -39,6 +40,11 @@ class App extends Component {
             path={`${this.props.match.path}/categories/:name`}
             render={(props) => {
               return <CategoryPage {...props} />
+            }} />
+          <Route
+            path={`${this.props.match.path}/errors`}
+            render={(props) => {
+              return <CategoryErrors {...props} />
             }} />
           <Route
             path={`${this.props.match.path}`}

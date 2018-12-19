@@ -10,7 +10,6 @@ import {
     categoriesAreLoading,
 } from '../actions/actions.js'
 import { connect } from 'react-redux';
-
 const mapStateToProps = (state) => {
     return ({
         selectedCategoryIndex: state.selectedCategoryIndex,
@@ -27,8 +26,14 @@ const mapDispatchToProps = (dispatch) => ({
 })
 class CategoryList extends React.Component {
     componentWillMount = () => {
+        let history = this.props.history;
         this.props.categoriesAreLoading();
-        this.props.fetchCategories();
+        this.props.fetchCategories()
+            .then((error) => {
+                if (error) {
+                    history.push('/errors')
+                }
+            })
     }
     createCategory = () => {
         this.props.createCategory();
@@ -51,8 +56,8 @@ class CategoryList extends React.Component {
                 </Grid.Column>
             )
         });
-        return (
 
+        return (
             <>
                 {
                     this.props.loading ?

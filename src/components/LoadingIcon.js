@@ -4,4 +4,4 @@ const LoadingIcon = (props) => {
     return <Icon name="spinner" size="huge" id="loading-icon" />;
 }
 
-export default LoadingIcon
+export default LoadingIcon;

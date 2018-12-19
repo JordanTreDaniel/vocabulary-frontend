@@ -10,7 +10,8 @@ import {
     ADD_CATEGORY,
     DELETE_CATEGORY,
     DELETE_CARD,
-    CATEGORIES_ARE_LOADING
+    CATEGORIES_ARE_LOADING,
+    ADD_ERROR
 } from './types';
 import Category from '../models/Category'
 const HEADERS = {
@@ -31,26 +32,27 @@ export const deleteCard = (id) => {
         })
             .then(res => res.json())
             .then(response => {
+                debugger;
                 dispatch({ type: DELETE_CARD, response, id })
                 // return response
-            })
-            .catch(err => {
-                throw err;
             })
     }
 }
 export const fetchCategories = () => {
     return (dispatch) => {
-        fetch(`${process.env.REACT_APP_API_URL}/categories`)
-            .then(res => res.json())
-            .then(res => {
-                res.sort((a, b) => {
-                    return a.id - b.id
-                });
-                dispatch(setCategories(res))
-            })
-            .catch(err => {
-                throw err;
+        return fetch(`${process.env.REACT_APP_API_URL}/categories`)
+            .then(response => response.json())
+            .then(response => {
+                if (!response.error) {
+                    response.sort((a, b) => {
+                        return a.id - b.id
+                    });
+                    dispatch(setCategories(response))
+                } else {
+                    console.log(response.error)
+                    dispatch({ type: ADD_ERROR, response })
+                    return response;
+                }
             })
     }
 }
@@ -66,10 +68,8 @@ export const fetchCategory = (id) => {
             fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`)
                 .then(res => res.json())
                 .then(category => {
+                    debugger;
                     dispatch(setCategory(category));
-                })
-                .catch(err => {
-                    throw err;
                 })
         }
     }
@@ -87,11 +87,9 @@ export const saveNewCategory = (category) => {
         })
             .then(res => res.json())
             .then(category => {
+                debugger;
                 dispatch({ type: UPDATE_CATEGORY, category })
                 // return category // commenting this out bc i don't think it's needed. might be messing up save functionality
-            })
-            .catch(err => {
-                console.log(err)
             })
     }
 }
@@ -103,6 +101,7 @@ export const deleteCategory = (id) => {
         })
             .then(res => res.json())
             .then(response => {
+                debugger;
                 dispatch({ type: DELETE_CATEGORY, id, response })
             })
     }
@@ -120,11 +119,9 @@ export const updateCategory = (category) => {
         })
             .then(res => res.json())
             .then(category => {
+                debugger;
                 dispatch({ type: UPDATE_CATEGORY, category })
                 // return category // commenting this out bc i don't think it's needed. might be messing up save functionality
-            })
-            .catch(err => {
-                console.log(err)
             })
     }
 }

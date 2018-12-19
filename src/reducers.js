@@ -11,7 +11,8 @@ import {
     ADD_CATEGORY,
     DELETE_CATEGORY,
     DELETE_CARD,
-    CATEGORIES_ARE_LOADING
+    CATEGORIES_ARE_LOADING,
+    ADD_ERROR
 } from "./actions/types";
 import { fetchCategory } from "./actions/actions";
 import Category from './models/Category'
@@ -49,6 +50,9 @@ const rootReducer = (prevState = initialState, action) => {
     switch (action.type) {
         case TEST:
             return { ...prevState, message: action.payload };
+        case ADD_ERROR:
+            prevState.errors.push(action.response);
+            return { ...prevState, errors: prevState.errors, loading: false }
         case CATEGORIES_ARE_LOADING:
             return { ...prevState, loading: true }
         case SET_CATEGORIES:
