@@ -44,7 +44,8 @@ const removeCategoryById = (categories, id) => {
     return categories
 }
 const rootReducer = (prevState = initialState, action) => {
-    let newCategory,
+
+    let newCategory, //these two variables are used in the onChange methods
         oldCategory;
 
     switch (action.type) {

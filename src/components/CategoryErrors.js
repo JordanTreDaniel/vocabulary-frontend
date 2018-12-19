@@ -19,10 +19,16 @@ const CategoryErrors = ({ errors, history }) => {
     return (
         <>
             <Grid>
-                <Grid.Row>
-                    <h1>Oops, something went wrong.</h1>
-                    <h3>{response}</h3>
-                    <h4>See javascript console for techy details.</h4>
+                <Grid.Row columns={1}>
+                    <Grid.Column>
+                        <h1>Oops, something went wrong.</h1>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <h3>{response}</h3>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <h4>See javascript console for techy details.</h4>
+                    </Grid.Column>
                 </Grid.Row>
             </Grid>
         </>
