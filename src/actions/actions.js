@@ -18,7 +18,12 @@ const HEADERS = {
     "Content-Type": "application/json",
     "Accept": "application/json"
 }
-
+//helper method to log error to console and add it to state
+const addError = (response, dispatch) => {
+    console.log(response.error) //do not delete.
+    dispatch({ type: ADD_ERROR, response })
+    return response;
+}
 export const categoriesAreLoading = () => {
     return { type: CATEGORIES_ARE_LOADING }
 }
@@ -35,9 +40,7 @@ export const deleteCard = (id) => {
                 if (!response.error) {
                     dispatch({ type: DELETE_CARD, response, id })
                 } else {
-                    console.log(response.error) //do not delete.
-                    dispatch({ type: ADD_ERROR, response })
-                    return response;
+                    return addError(response, dispatch);
                 }
             })
     }
@@ -56,9 +59,7 @@ export const fetchCategories = () => {
                     });
                     dispatch(setCategories(response))
                 } else {
-                    console.log(response.error) //do not delete.
-                    dispatch({ type: ADD_ERROR, response })
-                    return response;
+                    return addError(response, dispatch);
                 }
             })
     }
@@ -77,9 +78,7 @@ export const fetchCategory = (id) => {
                     if (!response.error) {
                         dispatch(setCategory(response));
                     } else {
-                        console.log(response.error) //do not delete.
-                        dispatch({ type: ADD_ERROR, response })
-                        return response;
+                        return addError(response, dispatch);
                     }
                 })
         }
@@ -102,9 +101,7 @@ export const saveNewCategory = (category) => {
                 if (!response.error) {
                     dispatch({ type: UPDATE_CATEGORY, category: response });
                 } else {
-                    console.log(response.error) //do not delete.
-                    dispatch({ type: ADD_ERROR, response })
-                    return response;
+                    return addError(response, dispatch);
                 }
             })
     }
@@ -120,9 +117,7 @@ export const deleteCategory = (id) => {
                 if (!response.error) {
                     dispatch({ type: DELETE_CATEGORY, id, response });
                 } else {
-                    console.log(response.error) //do not delete.
-                    dispatch({ type: ADD_ERROR, response })
-                    return response;
+                    return addError(response, dispatch);
                 }
             })
     }
@@ -141,9 +136,7 @@ export const updateCategory = (category) => {
                 if (!response.error) {
                     dispatch({ type: UPDATE_CATEGORY, category: response })
                 } else {
-                    console.log(response.error) //do not delete.
-                    dispatch({ type: ADD_ERROR, response })
-                    return response;
+                    return addError(response, dispatch);
                 }
             })
 
