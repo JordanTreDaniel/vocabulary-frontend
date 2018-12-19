@@ -40,13 +40,18 @@ const mapStateToProps = (state) => {
   })
 }
 
-
 class CategoryForm extends React.Component {
   componentDidMount = () => {
-    const currentId = parseInt(this.props.match.params.id)
+    const currentId = parseInt(this.props.match.params.id);
+    const { history } = this.props;
     if (this.props.match.path.match("edit") && this.props.category.id !== currentId) {
       this.props.categoriesAreLoading();
-      this.props.fetchCategory(currentId);
+      this.props.fetchCategory(currentId)
+        .then((error) => {
+          if (error) {
+            history.push('/errors')
+          }
+        })
     }
   }
   renderCardForms = () => {

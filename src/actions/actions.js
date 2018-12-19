@@ -30,13 +30,20 @@ export const deleteCard = (id) => {
                 ...HEADERS
             }
         })
-            .then(res => res.json())
+            .then(response => response.json())
             .then(response => {
-                debugger;
-                dispatch({ type: DELETE_CARD, response, id })
-                // return response
+                if (!response.error) {
+                    dispatch({ type: DELETE_CARD, response, id })
+                } else {
+                    console.log(response.error) //do not delete.
+                    dispatch({ type: ADD_ERROR, response })
+                    return response;
+                }
             })
     }
+}
+export const setCategories = (categories) => {
+    return { type: SET_CATEGORIES, categories }
 }
 export const fetchCategories = () => {
     return (dispatch) => {
@@ -49,31 +56,36 @@ export const fetchCategories = () => {
                     });
                     dispatch(setCategories(response))
                 } else {
-                    console.log(response.error)
+                    console.log(response.error) //do not delete.
                     dispatch({ type: ADD_ERROR, response })
                     return response;
                 }
             })
     }
 }
-
-export const setCategories = (categories) => {
-    return { type: SET_CATEGORIES, categories }
+export const setCategory = (categoryObj) => {
+    return { type: SET_CATEGORY, category: categoryObj }
 }
 export const fetchCategory = (id) => {
     return (dispatch) => {
         if (isNaN(id)) {
             dispatch(setCategory(new Category()))
         } else {
-            fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`)
-                .then(res => res.json())
-                .then(category => {
-                    debugger;
-                    dispatch(setCategory(category));
+            return fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`)
+                .then(response => response.json())
+                .then(response => {
+                    if (!response.error) {
+                        dispatch(setCategory(response));
+                    } else {
+                        console.log(response.error) //do not delete.
+                        dispatch({ type: ADD_ERROR, response })
+                        return response;
+                    }
                 })
         }
     }
 }
+
 export const createCategory = () => {
     const category = new Category();
     return { type: ADD_CATEGORY, category }
@@ -85,11 +97,15 @@ export const saveNewCategory = (category) => {
             body: JSON.stringify(category),
             headers: HEADERS
         })
-            .then(res => res.json())
-            .then(category => {
-                debugger;
-                dispatch({ type: UPDATE_CATEGORY, category })
-                // return category // commenting this out bc i don't think it's needed. might be messing up save functionality
+            .then(response => response.json())
+            .then(response => {
+                if (!response.error) {
+                    dispatch({ type: UPDATE_CATEGORY, category: response });
+                } else {
+                    console.log(response.error) //do not delete.
+                    dispatch({ type: ADD_ERROR, response })
+                    return response;
+                }
             })
     }
 }
@@ -99,16 +115,19 @@ export const deleteCategory = (id) => {
             method: 'DELETE',
             ...HEADERS
         })
-            .then(res => res.json())
+            .then(response => response.json())
             .then(response => {
-                debugger;
-                dispatch({ type: DELETE_CATEGORY, id, response })
+                if (!response.error) {
+                    dispatch({ type: DELETE_CATEGORY, id, response });
+                } else {
+                    console.log(response.error) //do not delete.
+                    dispatch({ type: ADD_ERROR, response })
+                    return response;
+                }
             })
     }
 }
-export const setCategory = (categoryObj) => {
-    return { type: SET_CATEGORY, category: categoryObj }
-}
+
 
 export const updateCategory = (category) => {
     return (dispatch) => {
@@ -117,12 +136,17 @@ export const updateCategory = (category) => {
             body: JSON.stringify(category),
             headers: HEADERS
         })
-            .then(res => res.json())
-            .then(category => {
-                debugger;
-                dispatch({ type: UPDATE_CATEGORY, category })
-                // return category // commenting this out bc i don't think it's needed. might be messing up save functionality
+            .then(response => response.json())
+            .then(response => {
+                if (!response.error) {
+                    dispatch({ type: UPDATE_CATEGORY, category: response })
+                } else {
+                    console.log(response.error) //do not delete.
+                    dispatch({ type: ADD_ERROR, response })
+                    return response;
+                }
             })
+
     }
 }
 export const addCard = () => {
@@ -135,8 +159,8 @@ export const selectCategory = (idx) => {
             resolve("success")
         });
 
-        return promise.then(res => {
-            return res;
+        return promise.then(response => {
+            return response;
         });
 
     }
