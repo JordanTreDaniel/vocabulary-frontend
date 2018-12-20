@@ -14,7 +14,7 @@ const AppRouter = () => {
             <Router>
                 <>
                     <Switch>
-                        <Route exact path="/signup" component={SignUpPage} />
+                        <Route path="/signup" component={SignUpPage} />
                         <Route path="" component={App} />
                     </Switch>
                 </>
