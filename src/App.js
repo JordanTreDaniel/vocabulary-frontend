@@ -4,7 +4,7 @@ import CategoryPage from './components/CategoryPage'
 import CategoryForm from './components/CategoryForm'
 import NavigationMenu from './components/NavigationMenu';
 import CategoryList from './components/CategoryList';
-import CategoryErrors from './components/CategoryErrors';
+import CategoryErrorsPage from './components/CategoryErrorsPage';
 import { connect } from 'react-redux';
 import './assets/stylesheets/App.css';
 import {
@@ -41,7 +41,7 @@ class App extends Component {
           <Route
             path={`${this.props.match.path}/errors`}
             render={(props) => {
-              return <CategoryErrors {...props} />
+              return <CategoryErrorsPage {...props} />
             }} />
           <Route
             path={`${this.props.match.path}`}

@@ -3,16 +3,20 @@ import ReactDOM from 'react-dom';
 import './assets/stylesheets/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './configureStore';
+import SignUpPage from './components/SignUpPage';
 const AppRouter = () => {
 
     return (
         <Provider store={store}>
             <Router>
                 <>
-                    <Route path="" component={App} />
+                    <Switch>
+                        <Route exact path="/signup" component={SignUpPage} />
+                        <Route path="" component={App} />
+                    </Switch>
                 </>
             </Router>
         </Provider>

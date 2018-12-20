@@ -32,6 +32,11 @@ export default class NavigationMenu extends React.Component {
                         active={activeItem === '/tags'}
                         onClick={this.handleItemClick}
                     />
+                    <Menu.Item
+                        name='signup'
+                        active={activeItem === '/signup'}
+                        onClick={this.handleItemClick}
+                    />
                 </Menu>
             </Segment>
         )

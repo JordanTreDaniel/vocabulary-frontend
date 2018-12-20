@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const mapStateToProps = (state) => {
     return { errors: state.categoriesAndTerms.errors };
 }
-const CategoryErrors = ({ errors, history }) => {
+const CategoryErrorsPage = ({ errors, history }) => {
     let response;
     switch (errors.length) {
         case 0:
@@ -35,4 +35,4 @@ const CategoryErrors = ({ errors, history }) => {
     )
 }
 
-export default connect(mapStateToProps, null)(CategoryErrors);
+export default connect(mapStateToProps, null)(CategoryErrorsPage);
