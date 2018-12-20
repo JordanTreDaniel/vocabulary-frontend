@@ -6,7 +6,7 @@ import { Grid } from 'semantic-ui-react';
 
 const mapStateToProps = (state) => {
     return ({
-        category: state.categories[state.selectedCategoryIndex]
+        category: state.categoriesAndTerms.categories[state.categoriesAndTerms.selectedCategoryIndex]
     })
 }
 

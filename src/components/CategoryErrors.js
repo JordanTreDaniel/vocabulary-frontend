@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 const mapStateToProps = (state) => {
-    return { errors: state.errors };
+    return { errors: state.categoriesAndTerms.errors };
 }
 const CategoryErrors = ({ errors, history }) => {
     let response;

@@ -12,10 +12,10 @@ import {
 import { connect } from 'react-redux';
 const mapStateToProps = (state) => {
     return ({
-        selectedCategoryIndex: state.selectedCategoryIndex,
-        categories: state.categories,
-        loading: state.loading,
-        errors: state.errors
+        selectedCategoryIndex: state.categoriesAndTerms.selectedCategoryIndex,
+        categories: state.categoriesAndTerms.categories,
+        loading: state.categoriesAndTerms.loading,
+        errors: state.categoriesAndTerms.errors
     })
 }
 const mapDispatchToProps = (dispatch) => ({

@@ -34,9 +34,9 @@ const mapDispatchToProps = (dispatch) => ({
 })
 const mapStateToProps = (state) => {
   return ({
-    category: state.categories[state.selectedCategoryIndex],
-    loading: state.loading,
-    errors: state.errors
+    category: state.categoriesAndTerms.categories[state.categoriesAndTerms.selectedCategoryIndex],
+    loading: state.categoriesAndTerms.loading,
+    errors: state.categoriesAndTerms.errors
   })
 }
 
