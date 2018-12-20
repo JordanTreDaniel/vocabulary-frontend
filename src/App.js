@@ -5,13 +5,11 @@ import CategoryForm from './components/CategoryForm'
 import NavigationMenu from './components/NavigationMenu';
 import CategoryList from './components/CategoryList';
 import CategoryErrors from './components/CategoryErrors';
-
 import { connect } from 'react-redux';
 import './assets/stylesheets/App.css';
 import {
   selectCategory,
 } from './actions/actions.js'
-
 
 const mapDispatchToProps = (dispatch) => ({
   selectCategory: (idx) => dispatch(selectCategory(idx)),
@@ -22,7 +20,6 @@ class App extends Component {
     return (
       <>
         <NavigationMenu {...this.props} />
-
         <Switch className="app-page-container">
           <Route
             path={`${this.props.match.path}/categories/:id/edit`}

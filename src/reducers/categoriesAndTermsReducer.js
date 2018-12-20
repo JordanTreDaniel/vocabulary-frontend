@@ -13,37 +13,23 @@ import {
     DELETE_CARD,
     CATEGORIES_ARE_LOADING,
     ADD_ERROR
-} from "./actions/types";
-import { fetchCategory } from "./actions/actions";
-import Category from './models/Category'
-import Term from "./models/Term";
-
+} from "../actions/types";
+import {
+    getIndexFromId,
+    insertUpdatedCategory,
+    removeCardById,
+    removeCategoryById,
+} from './reducerHelpers';
+import { fetchCategory } from "../actions/actions";
+import Category from '../models/Category'
+import Term from "../models/Term";
 const initialState = {
     categories: [new Category()],
     selectedCategoryIndex: 0,
     loading: false,
     errors: []
 }
-const getIndexFromId = (array, id) => {
-    const idx = array.map((c) => c.id).indexOf(id);
-    return idx > 0 ? idx : 0;
-}
-const insertUpdatedCategory = (categories, newCategory) => {
-    const idx = getIndexFromId(categories, newCategory.id)
-    categories.splice(idx, 1, newCategory);
-    return categories;
-}
-const removeCardById = (category, id) => {
-    let cards = category.cards;
-    cards.splice(getIndexFromId(cards, id), 1)
-    category.cards = cards;
-    return category;
-}
-const removeCategoryById = (categories, id) => {
-    categories.splice(getIndexFromId(categories, id), 1)
-    return categories
-}
-const rootReducer = (prevState = initialState, action) => {
+const categoriesAndTermsReducer = (prevState = initialState, action) => {
 
     let newCategory, //these two variables are used in the onChange methods
         oldCategory;
@@ -143,4 +129,4 @@ const rootReducer = (prevState = initialState, action) => {
     }
 }
 
-export default rootReducer;
+export default categoriesAndTermsReducer;
