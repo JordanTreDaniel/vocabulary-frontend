@@ -7,7 +7,7 @@ const CategoryListItem = (props) => {
         <Card
             onClick={() => {
                 selectCategory(index).then(res => {
-                    goToCategory(category.name)
+                    goToCategory(category.id)
                 })
             }}
             fluid

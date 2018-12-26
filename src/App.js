@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import CategoryPage from './components/CategoryPage'
 import CategoryForm from './components/CategoryForm'
 import NavigationMenu from './components/NavigationMenu';
@@ -22,29 +22,30 @@ class App extends Component {
         <NavigationMenu {...this.props} />
         <Switch className="app-page-container">
           <Route
-            path={`${this.props.match.path}/categories/:id/edit`}
+            path={`${this.props.match.path}categories/:id/edit`}
             exact
             render={(props) => {
               return <CategoryForm {...props} />
             }} />
           <Route
-            path={`${this.props.match.path}/categories/new`}
+            path={`${this.props.match.path}categories/new`}
             exact
             render={(props) => {
               return <CategoryForm {...props} />
             }} />
           <Route
-            path={`${this.props.match.path}/categories/:name`}
+            path={`${this.props.match.path}categories/:name`}
             render={(props) => {
               return <CategoryPage {...props} />
             }} />
           <Route
-            path={`${this.props.match.path}/errors`}
+            path={`${this.props.match.path}errors`}
             render={(props) => {
               return <CategoryErrorsPage {...props} />
             }} />
           <Route
-            path={`${this.props.match.path}`}
+            path={`${this.props.match.path}categories`}
+            exact
             render={(props) => {
               return (
                 <>
@@ -56,6 +57,7 @@ class App extends Component {
                 </>
               )
             }} />
+          <Redirect to="/categories" />
         </Switch>
       </>
     );

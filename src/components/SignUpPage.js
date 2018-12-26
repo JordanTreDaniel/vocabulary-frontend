@@ -18,7 +18,7 @@ class SignUpPage extends React.Component {
                 <Grid>
                     <Grid.Row columns={1}>
                         <Grid.Column>
-                            <a href={`https://github.com/login/oauth/authorize?client_id=${REACT_APP_GITHUB_CLIENT_ID}`}>
+                            <a href={`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}`}>
                                 <Button basic color="green">Sign Up With Github</Button>
                             </a>
                         </Grid.Column>
