@@ -24,6 +24,20 @@ const addError = (response, dispatch) => {
     dispatch({ type: ADD_ERROR, response })
     return response;
 }
+export const signInUser = (gitHubCode) => {
+    debugger;
+    fetch(`${process.env.REACT_APP_API_URL}/signInUser`, {
+        headers: {
+            ...HEADERS
+        },
+        method: "POST",
+        body: JSON.stringify({ code: gitHubCode })
+    })
+        .then(response => response.json())
+        .then(response => {
+            debugger;
+        })
+}
 export const categoriesAreLoading = () => {
     return { type: CATEGORIES_ARE_LOADING }
 }

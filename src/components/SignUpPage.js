@@ -3,15 +3,25 @@ import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { Button } from 'semantic-ui-react';
 import queryString from 'query-string';
+import { signInUser } from '../actions/actions'
 // const mapStateToProps = (state) => {
 //     return { errors: state.categoriesAndTerms.errors };
 // }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signInUser: (gitHubCode) => signInUser(gitHubCode)
+    }
+}
 class SignUpPage extends React.Component {
 
     componentWillMount = () => {
         const code = queryString.parse(this.props.location.search).code;
-        // this.signInUser(code);
+        if (code !== undefined) {
+            debugger;
+            this.props.signInUser(code);
+        }
     }
+
     render = () => {
         return (
             <>
@@ -30,4 +40,4 @@ class SignUpPage extends React.Component {
 
 }
 
-export default connect(null, null)(SignUpPage);
+export default connect(null, mapDispatchToProps)(SignUpPage);
