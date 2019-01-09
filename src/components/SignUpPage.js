@@ -9,7 +9,7 @@ import { signInUser } from '../actions/actions'
 // }
 const mapDispatchToProps = (dispatch) => {
     return {
-        signInUser: (gitHubCode) => signInUser(gitHubCode)
+        signInUser: (gitHubCode) => dispatch(signInUser(gitHubCode))
     }
 }
 class SignUpPage extends React.Component {
@@ -17,7 +17,8 @@ class SignUpPage extends React.Component {
     componentWillMount = () => {
         const code = queryString.parse(this.props.location.search).code;
         if (code !== undefined) {
-            this.props.signInUser(code);
+            this.props.signInUser(code)
+            this.props.history.push("/categories");
         }
     }
 

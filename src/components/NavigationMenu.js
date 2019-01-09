@@ -19,22 +19,22 @@ export default class NavigationMenu extends React.Component {
                 <Menu inverted pointing secondary>
                     <Menu.Item
                         name='categories'
-                        active={activeItem === '/'}
+                        active={activeItem == '' || activeItem == 'categories'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item
                         name='terms'
-                        active={activeItem === '/terms'}
+                        active={activeItem == 'terms'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item
                         name='tags'
-                        active={activeItem === '/tags'}
+                        active={activeItem == 'tags'}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item
                         name='signup'
-                        active={activeItem === '/signup'}
+                        active={activeItem == 'signup'}
                         onClick={this.handleItemClick}
                     />
                 </Menu>
