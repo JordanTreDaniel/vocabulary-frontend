@@ -5,6 +5,8 @@ import CategoryForm from './components/CategoryForm'
 import NavigationMenu from './components/NavigationMenu';
 import CategoryList from './components/CategoryList';
 import CategoryErrorsPage from './components/CategoryErrorsPage';
+import SignUpPage from './components/SignUpPage';
+
 import { connect } from 'react-redux';
 import './assets/stylesheets/App.css';
 import {
@@ -21,6 +23,9 @@ class App extends Component {
       <>
         <NavigationMenu {...this.props} />
         <Switch className="app-page-container">
+          <Route
+            path={`${this.props.match.path}signup`}
+            component={SignUpPage} />
           <Route
             path={`${this.props.match.path}categories/:id/edit`}
             exact

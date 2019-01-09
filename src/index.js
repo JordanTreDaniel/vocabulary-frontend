@@ -6,7 +6,6 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './configureStore';
-import SignUpPage from './components/SignUpPage';
 const AppRouter = () => {
 
     return (
@@ -14,7 +13,6 @@ const AppRouter = () => {
             <Router>
                 <>
                     <Switch>
-                        <Route path="/signup" component={SignUpPage} />
                         <Route path="" component={App} />
                     </Switch>
                 </>

@@ -17,7 +17,6 @@ class SignUpPage extends React.Component {
     componentWillMount = () => {
         const code = queryString.parse(this.props.location.search).code;
         if (code !== undefined) {
-            debugger;
             this.props.signInUser(code);
         }
     }

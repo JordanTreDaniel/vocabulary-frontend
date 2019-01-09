@@ -11,7 +11,8 @@ import {
     DELETE_CATEGORY,
     DELETE_CARD,
     CATEGORIES_ARE_LOADING,
-    ADD_ERROR
+    ADD_ERROR,
+    SET_CURRENT_USER
 } from './types';
 import Category from '../models/Category'
 const HEADERS = {
@@ -25,18 +26,19 @@ const addError = (response, dispatch) => {
     return response;
 }
 export const signInUser = (gitHubCode) => {
-    debugger;
-    fetch(`${process.env.REACT_APP_API_URL}/signInUser`, {
-        headers: {
-            ...HEADERS
-        },
-        method: "POST",
-        body: JSON.stringify({ code: gitHubCode })
-    })
-        .then(response => response.json())
-        .then(response => {
-            debugger;
+    return dispatch => {
+        return fetch(`${process.env.REACT_APP_API_URL}/signInUser`, {
+            headers: {
+                ...HEADERS
+            },
+            method: "POST",
+            body: JSON.stringify({ code: gitHubCode })
         })
+            .then(response => response.json())
+            .then(user => {
+                dispatch({ type: SET_CURRENT_USER, user })
+            })
+    }
 }
 export const categoriesAreLoading = () => {
     return { type: CATEGORIES_ARE_LOADING }
