@@ -44,6 +44,15 @@ export const signInUser = (gitHubCode) => {
 export const signOut = () => {
     return { type: SIGN_OUT }
 }
+export const getUserFromId = (id) => {
+    return dispatch => {
+        return fetch(`${process.env.REACT_APP_API_URL}/users/${id}`)
+            .then(res => res.json())
+            .then(user => {
+                dispatch({ type: SET_CURRENT_USER, user })
+            })
+    }
+}
 export const categoriesAreLoading = () => {
     return { type: CATEGORIES_ARE_LOADING }
 }

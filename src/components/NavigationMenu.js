@@ -8,42 +8,8 @@ const mapDispatchToProps = (dispatch) => ({ signOut: () => dispatch(signOut()) }
 class NavigationMenu extends React.Component {
     state = { activeItem: this.props.location.pathname }
 
-    handleItemClick = (e, { name }) => {
-        this.setState({ activeItem: name }, () => {
-            this.props.history.push(`/${name}`)
-        })
-    }
-
-    renderDropdown = () => {
-        return (
-            <>
-                <Dropdown trigger={this.showAvatar()}
-                >
-                    <Dropdown.Menu>
-                        <Dropdown.Header>{`Signed in as ${this.props.user.username}`}</Dropdown.Header>
-                        <Dropdown.Divider />
-                        {
-                            this.props.user.username !== "Guest" ?
-                                <Dropdown.Item text='Sign Out' onClick={this.props.signOut} />
-                                :
-                                null
-                        }
-                    </Dropdown.Menu>
-                </Dropdown>
-            </>
-        )
-    }
-    showAvatar = () => {
-        return (
-            <div
-                className="user-thumbnail"
-                style={{ "backgroundImage": `url(${this.props.user["avatar_url"]})` }}
-            ></div>
-        )
-    }
     render() {
         const { activeItem } = this.state
-
         return (
             <Segment inverted id="navigation-menu">
                 <Menu inverted pointing secondary>
@@ -78,6 +44,41 @@ class NavigationMenu extends React.Component {
             </Segment>
         )
     }
+
+    handleItemClick = (e, { name }) => {
+        this.setState({ activeItem: name }, () => {
+            this.props.history.push(`/${name}`)
+        })
+    }
+
+    showAvatar = () => {
+        return (
+            <div
+                className="user-thumbnail"
+                style={{ "backgroundImage": `url(${this.props.user["avatar_url"]})` }}
+            ></div>
+        )
+    }
+    renderDropdown = () => {
+        return (
+            <>
+                <Dropdown trigger={this.showAvatar()}
+                >
+                    <Dropdown.Menu>
+                        <Dropdown.Header>{`Signed in as ${this.props.user.username}`}</Dropdown.Header>
+                        <Dropdown.Divider />
+                        {
+                            this.props.user.username !== "Guest" ?
+                                <Dropdown.Item text='Sign Out' onClick={this.props.signOut} />
+                                :
+                                null
+                        }
+                    </Dropdown.Menu>
+                </Dropdown>
+            </>
+        )
+    }
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationMenu);

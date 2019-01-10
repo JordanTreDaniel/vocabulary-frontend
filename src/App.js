@@ -11,13 +11,21 @@ import { connect } from 'react-redux';
 import './assets/stylesheets/App.css';
 import {
   selectCategory,
+  getUserFromId,
 } from './actions/actions.js'
 
 const mapDispatchToProps = (dispatch) => ({
   selectCategory: (idx) => dispatch(selectCategory(idx)),
+  getUserFromId: (id) => dispatch(getUserFromId(id)),
 })
 
 class App extends Component {
+  componentWillMount = () => {
+    const userId = parseInt(localStorage.getItem("userId"));
+    if (userId) {
+      this.props.getUserFromId(userId);
+    }
+  }
   render() {
     return (
       <>
