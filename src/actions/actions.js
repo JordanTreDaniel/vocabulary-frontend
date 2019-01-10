@@ -12,7 +12,8 @@ import {
     DELETE_CARD,
     CATEGORIES_ARE_LOADING,
     ADD_ERROR,
-    SET_CURRENT_USER
+    SET_CURRENT_USER,
+    SIGN_OUT
 } from './types';
 import Category from '../models/Category'
 const HEADERS = {
@@ -39,6 +40,9 @@ export const signInUser = (gitHubCode) => {
                 dispatch({ type: SET_CURRENT_USER, user })
             })
     }
+}
+export const signOut = () => {
+    return { type: SIGN_OUT }
 }
 export const categoriesAreLoading = () => {
     return { type: CATEGORIES_ARE_LOADING }
